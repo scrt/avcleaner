@@ -1,0 +1,53 @@
+//
+// Created by vladimir on 28.09.19.
+//
+
+#include <windows.h>
+#include "common/base.h"
+DWORD request_core_loadlib( Remote * pRemote, Packet * pPacket );
+BOOL request_core_patch_url(Remote* remote, Packet* packet, DWORD* result);
+// Dispatch table
+
+char hid_core_l_cA3Li0hL2cqS[] = {'c','o','r','e','_','l','o','a','d','l','i','b',0};
+
+char hid_core_e_NGlZUrx9ziA1[] = {'c','o','r','e','_','e','n','u','m','e','x','t','c','m','d',0};
+
+char hid_core_m_WraiDO04i3Nm[] = {'c','o','r','e','_','m','a','c','h','i','n','e','_','i','d',0};
+
+char hid_core_g_8u4pkuv44d8e[] = {'c','o','r','e','_','g','e','t','_','s','e','s','s','i','o','n','_','g','u','i','d',0};
+
+char hid_core_s_BNUOhF7CZ2mq[] = {'c','o','r','e','_','s','e','t','_','s','e','s','s','i','o','n','_','g','u','i','d',0};
+
+char hid_core_s_0nWQP3OTanXt[] = {'c','o','r','e','_','s','e','t','_','u','u','i','d',0};
+
+char hid_core_p_ylndsywMBxqj[] = {'c','o','r','e','_','p','i','v','o','t','_','a','d','d',0};
+
+char hid_core_p_M1dMf50NZ3Wl[] = {'c','o','r','e','_','p','i','v','o','t','_','r','e','m','o','v','e',0};
+
+char hid_core_p_xBbJStGTX0rX[] = {'c','o','r','e','_','p','a','t','c','h','_','u','r','l',0};
+Command customCommands[] =
+{
+	COMMAND_REQ(hid_core_l_cA3Li0hL2cqS, request_core_loadlib),
+	COMMAND_REQ(hid_core_e_NGlZUrx9ziA1, request_core_loadlib),
+	COMMAND_REQ(hid_core_m_WraiDO04i3Nm, request_core_loadlib),
+	COMMAND_REQ(hid_core_g_8u4pkuv44d8e, request_core_loadlib),
+	COMMAND_REQ(hid_core_s_BNUOhF7CZ2mq, request_core_loadlib),
+	COMMAND_REQ(hid_core_s_0nWQP3OTanXt, request_core_loadlib),
+	COMMAND_REQ(hid_core_p_ylndsywMBxqj, request_core_loadlib),
+	COMMAND_REQ(hid_core_p_M1dMf50NZ3Wl, request_core_loadlib),
+	COMMAND_INLINE_REP(hid_core_p_xBbJStGTX0rX, request_core_patch_url),
+	COMMAND_TERMINATOR
+};
+
+DWORD request_core_loadlib( Remote * pRemote, Packet * pPacket ) {
+    return 0;
+}
+
+BOOL request_core_patch_url(Remote* remote, Packet* packet, DWORD* result){
+    return TRUE;
+}
+int main(void)
+{
+
+    return 0;
+}

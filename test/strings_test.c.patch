@@ -1,0 +1,60 @@
+#include <windows.h>
+
+
+// Dispatch table
+/*Command customCommands[] =
+{
+	COMMAND_REQ("AAAAAAAAAAAA", request_core_loadlib),
+	COMMAND_REQ("AAAAAAAAAAAAAAA", request_core_enumextcmd),
+	COMMAND_REQ("AAAAAAAAAAAAAAA", request_core_machine_id),
+	COMMAND_REQ("AAAAAAAAAAAAAAAAAAAAA", request_core_get_session_guid),
+	COMMAND_REQ("AAAAAAAAAAAAAAAAAAAAA", request_core_set_session_guid),
+	COMMAND_REQ("AAAAAAAAAAAAA", request_core_set_uuid),
+	COMMAND_REQ("AAAAAAAAAAAAAA", request_core_pivot_add),
+	COMMAND_REQ("AAAAAAAAAAAAAAAAA", request_core_pivot_remove),
+	COMMAND_INLINE_REP("AAAAAAAAAAAAAA", request_core_patch_url),
+	COMMAND_TERMINATOR
+};*/
+
+// if the library was loaded via its reflective loader we must use GetProcAddressR()
+/*
+    pExtension->init = (PSRVINIT)GetProcAddressR(pExtension->library, "AAAAAAAAAAAAAAAAAAA");
+    pExtension->deinit = (PSRVDEINIT)GetProcAddressR(pExtension->library, "AAAAAAAAAAAAAAAAAAAAA");
+    pExtension->getname = (PSRVGETNAME)GetProcAddressR(pExtension->library, "AAAAAAAAAAAAAAAA");
+    pExtension->commandAdded = (PCMDADDED)GetProcAddressR(pExtension->library, "AAAAAAAAAAAA");
+    pExtension->stagelessInit = (PSTAGELESSINIT)GetProcAddressR(pExtension->library, "AAAAAAAAAAAAA");
+*/
+typedef NTSTATUS (NTAPI *f_NtMapViewOfSection)(HANDLE, HANDLE, PVOID *, ULONG, ULONG,
+		PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG);
+typedef NTSTATUS (* PKUHL_M_C_FUNC) (int argc, wchar_t * args[]);
+typedef NTSTATUS (* PKUHL_M_C_FUNC_INIT) ();
+
+typedef struct _KUHL_M_C {
+	const PKUHL_M_C_FUNC pCommand;
+	const wchar_t * command;
+	const wchar_t * description;
+} KUHL_M_C, *PKUHL_M_C;
+
+int main(void)
+{
+    // match stringLiteral(unless(hasParent(initListExpr()))).bind('x')
+    // excludes strings in list
+    const KUHL_M_C kuhl_m_c_dpapi[] = {
+	{0,			L"AAAA",		L"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+	{0,		L"AAAAAAA",		L"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+	{0,	L"AAAAAAAAA",	L"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+	{0,		L"AAAAAAAA",	L"AAAAAAAAAAAAAAAAAAAAAAAA"}
+    };
+
+   	f_NtMapViewOfSection lNtMapViewOfSection;
+	HMODULE ntdll;
+
+	if (!(ntdll = LoadLibrary(TEXT("AAAAA"))))
+	{
+		return -1;
+	}
+
+	lNtMapViewOfSection = (f_NtMapViewOfSection)GetProcAddress(ntdll, "AAAAAAAAAAAAAAAAAA");
+    lNtMapViewOfSection(0,0,0,0,0,0,0,0,0,0);
+    return 0;
+}

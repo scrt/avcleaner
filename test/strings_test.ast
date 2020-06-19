@@ -1,0 +1,200 @@
+|-TypedefDecl 0x563b083f07c8 <inputs/strings_test.c:27:1, line:28:46> line:27:26 referenced f_NtMapViewOfSection 'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)'
+| `-PointerType 0x563b083f0720 'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)'
+|   `-ParenType 0x563b083f06c0 'NTSTATUS (HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' sugar
+|     `-FunctionProtoType 0x563b083f0640 'NTSTATUS (HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' cdecl
+|       |-TypedefType 0x563b07b84830 'NTSTATUS' sugar
+|       | |-Typedef 0x563b07b643a0 'NTSTATUS'
+|       | `-TypedefType 0x563b066fd150 'LONG' sugar
+|       |   |-Typedef 0x563b06692098 'LONG'
+|       |   `-BuiltinType 0x563b065e38e0 'long'
+|       |-TypedefType 0x563b066fd670 'HANDLE' sugar
+|       | |-Typedef 0x563b066fd618 'HANDLE'
+|       | `-PointerType 0x563b065e3fe0 'void *'
+|       |   `-BuiltinType 0x563b065e3820 'void'
+|       |-TypedefType 0x563b066fd670 'HANDLE' sugar
+|       | |-Typedef 0x563b066fd618 'HANDLE'
+|       | `-PointerType 0x563b065e3fe0 'void *'
+|       |   `-BuiltinType 0x563b065e3820 'void'
+|       |-PointerType 0x563b073111d0 'PVOID *'
+|       | `-TypedefType 0x563b0670def0 'PVOID' sugar
+|       |   |-Typedef 0x563b06691f00 'PVOID'
+|       |   `-PointerType 0x563b065e3fe0 'void *'
+|       |     `-BuiltinType 0x563b065e3820 'void'
+|       |-TypedefType 0x563b07d74a80 'ULONG' sugar
+|       | |-Typedef 0x563b07d74850 'ULONG'
+|       | `-TypedefType 0x563b066bfcd0 'DWORD' sugar
+|       |   |-Typedef 0x563b06687b30 'DWORD'
+|       |   `-BuiltinType 0x563b065e3980 'unsigned long'
+|       |-TypedefType 0x563b07d74a80 'ULONG' sugar
+|       | |-Typedef 0x563b07d74850 'ULONG'
+|       | `-TypedefType 0x563b066bfcd0 'DWORD' sugar
+|       |   |-Typedef 0x563b06687b30 'DWORD'
+|       |   `-BuiltinType 0x563b065e3980 'unsigned long'
+|       |-TypedefType 0x563b07390a80 'PLARGE_INTEGER' sugar
+|       | |-Typedef 0x563b06744ba8 'PLARGE_INTEGER'
+|       | `-PointerType 0x563b06744b70 'LARGE_INTEGER *'
+|       |   `-TypedefType 0x563b06744b20 'LARGE_INTEGER' sugar
+|       |     |-Typedef 0x563b06744ab8 'LARGE_INTEGER'
+|       |     `-ElaboratedType 0x563b06744a60 'union _LARGE_INTEGER' sugar
+|       |       `-RecordType 0x563b067424e0 'union _LARGE_INTEGER'
+|       |         `-Record 0x563b06742468 '_LARGE_INTEGER'
+|       |-TypedefType 0x563b06d21940 'PULONG' sugar
+|       | |-Typedef 0x563b06687568 'PULONG'
+|       | `-PointerType 0x563b06687530 'ULONG *'
+|       |   `-TypedefType 0x563b066874e0 'ULONG' sugar
+|       |     |-Typedef 0x563b06687488 'ULONG'
+|       |     `-BuiltinType 0x563b065e3980 'unsigned long'
+|       |-TypedefType 0x563b07d74a80 'ULONG' sugar
+|       | |-Typedef 0x563b07d74850 'ULONG'
+|       | `-TypedefType 0x563b066bfcd0 'DWORD' sugar
+|       |   |-Typedef 0x563b06687b30 'DWORD'
+|       |   `-BuiltinType 0x563b065e3980 'unsigned long'
+|       |-TypedefType 0x563b07d74a80 'ULONG' sugar
+|       | |-Typedef 0x563b07d74850 'ULONG'
+|       | `-TypedefType 0x563b066bfcd0 'DWORD' sugar
+|       |   |-Typedef 0x563b06687b30 'DWORD'
+|       |   `-BuiltinType 0x563b065e3980 'unsigned long'
+|       `-TypedefType 0x563b07d74a80 'ULONG' sugar
+|         |-Typedef 0x563b07d74850 'ULONG'
+|         `-TypedefType 0x563b066bfcd0 'DWORD' sugar
+|           |-Typedef 0x563b06687b30 'DWORD'
+|           `-BuiltinType 0x563b065e3980 'unsigned long'
+|-TypedefDecl 0x563b083f0ab8 <line:29:1, col:64> col:21 referenced PKUHL_M_C_FUNC 'NTSTATUS (*)(int, wchar_t **)'
+| `-PointerType 0x563b083f0a50 'NTSTATUS (*)(int, wchar_t **)'
+|   `-ParenType 0x563b083f09f0 'NTSTATUS (int, wchar_t **)' sugar
+|     `-FunctionProtoType 0x563b083f09b0 'NTSTATUS (int, wchar_t **)' cdecl
+|       |-TypedefType 0x563b07b84830 'NTSTATUS' sugar
+|       | |-Typedef 0x563b07b643a0 'NTSTATUS'
+|       | `-TypedefType 0x563b066fd150 'LONG' sugar
+|       |   |-Typedef 0x563b06692098 'LONG'
+|       |   `-BuiltinType 0x563b065e38e0 'long'
+|       |-BuiltinType 0x563b065e38c0 'int'
+|       `-DecayedType 0x563b083f08e0 'wchar_t **' sugar
+|         |-IncompleteArrayType 0x563b083f0890 'wchar_t *[]' 
+|         | `-PointerType 0x563b0667ccb0 'wchar_t *'
+|         |   `-TypedefType 0x563b0667cc60 'wchar_t' sugar
+|         |     |-Typedef 0x563b06667b40 'wchar_t'
+|         |     `-BuiltinType 0x563b065e3940 'unsigned short'
+|         `-PointerType 0x563b0676f3b0 'wchar_t **'
+|           `-PointerType 0x563b0667ccb0 'wchar_t *'
+|             `-TypedefType 0x563b0667cc60 'wchar_t' sugar
+|               |-Typedef 0x563b06667b40 'wchar_t'
+|               `-BuiltinType 0x563b065e3940 'unsigned short'
+|-TypedefDecl 0x563b083f0bc8 <line:30:1, col:43> col:21 PKUHL_M_C_FUNC_INIT 'NTSTATUS (*)()'
+| `-PointerType 0x563b083f0b70 'NTSTATUS (*)()'
+|   `-ParenType 0x563b083f0b40 'NTSTATUS ()' sugar
+|     `-FunctionNoProtoType 0x563b083f0b10 'NTSTATUS ()' cdecl
+|       `-TypedefType 0x563b07b84830 'NTSTATUS' sugar
+|         |-Typedef 0x563b07b643a0 'NTSTATUS'
+|         `-TypedefType 0x563b066fd150 'LONG' sugar
+|           |-Typedef 0x563b06692098 'LONG'
+|           `-BuiltinType 0x563b065e38e0 'long'
+|-RecordDecl 0x563b083f0c18 <line:32:9, line:36:1> line:32:16 struct _KUHL_M_C definition
+| |-FieldDecl 0x563b083f0ce0 <line:33:2, col:23> col:23 pCommand 'const PKUHL_M_C_FUNC':'NTSTATUS (*const)(int, wchar_t **)'
+| |-FieldDecl 0x563b083f0d38 <line:34:2, col:18> col:18 command 'const wchar_t *'
+| `-FieldDecl 0x563b083f0d90 <line:35:2, col:18> col:18 description 'const wchar_t *'
+|-TypedefDecl 0x563b083f0e38 <line:32:1, line:36:3> col:3 referenced KUHL_M_C 'struct _KUHL_M_C':'struct _KUHL_M_C'
+| `-ElaboratedType 0x563b083f0de0 'struct _KUHL_M_C' sugar
+|   `-RecordType 0x563b083f0c90 'struct _KUHL_M_C'
+|     `-Record 0x563b083f0c18 '_KUHL_M_C'
+|-TypedefDecl 0x563b083f0f10 <line:32:1, line:36:14> col:14 PKUHL_M_C 'struct _KUHL_M_C *'
+| `-PointerType 0x563b083f0ec0 'struct _KUHL_M_C *'
+|   `-ElaboratedType 0x563b083f0de0 'struct _KUHL_M_C' sugar
+|     `-RecordType 0x563b083f0c90 'struct _KUHL_M_C'
+|       `-Record 0x563b083f0c18 '_KUHL_M_C'
+`-FunctionDecl 0x563b083f1018 <line:38:1, line:58:1> line:38:5 main 'int (void)'
+  `-CompoundStmt 0x563b0840e478 <line:39:1, line:58:1>
+    |-DeclStmt 0x563b0840dc18 <line:40:5, line:45:6>
+    | `-VarDecl 0x563b083f1148 <line:40:5, line:45:5> line:40:20 kuhl_m_c_dpapi 'const KUHL_M_C [4]' cinit
+    |   `-InitListExpr 0x563b083f1788 <col:39, line:45:5> 'const KUHL_M_C [4]'
+    |     |-InitListExpr 0x563b0840d820 <line:41:2, col:78> 'KUHL_M_C':'struct _KUHL_M_C'
+    |     | |-ImplicitCastExpr 0x563b0840d880 <col:3> 'const PKUHL_M_C_FUNC':'NTSTATUS (*const)(int, wchar_t **)' <NullToPointer>
+    |     | | `-IntegerLiteral 0x563b083f11a8 <col:3> 'int' 0
+    |     | |-ImplicitCastExpr 0x563b0840d8b0 <col:8> 'const wchar_t *' <NoOp>
+    |     | | `-ImplicitCastExpr 0x563b0840d898 <col:8> 'unsigned short *' <ArrayToPointerDecay>
+    |     | |   `-StringLiteral 0x563b083f1208 <col:8> 'unsigned short [5]' lvalue L"blob"
+    |     | `-ImplicitCastExpr 0x563b0840d8e0 <col:18> 'const wchar_t *' <NoOp>
+    |     |   `-ImplicitCastExpr 0x563b0840d8c8 <col:18> 'unsigned short *' <ArrayToPointerDecay>
+    |     |     `-StringLiteral 0x563b083f1268 <col:18> 'unsigned short [58]' lvalue L"Describe a DPAPI blob, unprotect it with API or Masterkey"
+    |     |-InitListExpr 0x563b0840d8f8 <line:42:2, col:54> 'KUHL_M_C':'struct _KUHL_M_C'
+    |     | |-ImplicitCastExpr 0x563b0840d960 <col:3> 'const PKUHL_M_C_FUNC':'NTSTATUS (*const)(int, wchar_t **)' <NullToPointer>
+    |     | | `-IntegerLiteral 0x563b083f1350 <col:3> 'int' 0
+    |     | |-ImplicitCastExpr 0x563b0840d990 <col:7> 'const wchar_t *' <NoOp>
+    |     | | `-ImplicitCastExpr 0x563b0840d978 <col:7> 'unsigned short *' <ArrayToPointerDecay>
+    |     | |   `-StringLiteral 0x563b083f1370 <col:7> 'unsigned short [8]' lvalue L"protect"
+    |     | `-ImplicitCastExpr 0x563b0840d9c0 <col:20> 'const wchar_t *' <NoOp>
+    |     |   `-ImplicitCastExpr 0x563b0840d9a8 <col:20> 'unsigned short *' <ArrayToPointerDecay>
+    |     |     `-StringLiteral 0x563b083f1398 <col:20> 'unsigned short [32]' lvalue L"Protect a data via a DPAPI call"
+    |     |-InitListExpr 0x563b0840d9d8 <line:43:2, col:90> 'KUHL_M_C':'struct _KUHL_M_C'
+    |     | |-ImplicitCastExpr 0x563b0840da50 <col:3> 'const PKUHL_M_C_FUNC':'NTSTATUS (*const)(int, wchar_t **)' <NullToPointer>
+    |     | | `-IntegerLiteral 0x563b083f1448 <col:3> 'int' 0
+    |     | |-ImplicitCastExpr 0x563b0840da80 <col:6> 'const wchar_t *' <NoOp>
+    |     | | `-ImplicitCastExpr 0x563b0840da68 <col:6> 'unsigned short *' <ArrayToPointerDecay>
+    |     | |   `-StringLiteral 0x563b083f1468 <col:6> 'unsigned short [10]' lvalue L"masterkey"
+    |     | `-ImplicitCastExpr 0x563b0840dab0 <col:20> 'const wchar_t *' <NoOp>
+    |     |   `-ImplicitCastExpr 0x563b0840da98 <col:20> 'unsigned short *' <ArrayToPointerDecay>
+    |     |     `-StringLiteral 0x563b083f14d8 <col:20> 'unsigned short [68]' lvalue L"Describe a Masterkey file, unprotect each Masterkey (key depending)"
+    |     `-InitListExpr 0x563b0840dac8 <line:44:2, col:47> 'KUHL_M_C':'struct _KUHL_M_C'
+    |       |-ImplicitCastExpr 0x563b0840db20 <col:3> 'const PKUHL_M_C_FUNC':'NTSTATUS (*const)(int, wchar_t **)' <NullToPointer>
+    |       | `-IntegerLiteral 0x563b083f15d0 <col:3> 'int' 0
+    |       |-ImplicitCastExpr 0x563b0840db50 <col:7> 'const wchar_t *' <NoOp>
+    |       | `-ImplicitCastExpr 0x563b0840db38 <col:7> 'unsigned short *' <ArrayToPointerDecay>
+    |       |   `-StringLiteral 0x563b083f1628 <col:7> 'unsigned short [9]' lvalue L"credhist"
+    |       `-ImplicitCastExpr 0x563b0840db80 <col:20> 'const wchar_t *' <NoOp>
+    |         `-ImplicitCastExpr 0x563b0840db68 <col:20> 'unsigned short *' <ArrayToPointerDecay>
+    |           `-StringLiteral 0x563b083f1688 <col:20> 'unsigned short [25]' lvalue L"Describe a Credhist file"
+    |-DeclStmt 0x563b0840dcc0 <line:47:5, col:45>
+    | `-VarDecl 0x563b0840dc60 <col:5, col:26> col:26 used lNtMapViewOfSection 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)'
+    |-DeclStmt 0x563b0840dd48 <line:48:2, col:15>
+    | `-VarDecl 0x563b0840dce8 <col:2, col:10> col:10 used ntdll 'HMODULE':'struct HINSTANCE__ *'
+    |-IfStmt 0x563b0840df40 <line:50:2, line:53:2>
+    | |-UnaryOperator 0x563b0840dec8 <line:50:6, col:42> 'int' prefix '!' cannot overflow
+    | | `-ParenExpr 0x563b0840dea8 <col:7, col:42> 'HMODULE':'struct HINSTANCE__ *'
+    | |   `-BinaryOperator 0x563b0840de88 <col:8, col:41> 'HMODULE':'struct HINSTANCE__ *' '='
+    | |     |-DeclRefExpr 0x563b0840dd60 <col:8> 'HMODULE':'struct HINSTANCE__ *' lvalue Var 0x563b0840dce8 'ntdll' 'HMODULE':'struct HINSTANCE__ *'
+    | |     `-CallExpr 0x563b0840de30 <<scratch space>:147:1, inputs/strings_test.c:50:41> 'HMODULE':'struct HINSTANCE__ *'
+    | |       |-ImplicitCastExpr 0x563b0840de18 <<scratch space>:147:1> 'HMODULE (*)(LPCSTR)' <FunctionToPointerDecay>
+    | |       | `-DeclRefExpr 0x563b0840dd80 <col:1> 'HMODULE (LPCSTR)' Function 0x563b074364b8 'LoadLibraryA' 'HMODULE (LPCSTR)'
+    | |       `-ImplicitCastExpr 0x563b0840de70 <inputs/strings_test.c:50:33> 'LPCSTR':'const CHAR *' <NoOp>
+    | |         `-ImplicitCastExpr 0x563b0840de58 <col:33> 'char *' <ArrayToPointerDecay>
+    | |           `-StringLiteral 0x563b0840dda0 <col:33> 'char [6]' lvalue "ntdll"
+    | `-CompoundStmt 0x563b0840df28 <line:51:2, line:53:2>
+    |   `-ReturnStmt 0x563b0840df18 <line:52:3, col:11>
+    |     `-UnaryOperator 0x563b0840df00 <col:10, col:11> 'int' prefix '-'
+    |       `-IntegerLiteral 0x563b0840dee0 <col:11> 'int' 1
+    |-BinaryOperator 0x563b0840e150 <line:55:2, col:88> 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' '='
+    | |-DeclRefExpr 0x563b0840df58 <col:2> 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' lvalue Var 0x563b0840dc60 'lNtMapViewOfSection' 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)'
+    | `-CStyleCastExpr 0x563b0840e128 <col:24, col:88> 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' <BitCast>
+    |   `-CallExpr 0x563b0840e0a0 <col:46, col:88> 'FARPROC':'INT_PTR (*)()'
+    |     |-ImplicitCastExpr 0x563b0840e088 <col:46> 'FARPROC (*)(HMODULE, LPCSTR)' <FunctionToPointerDecay>
+    |     | `-DeclRefExpr 0x563b0840df78 <col:46> 'FARPROC (HMODULE, LPCSTR)' Function 0x563b073b41f8 'GetProcAddress' 'FARPROC (HMODULE, LPCSTR)'
+    |     |-ImplicitCastExpr 0x563b0840e0d0 <col:61> 'HMODULE':'struct HINSTANCE__ *' <LValueToRValue>
+    |     | `-DeclRefExpr 0x563b0840df98 <col:61> 'HMODULE':'struct HINSTANCE__ *' lvalue Var 0x563b0840dce8 'ntdll' 'HMODULE':'struct HINSTANCE__ *'
+    |     `-ImplicitCastExpr 0x563b0840e100 <col:68> 'LPCSTR':'const CHAR *' <NoOp>
+    |       `-ImplicitCastExpr 0x563b0840e0e8 <col:68> 'char *' <ArrayToPointerDecay>
+    |         `-StringLiteral 0x563b0840dff8 <col:68> 'char [19]' lvalue "NtMapViewOfSection"
+    |-CallExpr 0x563b0840e2e8 <line:56:5, col:44> 'NTSTATUS':'long'
+    | |-ImplicitCastExpr 0x563b0840e2d0 <col:5> 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' <LValueToRValue>
+    | | `-DeclRefExpr 0x563b0840e170 <col:5> 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)' lvalue Var 0x563b0840dc60 'lNtMapViewOfSection' 'f_NtMapViewOfSection':'NTSTATUS (*)(HANDLE, HANDLE, PVOID *, ULONG, ULONG, PLARGE_INTEGER, PULONG, ULONG, ULONG, ULONG)'
+    | |-ImplicitCastExpr 0x563b0840e358 <col:25> 'HANDLE':'void *' <NullToPointer>
+    | | `-IntegerLiteral 0x563b0840e190 <col:25> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e370 <col:27> 'HANDLE':'void *' <NullToPointer>
+    | | `-IntegerLiteral 0x563b0840e1b0 <col:27> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e388 <col:29> 'PVOID *' <NullToPointer>
+    | | `-IntegerLiteral 0x563b0840e1d0 <col:29> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e3a0 <col:31> 'ULONG':'unsigned long' <IntegralCast>
+    | | `-IntegerLiteral 0x563b0840e1f0 <col:31> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e3b8 <col:33> 'ULONG':'unsigned long' <IntegralCast>
+    | | `-IntegerLiteral 0x563b0840e210 <col:33> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e3d0 <col:35> 'PLARGE_INTEGER':'LARGE_INTEGER *' <NullToPointer>
+    | | `-IntegerLiteral 0x563b0840e230 <col:35> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e3e8 <col:37> 'PULONG':'ULONG *' <NullToPointer>
+    | | `-IntegerLiteral 0x563b0840e250 <col:37> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e400 <col:39> 'ULONG':'unsigned long' <IntegralCast>
+    | | `-IntegerLiteral 0x563b0840e270 <col:39> 'int' 0
+    | |-ImplicitCastExpr 0x563b0840e418 <col:41> 'ULONG':'unsigned long' <IntegralCast>
+    | | `-IntegerLiteral 0x563b0840e290 <col:41> 'int' 0
+    | `-ImplicitCastExpr 0x563b0840e430 <col:43> 'ULONG':'unsigned long' <IntegralCast>
+    |   `-IntegerLiteral 0x563b0840e2b0 <col:43> 'int' 0
+    `-ReturnStmt 0x563b0840e468 <line:57:5, col:12>
+      `-IntegerLiteral 0x563b0840e448 <col:12> 'int' 0
