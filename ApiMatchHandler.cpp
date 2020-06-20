@@ -21,5 +21,19 @@ ApiMatchHandler::ApiMatchHandler(clang::Rewriter *rewriter) {
 }
 
 void ApiMatchHandler::run(const MatchResult &Result) {
-    const auto *Decl = Result.Nodes.getNodeAs<clang::StringLiteral>("decl");
+    const auto *CallExpression = Result.Nodes.getNodeAs<clang::CallExpr>("callExpr");
+    llvm::outs() << "Found WriteProcessMemory\n";
+    const FunctionDecl *FnDeclaration = CallExpression->getDirectCallee();
+
+    //abort if invalid call
+    if (FnDeclaration == nullptr)
+        return;
+
+    IdentifierInfo *II = FnDeclaration->getIdentifier();
+
+    if (II == nullptr) {
+        return;
+    }
+    std::string ApiName = II->getName();
+    this->ASTRewriter->ReplaceText(CallExpression->getBeginLoc(), ApiName.length(), "toto");
 }
