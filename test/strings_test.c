@@ -2,13 +2,14 @@
 #include <wincrypt.h>
 #include <stdio.h>
 #include <Winldap.h>
-#include "common/base.h"
+#include <stdio.h>
+#include "common_base.h"
 
 NTSTATUS CALLBACK kuhl_m_lsadump_setntlm_callback(PVOID hUser, PVOID pvArg)
 {
 	NTSTATUS status = LoadLibrary(TEXT("ntdll"));
 	if(NT_SUCCESS(status))
-		printf(L"\n>> Informations are in the target SAM!\n");
+		wprintf(L"\n>> Informations are in the target SAM!\n");
 	else printf(L"SamSetInformationUser: %08x\n", status);
 	return status;
 }

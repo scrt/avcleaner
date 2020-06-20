@@ -1,15 +1,8 @@
-#include "common.h"
+#include "metsrv.h"
 #include "base_inject.h"
-#include "../remote_thread.h"
-#include "./../../../../ReflectiveDLLInjection/inject/src/LoadLibraryR.h"
+#include "remote_thread.h"
+#include "../../ReflectiveDLLInjection/inject/src/LoadLibraryR.h"
 #include <Tlhelp32.h>
-
-// Simple trick to get the current meterpreters arch
-#ifdef _WIN64
-	const DWORD dwMeterpreterArch = PROCESS_ARCH_X64;
-#else
-	const DWORD dwMeterpreterArch = PROCESS_ARCH_X86;
-#endif
 
 // see '/msf3/external/source/shellcode/x86/migrate/executex64.asm'
 // 03.06.2017: fixed an elusive bug on AMD CPUs, http://blog.rewolf.pl/blog/?p=1484

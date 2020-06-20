@@ -16,6 +16,7 @@
 
 #include "Consumer.h"
 #include "MatchHandler.h"
+#include "ApiMatchHandler.h"
 
 #include <iostream>
 #include <memory>
@@ -28,6 +29,7 @@ namespace ClSetup {
 
     llvm::cl::opt<bool> IsEditEnabled("edit", llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),llvm::cl::cat(ToolCategory));
     llvm::cl::opt<bool> IsStringObfuscationEnabled("strings", llvm::cl::desc("Enable obfuscation of string literals."),llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsApiObfuscationEnabled("api", llvm::cl::desc("Enable obfuscation of api calls."),llvm::cl::cat(ToolCategory));
 }
 
 namespace StringEncryptor {
@@ -52,7 +54,26 @@ namespace StringEncryptor {
         }
     };
 
+    class ApiCallConsumer : public clang::ASTConsumer {
+    public:
+
+        void HandleTranslationUnit(clang::ASTContext &Context) override {
+            using namespace clang::ast_matchers;
+            using namespace StringEncryptor;
+
+            llvm::outs() << "[ApiCallObfuscation] Registering ASTMatcher...\n";
+            MatchFinder Finder;
+            ApiMatchHandler Handler(&ASTRewriter);
+
+            const auto Matcher = callExpr(callee(functionDecl(hasName("WriteProcessMemory")))).bind("callExpr");
+
+            Finder.addMatcher(Matcher, &Handler);
+            Finder.matchAST(Context);
+        }
+    };
+
     StringEncryptionConsumer StringConsumer = StringEncryptionConsumer();
+    ApiCallConsumer ApiConsumer = ApiCallConsumer();
 
     class Action : public clang::ASTFrontendAction {
 
@@ -68,6 +89,10 @@ namespace StringEncryptor {
 
             if(ClSetup::IsStringObfuscationEnabled) {
                 consumers.push_back(&StringConsumer);
+            }
+
+            if(ClSetup::IsApiObfuscationEnabled) {
+                consumers.push_back(&ApiConsumer);
             }
 
             auto TheConsumer = llvm::make_unique<Consumer>();

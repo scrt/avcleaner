@@ -21,7 +21,7 @@ add_executable(avcleaner.bin
         main.cpp
         MatchHandler.cpp
         Globals.cpp
-        )
+        ApiMatchHandler.cpp ApiMatchHandler.h)
 
 
 include_directories(${LLVM_INCLUDE_DIRS})
