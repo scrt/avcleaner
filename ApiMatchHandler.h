@@ -51,6 +51,7 @@ private:
     std::string _ApiName;
     std::string _TypeDef;
     std::string _Library;
+    std::vector<const clang::FunctionDecl*> TypedefAdded; // collection of locations where the TypeDef for the API was already added.
 
     clang::SourceRange findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
                                          const clang::CallExpr &Literal, uint64_t Iterations);

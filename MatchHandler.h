@@ -96,8 +96,6 @@ private:
     findInjectionSpot(clang::ASTContext *Context, clang::ast_type_traits::DynTypedNode Parent,
                       const clang::StringLiteral &Literal, bool IsGlobal, uint64_t Iterations);
 
-
-
     /**
      * offers a chance to bail out from the refactoring process if the string literal is found in an unpatchable location.
      * @param FunctionName

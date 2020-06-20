@@ -17,7 +17,6 @@
 
 using namespace clang;
 
-
 std::string ApiMatchHandler::getFunctionIdentifier(const CallExpr *CallExpression) {
 
     const FunctionDecl *FnDeclaration = CallExpression->getDirectCallee();
@@ -48,8 +47,6 @@ bool ApiMatchHandler::handleCallExpr(const CallExpr *CallExpression, clang::ASTC
     if (!addGetProcAddress(CallExpression, pContext, Replacement, Identifier))
         return false;
 
-    //Globs::PatchedSourceLocation.push_back(LiteralRange);
-
     return replaceIdentifier(CallExpression, Identifier, Replacement);
 }
 
@@ -70,28 +67,30 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
 
     std::stringstream Result;
 
+    // add function prototype if not already added
+    if(std::find(TypedefAdded.begin(), TypedefAdded.end(), pCallExpression->getDirectCallee()) == TypedefAdded.end()) {
+
+        Result << "\t" << _TypeDef << "\n";
+    }
+
     // add LoadLibrary with obfuscated strings
     std::string LoadLibraryVariable = Utils::translateStringToIdentifier(_Library);
     std::string LoadLibraryString = Utils::generateVariableDeclaration(LoadLibraryVariable, _Library);
     std::string LoadLibraryHandleIdentifier = Utils::translateStringToIdentifier("hHandle_"+_Library);
-    Result << LoadLibraryString << std::endl;
+    Result << "\t" << LoadLibraryString << std::endl;
     Result << "\tHANDLE " << LoadLibraryHandleIdentifier << " = LoadLibrary(" << LoadLibraryVariable << ");\n";
 
     // add GetProcAddress with obfuscated string: TypeDef NewIdentifier = (TypeDef) GetProcAddress(handleIdentifier, ApiName)
     std::string ApiNameIdentifier = Utils::translateStringToIdentifier(ApiName);
     std::string ApiNameDecl = Utils::generateVariableDeclaration(ApiNameIdentifier, ApiName);
-    Result << ApiNameDecl << "\n";
-    Result << "_ "<< ApiName << " " << NewIdentifier << " = (_" << ApiName << ") GetProcAddress("
+    Result << "\t" << ApiNameDecl << "\n";
+    Result << "\t_ "<< ApiName << " " << NewIdentifier << " = (_" << ApiName << ") GetProcAddress("
            << LoadLibraryHandleIdentifier << ", " << ApiNameIdentifier << ");\n";
 
-    bool InsertResult = ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), Result.str());
+    TypedefAdded.push_back(pCallExpression->getDirectCallee());
 
-    if (InsertResult) {
-        llvm::errs() << " Could not finish to patch the function call.\n";
-        //Globs::PatchedSourceLocation.push_back(range);
-    }
-
-    return !InsertResult;
+    // add everything at the beginning of the function.
+    return !(ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), Result.str()));
 }
 
 SourceRange
@@ -116,7 +115,6 @@ ApiMatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_
             auto *Statement = FunDecl->getBody();
             auto *FirstChild = *Statement->child_begin();
             return {FirstChild->getBeginLoc(), FunDecl->getEndLoc()};
-
         }
 
         return findInjectionSpot(Context, parent, Literal, ++Iterations);

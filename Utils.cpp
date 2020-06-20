@@ -9,7 +9,8 @@
 #include <sstream>
 
 using namespace Utils;
- std::string Utils::randomString(std::string::size_type Length) {
+
+std::string Utils::randomString(std::string::size_type Length) {
 
     static auto &chrs = "0123456789"
                         "abcdefghijklmnopqrstuvwxyz"
@@ -28,7 +29,7 @@ using namespace Utils;
     return s;
 }
 
- std::string Utils::translateStringToIdentifier(const std::string &StrLiteral) {
+std::string Utils::translateStringToIdentifier(const std::string &StrLiteral) {
 
     std::string NewIdentifier = std::regex_replace(StrLiteral, std::regex("[^A-Za-z]"), "_");
     return "hid_" + NewIdentifier.substr(0, 6) + '_' + randomString(12);
@@ -47,9 +48,8 @@ void Utils::cleanParameter(std::string &Argument) {
 }
 
 
-
 std::string
-Utils::generateVariableDeclaration(const std::string &StringIdentifier, const  std::string &StringValue) {
+Utils::generateVariableDeclaration(const std::string &StringIdentifier, const std::string &StringValue) {
 
     std::stringstream Result;
 
@@ -80,7 +80,7 @@ Utils::generateVariableDeclaration(const std::string &StringIdentifier, const  s
         }
     }
 
-    if(*Result.str().end() == ',')
+    if (*Result.str().end() == ',')
         Result << "0};\n";
     else
         Result << ",0};\n";
