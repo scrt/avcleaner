@@ -45,32 +45,6 @@ public:
 
     void run(const MatchResult &Result) override; // callback function that runs when a Match is found.
 
-    /**
-     * strip metacharacters decorating a string.
-     * For instance, L"ntdll" -> ntdll
-     * @param Argument the string to be cleaned.
-     */
-    static void cleanParameter(std::string &Argument);
-
-/**
- * used to replace a string literal by a variable's identifier
- * must not collide with existing identifiers.
- * Format: 12-first characters, letters only + random part
- * TODO: remember allocated identifiers for collision prevention
- * TODO: extract constants into readable identifiers.
- * @param StrLiteral the string literal
- */
-static std::string translateStringToIdentifier(const std::string &StrLiteral);
-
-/**
- * @brief declares and instantiate a variable holding a string that was moved out from a function's arguments.
- * @param StringIdentifier the new variable identifier.
- * @param StringValue the actual value of the string literal.
- * @return the generated code snippet.
- */
-static std::string
-generateVariableDeclaration(const std::string &StringIdentifier, std::string &StringValue);
-
 private:
     clang::Rewriter *ASTRewriter; // an instance to a Rewriter to manage changes to the AST.
 
@@ -109,12 +83,6 @@ private:
     void handleCallExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
                         clang::ast_type_traits::DynTypedNode node);
 
-    /**
-     * @brief generates a random string of size Length.
-     * @param Length desired length of the generated string.
-     * @return a random string of size Length.
-     */
-    static std::string randomString(unsigned long Length);
 
     /**
      * @brief Finds some free space to inject code that must run before the string literals usages.
@@ -128,7 +96,7 @@ private:
     findInjectionSpot(clang::ASTContext *Context, clang::ast_type_traits::DynTypedNode Parent,
                       const clang::StringLiteral &Literal, bool IsGlobal, uint64_t Iterations);
 
-    const static uint64_t CLIMB_PARENTS_MAX_ITER = 1000; // fail safe to prevent a recursion loop when climbing the list of parents.
+
 
     /**
      * offers a chance to bail out from the refactoring process if the string literal is found in an unpatchable location.

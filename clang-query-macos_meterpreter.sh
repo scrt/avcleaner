@@ -11,6 +11,9 @@ clang-query "$1" -- -D "_WIN64" -D "_UNICODE" -D "UNICODE" -D "_WINSOCK_DEPRECAT
   "-I" "$WIN_INCLUDE/Include/10.0.17134.0/winrt" \
   "-I" "/Users/vladimir/vmshare-work/tmp/metasploit-payloads/c/meterpreter/source/metsrv" \
   "-I" "/Users/vladimir/vmshare-work/tmp/metasploit-payloads/c/meterpreter/source/common" \
+  "-I" "/Users/vladimir/vmshare-work/tmp/metasploit-payloads/c/meterpreter/source/extensions/kiwi/mimikatz/mimikatz/modules/" \
+  "-I" "/Users/vladimir/vmshare-work/tmp/metasploit-payloads/c/meterpreter/source/extensions/kiwi/mimikatz/mimikatz/" \
+  "-I" "/Users/vladimir/vmshare-work/tmp/metasploit-payloads/c/meterpreter/source/extensions/kiwi/mimikatz/inc" \
   "-fdeprecated-macro" \
   "-w" \
   "-fdebug-compilation-dir"\

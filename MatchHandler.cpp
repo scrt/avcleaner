@@ -12,6 +12,7 @@
 #include "clang/Tooling/Inclusions/HeaderIncludes.h"
 #include "clang/Tooling/Inclusions/IncludeStyle.h"
 #include "Globals.h"
+#include "Utils.h"
 
 using namespace clang;
 
@@ -24,7 +25,7 @@ MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_tr
                              clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
                              uint64_t Iterations) {
 
-    if (Iterations > CLIMB_PARENTS_MAX_ITER) {
+    if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER) {
         return CurrentParents;
     }
 
@@ -134,16 +135,14 @@ bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTCo
     if(shouldAbort(pLiteral, pContext, LiteralRange))
         return false;
 
-    std::string Replacement = translateStringToIdentifier(pLiteral->getBytes().str());
+    std::string Replacement = Utils::translateStringToIdentifier(pLiteral->getBytes().str());
 
     if(!insertVariableDeclaration(pLiteral, pContext, LiteralRange, Replacement))
         return false ;
 
-    bool res = replaceStringLiteral(pLiteral, pContext, LiteralRange, Replacement);
-
     Globs::PatchedSourceLocation.push_back(LiteralRange);
 
-    return res;
+    return replaceStringLiteral(pLiteral, pContext, LiteralRange, Replacement);
 }
 
 void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
@@ -176,7 +175,7 @@ bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLitera
     // inject code to declare the string in an encrypted fashion
     SourceRange FreeSpace = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(), *pLiteral,
                                               IsInGlobalContext, 0);
-    std::string StringVariableDeclaration = generateVariableDeclaration(Replacement, StringLiteralContent);
+    std::string StringVariableDeclaration = Utils::generateVariableDeclaration(Replacement, StringLiteralContent);
 
     if (!IsInGlobalContext) {
         //StringVariableDeclaration += "\tdprintf(\"" + Replacement + "\");\n";
@@ -217,47 +216,11 @@ bool MatchHandler::replaceStringLiteral(const clang::StringLiteral *pLiteral, cl
     return ASTRewriter->ReplaceText(LiteralRange, Replacement);
 }
 
-void MatchHandler::cleanParameter(std::string &Argument) {
-
-    auto Index = Argument.find_first_of('\"');
-
-    Argument.erase(Argument.begin(), Argument.begin() + Index + 1);
-
-    if (Argument.back() == '\"') {
-        Argument.pop_back();
-    }
-}
-
-std::string MatchHandler::translateStringToIdentifier(const std::string &StrLiteral) {
-
-    std::string NewIdentifier = std::regex_replace(StrLiteral, std::regex("[^A-Za-z]"), "_");
-    return "hid_" + NewIdentifier.substr(0, 6) + '_' + randomString(12);
-}
-
-std::string MatchHandler::randomString(std::string::size_type Length) {
-
-    static auto &chrs = "0123456789"
-                        "abcdefghijklmnopqrstuvwxyz"
-                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    thread_local static std::mt19937 rg{std::random_device{}()};
-    thread_local static std::uniform_int_distribution<std::string::size_type> pick(0, sizeof(chrs) - 2);
-
-    std::string s;
-
-    s.reserve(Length);
-
-    while (Length--)
-        s += chrs[pick(rg)];
-
-    return s;
-}
-
 SourceRange
 MatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
                                 const clang::StringLiteral &Literal, bool IsGlobal, uint64_t Iterations) {
 
-    if (Iterations > CLIMB_PARENTS_MAX_ITER)
+    if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER)
         throw std::runtime_error("Reached max iterations when trying to find a function declaration");
 
     ASTContext::DynTypedNodeList parents = Context->getParents(Literal);;
@@ -285,45 +248,6 @@ MatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_typ
 
         return findInjectionSpot(Context, parent, Literal, IsGlobal, ++Iterations);
     }
-}
-
-std::string
-MatchHandler::generateVariableDeclaration(const std::string &StringIdentifier, std::string &StringValue) {
-
-    std::stringstream Result;
-
-    //Result << "\n#ifdef _UNICODE\n\twchar_t\n";
-    //Result << "#else\n\tchar\n#endif\n\t";
-    Result << "TCHAR " << StringIdentifier << "[] = {";
-
-    auto CleanString = std::string(StringValue);
-    cleanParameter(CleanString);
-    bool ToggleZero = std::count(CleanString.begin(), CleanString.end(), 0) >= CleanString.size() / 2;
-    for (std::string::iterator it = CleanString.begin(); it != CleanString.end(); it++) {
-
-        if (*it == '\'') {
-            Result << "'\\" << *it << "'";
-        } else if (*it == '\\') {
-            Result << "'\\\\'";
-        } else if (*it == '\n') {
-            Result << "'\\n'";
-        } else if (*it != 0) {
-            Result << "'" << *it << "'";
-        } else {
-            continue;
-        }
-
-        uint32_t offset = 1;
-        if (it + offset != CleanString.end()) {
-            Result << ",";
-        }
-    }
-
-    if(*Result.str().end() == ',')
-        Result << "0};\n";
-    else
-        Result << ",0};\n";
-    return std::regex_replace(Result.str(), std::regex(",,"), ",");
 }
 
 bool MatchHandler::isBlacklistedFunction(const CallExpr *FunctionCall) {

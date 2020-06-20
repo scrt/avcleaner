@@ -27,9 +27,13 @@
 namespace ClSetup {
     llvm::cl::OptionCategory ToolCategory("StringEncryptor");
 
-    llvm::cl::opt<bool> IsEditEnabled("edit", llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),llvm::cl::cat(ToolCategory));
-    llvm::cl::opt<bool> IsStringObfuscationEnabled("strings", llvm::cl::desc("Enable obfuscation of string literals."),llvm::cl::cat(ToolCategory));
-    llvm::cl::opt<bool> IsApiObfuscationEnabled("api", llvm::cl::desc("Enable obfuscation of api calls."),llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsEditEnabled("edit",
+                                      llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),
+                                      llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsStringObfuscationEnabled("strings", llvm::cl::desc("Enable obfuscation of string literals."),
+                                                   llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsApiObfuscationEnabled("api", llvm::cl::desc("Enable obfuscation of api calls."),
+                                                llvm::cl::cat(ToolCategory));
 }
 
 namespace StringEncryptor {
@@ -57,23 +61,30 @@ namespace StringEncryptor {
     class ApiCallConsumer : public clang::ASTConsumer {
     public:
 
+        ApiCallConsumer(std::string ApiName, std::string TypeDef, std::string Library)
+                : _ApiName(ApiName), _TypeDef(std::move(TypeDef)), _Library(Library) {}
+
         void HandleTranslationUnit(clang::ASTContext &Context) override {
             using namespace clang::ast_matchers;
             using namespace StringEncryptor;
 
-            llvm::outs() << "[ApiCallObfuscation] Registering ASTMatcher...\n";
+            llvm::outs() << "[ApiCallObfuscation] Registering ASTMatcher for " << _ApiName << "\n";
             MatchFinder Finder;
-            ApiMatchHandler Handler(&ASTRewriter);
+            ApiMatchHandler Handler(&ASTRewriter, _ApiName, _TypeDef, _Library);
 
-            const auto Matcher = callExpr(callee(functionDecl(hasName("WriteProcessMemory")))).bind("callExpr");
+            const auto Matcher = callExpr(callee(functionDecl(hasName(_ApiName)))).bind("callExpr");
 
             Finder.addMatcher(Matcher, &Handler);
             Finder.matchAST(Context);
         }
+
+    private:
+        std::string _ApiName;
+        std::string _TypeDef;
+        std::string _Library;
     };
 
     StringEncryptionConsumer StringConsumer = StringEncryptionConsumer();
-    ApiCallConsumer ApiConsumer = ApiCallConsumer();
 
     class Action : public clang::ASTFrontendAction {
 
@@ -84,15 +95,20 @@ namespace StringEncryptor {
                                              llvm::StringRef Filename) override {
 
             ASTRewriter.setSourceMgr(Compiler.getSourceManager(), Compiler.getLangOpts());
-            std::vector<clang::ASTConsumer*> consumers;
+            std::vector<clang::ASTConsumer *> consumers;
 
 
-            if(ClSetup::IsStringObfuscationEnabled) {
+            if (ClSetup::IsStringObfuscationEnabled) {
                 consumers.push_back(&StringConsumer);
             }
 
-            if(ClSetup::IsApiObfuscationEnabled) {
-                consumers.push_back(&ApiConsumer);
+            if (ClSetup::IsApiObfuscationEnabled) {
+
+                for(auto const& el: ApiToHide_samlib){
+                    auto Cons = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer(el.first, el.second,
+                                                                                       "samlib.dll"));
+                    consumers.push_back(*Cons);
+                }
             }
 
             auto TheConsumer = llvm::make_unique<Consumer>();
@@ -122,9 +138,9 @@ namespace StringEncryptor {
             auto ReWriteBuffer = ASTRewriter.getRewriteBufferFor(FileID);
             llvm::errs() << "Got Rewrite buffer\n";
 
-            if(ReWriteBuffer != nullptr)
+            if (ReWriteBuffer != nullptr)
                 ReWriteBuffer->write((s));
-            else{
+            else {
                 llvm::errs() << "File was not modified\n";
                 return;
             }
@@ -133,13 +149,13 @@ namespace StringEncryptor {
 
             std::ofstream fo;
 
-            if(ClSetup::IsEditEnabled)  {
+            if (ClSetup::IsEditEnabled) {
                 fo.open(FileName);
-            } else{
-                fo.open(FileName +".patch");
+            } else {
+                fo.open(FileName + ".patch");
             }
 
-            if(fo.is_open())
+            if (fo.is_open())
                 fo << result;
             else
                 llvm::errs() << "[!] Error saving result to " << FileName << "\n";
