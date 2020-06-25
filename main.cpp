@@ -70,7 +70,7 @@ namespace StringEncryptor {
                 consumers.push_back(&StringConsumer);
             }
 
-            auto TheConsumer = llvm::make_unique<Consumer>();
+            auto TheConsumer = std::make_unique<Consumer>();
             TheConsumer->consumers = consumers;
             return TheConsumer;
         }
