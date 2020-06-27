@@ -9,7 +9,7 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "MatchHandler.h"
 
-namespace StringEncryptor   {
+namespace AVObfuscator   {
     extern clang::Rewriter ASTRewriter;
 }
 

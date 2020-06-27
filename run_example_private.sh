@@ -1,4 +1,4 @@
-./CMakeBuild/avcleaner.bin "$1" --strings=true -- -D "_WIN64" -D "_UNICODE" -D "UNICODE" -D "_WINSOCK_DEPRECATED_NO_WARNINGS"\
+./cmake-build-debug/avcleaner.bin "$1" --strings=true -- -D "_WIN64" -D "_UNICODE" -D "UNICODE" -D "_WINSOCK_DEPRECATED_NO_WARNINGS"\
   "-I" "/usr/local/Cellar/llvm/9.0.1"#"/usr/lib/clang/8.0.1//include" \
   "-I" "/usr/local/Cellar/llvm/9.0.1"#"/usr/lib/clang/8.0.1/" \
   "-I" "/Users/vladimir/dev/anti-av/hkclnr/avcleaner/Include/msvc-14.15.26726-include"\

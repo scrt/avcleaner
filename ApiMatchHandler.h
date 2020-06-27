@@ -46,6 +46,7 @@ public:
                                                                                            _TypeDef(TypeDef), _Library(Library) {}
 
     void run(const MatchResult &Result) override; // callback function that runs when a Match is found.
+
 private:
     clang::Rewriter *ASTRewriter; // an instance to a Rewriter to manage changes to the AST.
     std::string _ApiName;

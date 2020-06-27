@@ -21,11 +21,12 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 #include <fstream>
 
 namespace ClSetup {
-    llvm::cl::OptionCategory ToolCategory("StringEncryptor");
+    llvm::cl::OptionCategory ToolCategory("AVObfuscator");
 
     llvm::cl::opt<bool> IsEditEnabled("edit",
                                       llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),
@@ -36,7 +37,7 @@ namespace ClSetup {
                                                 llvm::cl::cat(ToolCategory));
 }
 
-namespace StringEncryptor {
+namespace AVObfuscator {
 
     clang::Rewriter ASTRewriter;
 
@@ -45,7 +46,7 @@ namespace StringEncryptor {
 
         void HandleTranslationUnit(clang::ASTContext &Context) override {
             using namespace clang::ast_matchers;
-            using namespace StringEncryptor;
+            using namespace AVObfuscator;
 
             llvm::outs() << "[StringEncryption] Registering ASTMatcher...\n";
             MatchFinder Finder;
@@ -62,11 +63,11 @@ namespace StringEncryptor {
     public:
 
         ApiCallConsumer(std::string ApiName, std::string TypeDef, std::string Library)
-                : _ApiName(ApiName), _TypeDef(std::move(TypeDef)), _Library(Library) {}
+                : _ApiName(std::move(ApiName)), _TypeDef(std::move(TypeDef)), _Library(std::move(Library)) {}
 
         void HandleTranslationUnit(clang::ASTContext &Context) override {
             using namespace clang::ast_matchers;
-            using namespace StringEncryptor;
+            using namespace AVObfuscator;
 
             llvm::outs() << "[ApiCallObfuscation] Registering ASTMatcher for " << _ApiName << "\n";
             MatchFinder Finder;
@@ -105,19 +106,20 @@ namespace StringEncryptor {
             if (ClSetup::IsApiObfuscationEnabled) {
 
                 for(auto const& el: ApiToHide_samlib){
+
                     auto Cons = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer(el.first, el.second,
                                                                                        "samlib.dll"));
                     consumers.push_back(*Cons);
                 }
             }
 
-            auto TheConsumer = llvm::make_unique<Consumer>();
+            auto TheConsumer = std::make_unique<Consumer>();
             TheConsumer->consumers = consumers;
             return TheConsumer;
         }
 
         bool BeginSourceFileAction(clang::CompilerInstance &Compiler) override {
-            llvm::outs() << "Processing file " << '\n';
+            llvm::outs() << "Processing file " << Compiler.getSourceManager().getFileEntryForID(Compiler.getSourceManager().getMainFileID())->getName() << '\n';
 
             return true;
         }
@@ -130,13 +132,10 @@ namespace StringEncryptor {
             llvm::errs() << "** EndSourceFileAction for: " << FileName << "\n";
 
             // Now emit the rewritten buffer.
-            llvm::errs() << "Here is the edited source file :\n\n";
             std::string TypeS;
             llvm::raw_string_ostream s(TypeS);
             auto FileID = SM.getMainFileID();
-            llvm::errs() << "Got main file id\n";
             auto ReWriteBuffer = ASTRewriter.getRewriteBufferFor(FileID);
-            llvm::errs() << "Got Rewrite buffer\n";
 
             if (ReWriteBuffer != nullptr)
                 ReWriteBuffer->write((s));
@@ -172,6 +171,6 @@ auto main(int argc, const char *argv[]) -> int {
     ClangTool Tool(OptionsParser.getCompilations(),
                    OptionsParser.getSourcePathList());
 
-    auto Action = newFrontendActionFactory<StringEncryptor::Action>();
+    auto Action = newFrontendActionFactory<AVObfuscator::Action>();
     return Tool.run(Action.get());
 }
