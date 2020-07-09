@@ -31,4 +31,4 @@ However, you should know that you're using a compiler frontend, which can only w
 CommandLine Error: Option 'non-global-value-max-name-size' registered more than once! LLVM ERROR: inconsistency in registered CommandLine options
 ```
 
-In case you encounter this error, please use Dockerfile_archlinux and it shoud go away. 
+In case you encounter this error, please use CMakeLists_archlinux.txt and it shoud go away. 
