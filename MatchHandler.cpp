@@ -119,6 +119,8 @@ void MatchHandler::handleStringInContext(const clang::StringLiteral *pLiteral, c
         handleCallExpr(pLiteral, pContext, node);
     } else if (ParentNodeKind.compare("InitListExpr") == 0) {
         handleInitListExpr(pLiteral, pContext, node);
+    }else if(ParentNodeKind.compare("VarDecl") == 0) {
+        handleVarDeclExpr(pLiteral, pContext, node);
     } else {
         llvm::outs() << "Unhandled context " << ParentNodeKind << " for string " << pLiteral->getBytes() << "\n";
     }
@@ -131,6 +133,7 @@ bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTCo
             ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getBeginLoc()),
             ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc())
     );
+
 
     if(shouldAbort(pLiteral, pContext, LiteralRange))
         return false;
@@ -164,6 +167,20 @@ void MatchHandler::handleInitListExpr(const clang::StringLiteral *pLiteral, clan
 
     handleExpr(pLiteral, pContext, node);
 }
+
+void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
+                                      const clang::ast_type_traits::DynTypedNode node) {
+
+    auto Identifier = node.get<clang::VarDecl>()->getIdentifier()->getName();
+    auto TypeLoc =  node.get<clang::VarDecl>()->getTypeSourceInfo()->getTypeLoc();
+    auto Type = TypeLoc.getType().getAsString();
+    auto Loc = TypeLoc.getSourceRange();
+    auto LHSReplacement = Type.replace(Type.find(" []"),3,"* ")+Identifier;
+
+    ASTRewriter->ReplaceText(Loc, LHSReplacement.str());
+    handleExpr(pLiteral, pContext, node);
+}
+
 
 bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
                                              clang::SourceRange range, const std::string& Replacement) {

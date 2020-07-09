@@ -69,7 +69,7 @@ Utils::generateVariableDeclaration(const std::string &StringIdentifier, const st
         } else if (*it == '\n') {
             Result << "'\\n'";
         } else if (*it != 0) {
-            Result << "'" << *it << "'";
+            Result << "'\\x" << std::hex << (int)*it << "'";
         } else {
             continue;
         }

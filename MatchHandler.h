@@ -121,6 +121,9 @@ private:
 
     bool handleExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
                     clang::ast_type_traits::DynTypedNode node);
+
+    void handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
+                           const clang::ast_type_traits::DynTypedNode node);
 };
 
 #endif //AVCLEANER_MATCHHANDLER_H
