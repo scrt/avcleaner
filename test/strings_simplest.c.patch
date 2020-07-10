@@ -6,31 +6,31 @@
 #include <stdio.h>
 
 
-TCHAR hid_core_l_kyIDIWTX4A6v[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
+const char hid_core_l_Np4yia8FUnPy[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
 
-TCHAR hid_reques_JDTO9W2opLT6[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
+const char hid_reques_hw1f6sCntbdM[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
 
-TCHAR hid_core_e_ZTK2jqLgvL6E[] = {'\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
+const char hid_core_e_dz7tWHD2JZcB[] = {'\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
 
-TCHAR hid_reques_dWuwFjdbLgR9[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
+const char hid_reques_Cwc9q1pWBQ9r[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
 
-TCHAR hid_core_m_tLAk0fGuKJfz[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
+const char hid_core_m_ZYmmDvHf5VGE[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
 
-TCHAR hid_reques_IgYRnYuigouX[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
+const char hid_reques_ZAygo4SjLjKO[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
 
-TCHAR hid_core_g_f5srU5p4yJ8Z[] = {'\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
+const char hid_core_g_AfYT1u4i14wj[] = {'\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
 
-TCHAR hid_reques_lLTFgAxDwKMA[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
+const char hid_reques_erYwueXrPeif[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
 char *customCommands[] =
 {
-	hid_core_l_kyIDIWTX4A6v,
-    hid_reques_JDTO9W2opLT6,
-	hid_core_e_ZTK2jqLgvL6E,
-    hid_reques_dWuwFjdbLgR9,
-	hid_core_m_tLAk0fGuKJfz,
-    hid_reques_IgYRnYuigouX,
-	hid_core_g_f5srU5p4yJ8Z,
-    hid_reques_lLTFgAxDwKMA
+	hid_core_l_Np4yia8FUnPy,
+    hid_reques_hw1f6sCntbdM,
+	hid_core_e_dz7tWHD2JZcB,
+    hid_reques_Cwc9q1pWBQ9r,
+	hid_core_m_ZYmmDvHf5VGE,
+    hid_reques_ZAygo4SjLjKO,
+	hid_core_g_AfYT1u4i14wj,
+    hid_reques_erYwueXrPeif
 };
 
 typedef NTSTATUS (NTAPI *f_NtMapViewOfSection)(HANDLE, HANDLE, PVOID *, ULONG, ULONG,
@@ -47,18 +47,28 @@ typedef struct _KUHL_M_C {
 int main(void)
 {
 
-    f_NtMapViewOfSection lNtMapViewOfSection;
+    
+	const wchar_t hid_n_t_d__gldTGhTov99S[] = {'\x6e','\x74','\x64','\x6c','\x6c',0};
+
+	const char hid_NtMapV_wT8bsreP3Xcj[] = {'\x4e','\x74','\x4d','\x61','\x70','\x56','\x69','\x65','\x77','\x4f','\x66','\x53','\x65','\x63','\x74','\x69','\x6f','\x6e',0};
+
+	const char hid_____At_zC1Ti0gnn6ug[] = {'\x5b','\x2a','\x5d','\x20','\x41','\x74','\x74','\x65','\x6d','\x70','\x74','\x69','\x6e','\x67','\x20','\x74','\x6f','\x20','\x61','\x64','\x64','\x20','\x75','\x73','\x65','\x72','\x20','\x25','\x73','\x20','\x74','\x6f','\x20','\x68','\x6f','\x73','\x74','\x20','\x25','\x73','\n',0};
+
+	const char hid_userna_2UP696z2cmou[] = {'\x75','\x73','\x65','\x72','\x6e','\x61','\x6d','\x65',0};
+
+	const char hid_dc_net_r5ChULBwf9Ep[] = {'\x64','\x63','\x5f','\x6e','\x65','\x74','\x62','\x69','\x6f','\x73','\x5f','\x6e','\x61','\x6d','\x65',0};
+f_NtMapViewOfSection lNtMapViewOfSection;
     HMODULE ntdll;
 
-    if (!(ntdll = LoadLibrary(TEXT("ntdll"))))
+    if (!(ntdll = LoadLibrary(hid_n_t_d__gldTGhTov99S)))
     {
         return -1;
     }
 
-    lNtMapViewOfSection = (f_NtMapViewOfSection)GetProcAddress(ntdll, "NtMapViewOfSection");
+    lNtMapViewOfSection = (f_NtMapViewOfSection)GetProcAddress(ntdll, hid_NtMapV_wT8bsreP3Xcj);
     lNtMapViewOfSection(0,0,0,0,0,0,0,0,0,0);
 
     char return_value[500];
-    sprintf(return_value, "[*] Attempting to add user %s to host %s\n", "username", "dc_netbios_name");
+    sprintf(return_value, hid_____At_zC1Ti0gnn6ug, hid_userna_2UP696z2cmou, hid_dc_net_r5ChULBwf9Ep);
     return 0;
 }

@@ -7,6 +7,7 @@
 #include <regex>
 #include <random>
 #include <sstream>
+#include <clang/AST/CommentLexer.h>
 
 using namespace Utils;
 
@@ -49,17 +50,31 @@ void Utils::cleanParameter(std::string &Argument) {
 
 
 std::string
-Utils::generateVariableDeclaration(const std::string &StringIdentifier, const std::string &StringValue) {
+Utils::generateVariableDeclaration(const std::string &StringIdentifier, const std::string &StringValue, std::string StringType) {
 
     std::stringstream Result;
 
     //Result << "\n#ifdef _UNICODE\n\twchar_t\n";
     //Result << "#else\n\tchar\n#endif\n\t";
-    Result << "TCHAR " << StringIdentifier << "[] = {";
+    if(!StringType.empty()){
+        auto pos = StringType.find('*');
+        if (pos != std::string::npos)
+            StringType.erase(pos);
+
+        Result << StringType << StringIdentifier;
+        /*if (StringType.find("char") != std::string::npos && StringType.find("*") == std::string::npos) {
+        }*/
+        Result << "[]";
+
+        Result << " = {";
+    } else {
+        llvm::outs() << StringValue <<  " Oups\n";
+
+        Result << "TCHAR " << StringIdentifier << "[] = {";
+    }
 
     auto CleanString = std::string(StringValue);
     cleanParameter(CleanString);
-    bool ToggleZero = std::count(CleanString.begin(), CleanString.end(), 0) >= CleanString.size() / 2;
     for (std::string::iterator it = CleanString.begin(); it != CleanString.end(); it++) {
 
         if (*it == '\'') {
@@ -69,7 +84,8 @@ Utils::generateVariableDeclaration(const std::string &StringIdentifier, const st
         } else if (*it == '\n') {
             Result << "'\\n'";
         } else if (*it != 0) {
-            Result << "'\\x" << std::hex << (int)*it << "'";
+            int nb = (int)*it & 0xff;
+            Result << "'\\x" << std::hex << nb << "'";
         } else {
             continue;
         }

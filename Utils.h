@@ -42,9 +42,7 @@ namespace Utils {
      * @param StringValue the actual value of the string literal.
      * @return the generated code snippet.
      */
-    extern std::string
-    generateVariableDeclaration(const std::string &StringIdentifier, const std::string &StringValue);
-
+    extern std::string generateVariableDeclaration(const std::string &StringIdentifier, const std::string &StringValue, std::string StringType="");
 };
 
 #endif //AVCLEANER_UTILS_H

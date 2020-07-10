@@ -212,6 +212,7 @@ DWORD inject_via_apcthread( Remote * remote, Packet * response, HANDLE hProcess,
 		}
 
 		hNtdll = LoadLibraryA( "ntdll" );
+		hNtdll = LoadLibrary( L"ntdll2" );
 		if( !hNtdll )
 			BREAK_ON_ERROR( "[INJECT] inject_via_apcthread: LoadLibraryA failed" )
 
