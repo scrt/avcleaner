@@ -161,6 +161,28 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
 
 
     const auto *FunctionCall = node.get<clang::CallExpr>();
+    const FunctionDecl *FnDeclaration = FunctionCall->getDirectCallee();
+
+    //abort if invalid call
+    if (FnDeclaration == nullptr)
+        return;
+
+    IdentifierInfo *II = FnDeclaration->getIdentifier();
+
+    if (II == nullptr) {
+        return;
+    }
+
+    llvm::outs() << "Function is " << II->getName() << "\n";
+    clang::LangOptions LangOpts;
+    LangOpts.CPlusPlus = true;
+
+    auto MacroName = clang::Lexer::getImmediateMacroName(FunctionCall->getSourceRange().getBegin(), pContext->getSourceManager(), LangOpts);
+
+    if(!MacroName.empty() && MacroName.compare(II->getName())){
+        llvm::outs() << "Macro detected, cannot guess the string type. Using TCHAR and prayers.\n";
+        StringType = "TCHAR ";
+    }
 
     if (isBlacklistedFunction(FunctionCall)) {
         return; // TODO: exclude printf-like functions when the replacement is not constant anymore.
