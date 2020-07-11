@@ -159,7 +159,7 @@ bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTCo
 void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
                                   const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
 
-
+    // below is an attempt to guess the correct string type
     const auto *FunctionCall = node.get<clang::CallExpr>();
     const FunctionDecl *FnDeclaration = FunctionCall->getDirectCallee();
 
@@ -176,13 +176,35 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
     llvm::outs() << "Function is " << II->getName() << "\n";
     clang::LangOptions LangOpts;
     LangOpts.CPlusPlus = true;
-
     auto MacroName = clang::Lexer::getImmediateMacroName(FunctionCall->getSourceRange().getBegin(), pContext->getSourceManager(), LangOpts);
 
     if(!MacroName.empty() && MacroName.compare(II->getName())){
         llvm::outs() << "Macro detected, cannot guess the string type. Using TCHAR and prayers.\n";
         StringType = "TCHAR ";
     }
+
+    for(auto i = 0 ; i < FunctionCall->getNumArgs() ; i++) {
+
+        auto ArgStart = pContext->getSourceManager().getSpellingColumnNumber(FunctionCall->getArg(i)->getBeginLoc());
+        auto StringStart = pContext->getSourceManager().getSpellingColumnNumber(pLiteral->getBeginLoc());
+
+        if(ArgStart == StringStart) {
+
+            auto DeclType = FunctionCall->getDirectCallee()->getParamDecl(i)->getType().getAsString();
+            auto Type = FunctionCall->getDirectCallee()->getParamDecl(i)->getType();
+
+            // isConstQualified API returns incorrect result for LPCSTR or LPCWSTR, so the heuristic below is used.
+            if(DeclType.find("const") == std::string::npos && DeclType.find("LPC") == std::string::npos) {
+
+                auto keyword = std::string("const");
+                auto pos = StringType.find(keyword);
+                if (pos != std::string::npos){
+                    StringType.erase(pos, keyword.length());
+                }
+            }
+            break;
+        }
+    };
 
     if (isBlacklistedFunction(FunctionCall)) {
         return; // TODO: exclude printf-like functions when the replacement is not constant anymore.
