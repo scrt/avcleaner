@@ -61,7 +61,7 @@ Utils::generateVariableDeclaration(const std::string &StringIdentifier, const st
         if (pos != std::string::npos)
             StringType.erase(pos);
 
-        Result << StringType << StringIdentifier;
+        Result << StringType << " " << StringIdentifier;
         /*if (StringType.find("char") != std::string::npos && StringType.find("*") == std::string::npos) {
         }*/
         Result << "[]";
