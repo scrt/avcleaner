@@ -80,7 +80,7 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
     std::string ApiNameIdentifier = Utils::translateStringToIdentifier(ApiName);
     std::string ApiNameDecl = Utils::generateVariableDeclaration(ApiNameIdentifier, ApiName);
     Result << "\t" << ApiNameDecl << "\n";
-    Result << "\t_ "<< ApiName << " " << NewIdentifier << " = (_" << ApiName << ") GetProcAddress("
+    Result << "\t_"<< ApiName << " " << NewIdentifier << " = (_" << ApiName << ") GetProcAddress("
            << LoadLibraryHandleIdentifier << ", " << ApiNameIdentifier << ");\n";
 
     TypedefAdded.push_back(pCallExpression->getDirectCallee());

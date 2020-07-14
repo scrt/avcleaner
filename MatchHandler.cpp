@@ -183,7 +183,7 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
         StringType = "TCHAR ";
     }
 
-    for(auto i = 0 ; i < FunctionCall->getNumArgs() ; i++) {
+    for(auto i = 0 ; i < FunctionCall->getDirectCallee()->getNumParams() ; i++) {
 
         auto ArgStart = pContext->getSourceManager().getSpellingColumnNumber(FunctionCall->getArg(i)->getBeginLoc());
         auto StringStart = pContext->getSourceManager().getSpellingColumnNumber(pLiteral->getBeginLoc());
@@ -228,9 +228,14 @@ void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang
     auto TypeLoc =  node.get<clang::VarDecl>()->getTypeSourceInfo()->getTypeLoc();
     auto Type = TypeLoc.getType().getAsString();
     auto Loc = TypeLoc.getSourceRange();
-    auto LHSReplacement = Type.replace(Type.find(" []"),3,"* ")+Identifier;
+    std::string LHSReplacement;
+    if(Type.find(" []") != std::string::npos)
+        LHSReplacement = Type.replace(Type.find(" []"),3,"* ");
+
+    LHSReplacement.append(Identifier);
+
     llvm::outs() << "Type of " << Identifier << " is " << Type << "\n";
-    std::string NewType = Type;
+    std::string NewType = Type+" ";
     if (Type.find("BYTE*") != std::string::npos) {
         NewType = "const char ";
     } else if(Type.find("wchar") != std::string::npos){
@@ -241,11 +246,10 @@ void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang
         NewType = "const char ";
     }
 
-    ASTRewriter->ReplaceText(Loc, LHSReplacement.str());
+    ASTRewriter->ReplaceText(Loc, LHSReplacement);
     llvm::outs() << "Type of " << Identifier << " is " << StringType << "\n";
-
-
-    handleExpr(pLiteral, pContext, node, NewType, Type);
+    
+    handleExpr(pLiteral, pContext, node, NewType, Type+" ");
 }
 
 
@@ -293,8 +297,9 @@ bool MatchHandler::replaceStringLiteral(const clang::StringLiteral *pLiteral, cl
         // weird bug with TEXT Macro / other macros...there must be a proper way to do this.
         if (OrigText.find("TEXT") != std::string::npos) {
 
-            ASTRewriter->RemoveText(LiteralRange);
-            LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc().getLocWithOffset(-1)));
+            //ASTRewriter->RemoveText(LiteralRange);
+            //LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc().getLocWithOffset(-1)));
+            LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc()));
         }
     }
 

@@ -111,6 +111,11 @@ namespace AVObfuscator {
                                                                                        "samlib.dll"));
                     consumers.push_back(*Cons);
                 }
+
+                std::string MessageBoxATypeDef = "typedef int (*_MessageBoxA)(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType);";
+                auto Cons = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("MessageBoxA", MessageBoxATypeDef,
+                                                                                   "User32.dll"));
+                consumers.push_back(*Cons);
             }
 
             auto TheConsumer = std::make_unique<Consumer>();

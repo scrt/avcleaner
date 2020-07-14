@@ -54,7 +54,7 @@ private:
     std::string _Library;
     std::vector<const clang::FunctionDecl*> TypedefAdded; // collection of locations where the TypeDef for the API was already added.
 
-    clang::SourceRange findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
+    static clang::SourceRange findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
                                          const clang::CallExpr &Literal, uint64_t Iterations);
 
     bool
@@ -67,8 +67,6 @@ private:
                            const std::string &NewIdentifier);
 
     bool handleCallExpr(const clang::CallExpr *CallExpression, clang::ASTContext *const pContext);
-
-
 };
 
 static std::map<std::string, std::string> ApiToHide_samlib = {

