@@ -64,10 +64,10 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
     std::stringstream Result;
 
     // add function prototype if not already added
-    if(std::find(TypedefAdded.begin(), TypedefAdded.end(), pCallExpression->getDirectCallee()) == TypedefAdded.end()) {
+    //if(std::find(TypedefAdded.begin(), TypedefAdded.end(), pCallExpression->getDirectCallee()) == TypedefAdded.end()) {
 
         Result << "\t" << _TypeDef << "\n";
-    }
+    //}
 
     // add LoadLibrary with obfuscated strings
     std::string LoadLibraryVariable = Utils::translateStringToIdentifier(_Library);

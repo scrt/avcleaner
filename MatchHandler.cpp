@@ -125,9 +125,10 @@ void MatchHandler::handleStringInContext(const clang::StringLiteral *pLiteral, c
         handleCallExpr(pLiteral, pContext, node, StringType);
     } else if (ParentNodeKind.compare("InitListExpr") == 0) {
         handleInitListExpr(pLiteral, pContext, node, StringType);
-    }else if(ParentNodeKind.compare("VarDecl") == 0) {
+    }/* not yet ready
+ *     else if(ParentNodeKind.compare("VarDecl") == 0) {
         handleVarDeclExpr(pLiteral, pContext, node, StringType);
-    } else {
+    }*/ else {
         llvm::outs() << "Unhandled context " << ParentNodeKind << " for string " << pLiteral->getBytes() << "\n";
     }
 }

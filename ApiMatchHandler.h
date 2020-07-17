@@ -70,9 +70,9 @@ private:
 };
 
 static std::map<std::string, std::string> ApiToHide_samlib = {
-        {"SamConnect",                     "typedef NTSTATUS (__stdcall* _SamEnumerateDomainsInSamServer)(SAMPR_HANDLE ServerHandle, DWORD * EnumerationContext, PSAMPR_RID_ENUMERATION* Buffer, DWORD PreferedMaximumLength,DWORD * CountReturned);"},
+        /*{"SamConnect",                     "typedef NTSTATUS (__stdcall* _SamEnumerateDomainsInSamServer)(SAMPR_HANDLE ServerHandle, DWORD * EnumerationContext, PSAMPR_RID_ENUMERATION* Buffer, DWORD PreferedMaximumLength,DWORD * CountReturned);"},
         {"SamConnectWithCreds",            "typedef NTSTATUS(__stdcall* _SamConnect)(PUNICODE_STRING ServerName, SAMPR_HANDLE * ServerHandle, ACCESS_MASK DesiredAccess, BOOLEAN Trusted);"},
-        {"SamEnumerateDomainsInSamServer", "typedef NTSTATUS(__stdcall* _SamConnectWithCreds)(PUNICODE_STRING ServerName, SAMPR_HANDLE * ServerHandle, ACCESS_MASK DesiredAccess, LSA_OBJECT_ATTRIBUTES * ObjectAttributes, RPC_AUTH_IDENTITY_HANDLE AuthIdentity, PWSTR ServerPrincName, ULONG * unk0);"},
+        {"SamEnumerateDomainsInSamServer", "typedef NTSTATUS(__stdcall* _SamConnectWithCreds)(PUNICODE_STRING ServerName, SAMPR_HANDLE * ServerHandle, ACCESS_MASK DesiredAccess, LSA_OBJECT_ATTRIBUTES * ObjectAttributes, RPC_AUTH_IDENTITY_HANDLE AuthIdentity, PWSTR ServerPrincName, ULONG * unk0);"},*/
         {"SamLookupDomainInSamServer",     "typedef NTSTATUS(__stdcall* _SamLookupDomainInSamServer)(SAMPR_HANDLE ServerHandle, PUNICODE_STRING Name, PSID * DomainId);"},
         {"SamOpenDomain",                  "typedef NTSTATUS(__stdcall* _SamOpenDomain)(SAMPR_HANDLE SamHandle, ACCESS_MASK DesiredAccess, PSID DomainId, SAMPR_HANDLE * DomainHandle);"},
         {"SamOpenUser",                    "typedef NTSTATUS(__stdcall* _SamOpenUser)(SAMPR_HANDLE DomainHandle, ACCESS_MASK DesiredAccess, DWORD UserId, SAMPR_HANDLE * UserHandle);"},
