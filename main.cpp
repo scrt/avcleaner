@@ -16,21 +16,28 @@
 
 #include "Consumer.h"
 #include "MatchHandler.h"
+#include "ApiMatchHandler.h"
 
 #include <iostream>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 #include <fstream>
 
 namespace ClSetup {
-    llvm::cl::OptionCategory ToolCategory("StringEncryptor");
+    llvm::cl::OptionCategory ToolCategory("AVObfuscator");
 
-    llvm::cl::opt<bool> IsEditEnabled("edit", llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),llvm::cl::cat(ToolCategory));
-    llvm::cl::opt<bool> IsStringObfuscationEnabled("strings", llvm::cl::desc("Enable obfuscation of string literals."),llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsEditEnabled("edit",
+                                      llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),
+                                      llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsStringObfuscationEnabled("strings", llvm::cl::desc("Enable obfuscation of string literals."),
+                                                   llvm::cl::cat(ToolCategory));
+    llvm::cl::opt<bool> IsApiObfuscationEnabled("api", llvm::cl::desc("Enable obfuscation of api calls."),
+                                                llvm::cl::cat(ToolCategory));
 }
 
-namespace StringEncryptor {
+namespace AVObfuscator {
 
     clang::Rewriter ASTRewriter;
 
@@ -39,7 +46,7 @@ namespace StringEncryptor {
 
         void HandleTranslationUnit(clang::ASTContext &Context) override {
             using namespace clang::ast_matchers;
-            using namespace StringEncryptor;
+            using namespace AVObfuscator;
 
             llvm::outs() << "[StringEncryption] Registering ASTMatcher...\n";
             MatchFinder Finder;
@@ -50,6 +57,32 @@ namespace StringEncryptor {
             Finder.addMatcher(Matcher, &Handler);
             Finder.matchAST(Context);
         }
+    };
+
+    class ApiCallConsumer : public clang::ASTConsumer {
+    public:
+
+        ApiCallConsumer(std::string ApiName, std::string TypeDef, std::string Library)
+                : _ApiName(std::move(ApiName)), _TypeDef(std::move(TypeDef)), _Library(std::move(Library)) {}
+
+        void HandleTranslationUnit(clang::ASTContext &Context) override {
+            using namespace clang::ast_matchers;
+            using namespace AVObfuscator;
+
+            llvm::outs() << "[ApiCallObfuscation] Registering ASTMatcher for " << _ApiName << "\n";
+            MatchFinder Finder;
+            ApiMatchHandler Handler(&ASTRewriter, _ApiName, _TypeDef, _Library);
+
+            const auto Matcher = callExpr(callee(functionDecl(hasName(_ApiName)))).bind("callExpr");
+
+            Finder.addMatcher(Matcher, &Handler);
+            Finder.matchAST(Context);
+        }
+
+    private:
+        std::string _ApiName;
+        std::string _TypeDef;
+        std::string _Library;
     };
 
     StringEncryptionConsumer StringConsumer = StringEncryptionConsumer();
@@ -63,11 +96,26 @@ namespace StringEncryptor {
                                              llvm::StringRef Filename) override {
 
             ASTRewriter.setSourceMgr(Compiler.getSourceManager(), Compiler.getLangOpts());
-            std::vector<clang::ASTConsumer*> consumers;
+            std::vector<clang::ASTConsumer *> consumers;
 
 
-            if(ClSetup::IsStringObfuscationEnabled) {
+            if (ClSetup::IsStringObfuscationEnabled) {
                 consumers.push_back(&StringConsumer);
+            }
+
+            if (ClSetup::IsApiObfuscationEnabled) {
+
+                for(auto const& el: ApiToHide_samlib){
+
+                    auto Cons = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer(el.first, el.second,
+                                                                                       "samlib.dll"));
+                    consumers.push_back(*Cons);
+                }
+
+                std::string MessageBoxATypeDef = "typedef int (*_MessageBoxA)(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType);";
+                auto Cons = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("MessageBoxA", MessageBoxATypeDef,
+                                                                                   "User32.dll"));
+                consumers.push_back(*Cons);
             }
 
             auto TheConsumer = std::make_unique<Consumer>();
@@ -76,7 +124,7 @@ namespace StringEncryptor {
         }
 
         bool BeginSourceFileAction(clang::CompilerInstance &Compiler) override {
-            llvm::outs() << "Processing file " << '\n';
+            llvm::outs() << "Processing file " << Compiler.getSourceManager().getFileEntryForID(Compiler.getSourceManager().getMainFileID())->getName() << '\n';
 
             return true;
         }
@@ -89,17 +137,14 @@ namespace StringEncryptor {
             llvm::errs() << "** EndSourceFileAction for: " << FileName << "\n";
 
             // Now emit the rewritten buffer.
-            llvm::errs() << "Here is the edited source file :\n\n";
             std::string TypeS;
             llvm::raw_string_ostream s(TypeS);
             auto FileID = SM.getMainFileID();
-            llvm::errs() << "Got main file id\n";
             auto ReWriteBuffer = ASTRewriter.getRewriteBufferFor(FileID);
-            llvm::errs() << "Got Rewrite buffer\n";
 
-            if(ReWriteBuffer != nullptr)
+            if (ReWriteBuffer != nullptr)
                 ReWriteBuffer->write((s));
-            else{
+            else {
                 llvm::errs() << "File was not modified\n";
                 return;
             }
@@ -108,13 +153,13 @@ namespace StringEncryptor {
 
             std::ofstream fo;
 
-            if(ClSetup::IsEditEnabled)  {
+            if (ClSetup::IsEditEnabled) {
                 fo.open(FileName);
-            } else{
-                fo.open(FileName +".patch");
+            } else {
+                fo.open(FileName + ".patch");
             }
 
-            if(fo.is_open())
+            if (fo.is_open())
                 fo << result;
             else
                 llvm::errs() << "[!] Error saving result to " << FileName << "\n";
@@ -131,6 +176,6 @@ auto main(int argc, const char *argv[]) -> int {
     ClangTool Tool(OptionsParser.getCompilations(),
                    OptionsParser.getSourcePathList());
 
-    auto Action = newFrontendActionFactory<StringEncryptor::Action>();
+    auto Action = newFrontendActionFactory<AVObfuscator::Action>();
     return Tool.run(Action.get());
 }

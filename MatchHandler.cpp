@@ -5,6 +5,7 @@
 #include "MatchHandler.h"
 #include <random>
 #include <regex>
+#include <utility>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -12,6 +13,7 @@
 #include "clang/Tooling/Inclusions/HeaderIncludes.h"
 #include "clang/Tooling/Inclusions/IncludeStyle.h"
 #include "Globals.h"
+#include "Utils.h"
 
 using namespace clang;
 
@@ -24,7 +26,7 @@ MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_tr
                              clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
                              uint64_t Iterations) {
 
-    if (Iterations > CLIMB_PARENTS_MAX_ITER) {
+    if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER) {
         return CurrentParents;
     }
 
@@ -50,9 +52,30 @@ MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_tr
     return CurrentParents;
 }
 
+std::string
+MatchHandler::findStringType(const StringLiteral &NodeString, clang::ASTContext *const pContext) {
+
+    ASTContext::DynTypedNodeList parents = pContext->getParents(NodeString);;
+    std::string StringType;
+    for (const auto &parent : parents) {
+
+        StringRef ParentNodeKind = parent.getNodeKind().asStringRef();
+
+        if (ParentNodeKind.find("Cast") != std::string::npos) {
+
+            StringType = parent.get<clang::ImplicitCastExpr>()->getType().getAsString();
+            llvm::outs() << "StringType is " << StringType  << "\n";
+        }
+
+        llvm::outs() << "getParent, Node kind ot^^o: " << parent.getNodeKind().asStringRef() << "\n";
+    }
+
+    return StringType;
+}
+
 bool
 MatchHandler::climbParentsIgnoreCast(const StringLiteral &NodeString, clang::ast_type_traits::DynTypedNode node,
-                                     clang::ASTContext *const pContext, uint64_t iterations) {
+                                     clang::ASTContext *const pContext, uint64_t iterations, std::string StringType) {
 
     ASTContext::DynTypedNodeList parents = pContext->getParents(NodeString);;
 
@@ -66,10 +89,10 @@ MatchHandler::climbParentsIgnoreCast(const StringLiteral &NodeString, clang::ast
 
         if (ParentNodeKind.find("Cast") != std::string::npos) {
 
-            return climbParentsIgnoreCast(NodeString, parent, pContext, ++iterations);
+            return climbParentsIgnoreCast(NodeString, parent, pContext, ++iterations, StringType);
         }
 
-        handleStringInContext(&NodeString, pContext, parent);
+        handleStringInContext(&NodeString, pContext, parent, StringType);
     }
 
     return false;
@@ -87,44 +110,30 @@ void MatchHandler::run(const MatchResult &Result) {
         return;
     }
 
-    climbParentsIgnoreCast(*Decl, clang::ast_type_traits::DynTypedNode(), Result.Context, 0);
+    auto StringType = findStringType(*Decl, Result.Context);
 
-    /*
-    std::vector<std::string> Parents;
-    getNodeParents(*Decl, clang::ast_type_traits::DynTypedNode(), Result.Context, Parents, 0);
+    climbParentsIgnoreCast(*Decl, clang::ast_type_traits::DynTypedNode(), Result.Context, 0, StringType);
 
-    std::stringstream ListOfParents;
-    bool IsFirst = true; // used as a sentinel to avoid printing a "comma" for the first element.
-    for (auto &CurrentParent : Parents) {
-
-        if (IsFirst) {
-            IsFirst = false;
-        } else {
-            ListOfParents << ", ";
-        }
-
-        ListOfParents << CurrentParent;
-    }
-    llvm::outs() << ListOfParents.str() << "\n";
-     */
 }
 
 void MatchHandler::handleStringInContext(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                         const clang::ast_type_traits::DynTypedNode node) {
+                                         const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
 
     StringRef ParentNodeKind = node.getNodeKind().asStringRef();
 
     if (ParentNodeKind.compare("CallExpr") == 0) {
-        handleCallExpr(pLiteral, pContext, node);
+        handleCallExpr(pLiteral, pContext, node, StringType);
     } else if (ParentNodeKind.compare("InitListExpr") == 0) {
-        handleInitListExpr(pLiteral, pContext, node);
+        handleInitListExpr(pLiteral, pContext, node, StringType);
+    }else if(ParentNodeKind.compare("VarDecl") == 0) {
+        handleVarDeclExpr(pLiteral, pContext, node, StringType);
     } else {
         llvm::outs() << "Unhandled context " << ParentNodeKind << " for string " << pLiteral->getBytes() << "\n";
     }
 }
 
 bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                  const clang::ast_type_traits::DynTypedNode node) {
+                                  const clang::ast_type_traits::DynTypedNode node, std::string StringType, std::string NewType) {
 
     clang::SourceRange LiteralRange = clang::SourceRange(
             ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getBeginLoc()),
@@ -134,40 +143,118 @@ bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTCo
     if(shouldAbort(pLiteral, pContext, LiteralRange))
         return false;
 
-    std::string Replacement = translateStringToIdentifier(pLiteral->getBytes().str());
+    std::string Replacement = Utils::translateStringToIdentifier(pLiteral->getBytes().str());
 
-    if(!insertVariableDeclaration(pLiteral, pContext, LiteralRange, Replacement))
+    if(!insertVariableDeclaration(pLiteral, pContext, LiteralRange, Replacement, StringType))
         return false ;
 
-    bool res = replaceStringLiteral(pLiteral, pContext, LiteralRange, Replacement);
+    if(!StringType.empty() && !NewType.empty())
+        Replacement = "(" + NewType + ")" + Replacement;
 
     Globs::PatchedSourceLocation.push_back(LiteralRange);
 
-    return res;
+    return replaceStringLiteral(pLiteral, pContext, LiteralRange, Replacement);
 }
 
 void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                  const clang::ast_type_traits::DynTypedNode node) {
+                                  const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
 
-
+    // below is an attempt to guess the correct string type
     const auto *FunctionCall = node.get<clang::CallExpr>();
+    const FunctionDecl *FnDeclaration = FunctionCall->getDirectCallee();
+
+    //abort if invalid call
+    if (FnDeclaration == nullptr)
+        return;
+
+    IdentifierInfo *II = FnDeclaration->getIdentifier();
+
+    if (II == nullptr) {
+        return;
+    }
+
+    llvm::outs() << "Function is " << II->getName() << "\n";
+    clang::LangOptions LangOpts;
+    LangOpts.CPlusPlus = true;
+    auto MacroName = clang::Lexer::getImmediateMacroName(FunctionCall->getSourceRange().getBegin(), pContext->getSourceManager(), LangOpts);
+
+    if(!MacroName.empty() && MacroName.compare(II->getName())){
+        llvm::outs() << "Macro detected, cannot guess the string type. Using TCHAR and prayers.\n";
+        StringType = "TCHAR ";
+    }
+
+    for(auto i = 0 ; i < FunctionCall->getDirectCallee()->getNumParams() ; i++) {
+
+        auto ArgStart = pContext->getSourceManager().getSpellingColumnNumber(FunctionCall->getArg(i)->getBeginLoc());
+        auto StringStart = pContext->getSourceManager().getSpellingColumnNumber(pLiteral->getBeginLoc());
+
+        if(ArgStart == StringStart) {
+
+            auto DeclType = FunctionCall->getDirectCallee()->getParamDecl(i)->getType().getAsString();
+            auto Type = FunctionCall->getDirectCallee()->getParamDecl(i)->getType();
+
+            // isConstQualified API returns incorrect result for LPCSTR or LPCWSTR, so the heuristic below is used.
+            if(DeclType.find("const") == std::string::npos && DeclType.find("LPC") == std::string::npos) {
+
+                auto keyword = std::string("const");
+                auto pos = StringType.find(keyword);
+                if (pos != std::string::npos){
+                    StringType.erase(pos, keyword.length());
+                }
+            }
+            break;
+        }
+    };
 
     if (isBlacklistedFunction(FunctionCall)) {
         return; // TODO: exclude printf-like functions when the replacement is not constant anymore.
     }
 
-    handleExpr(pLiteral, pContext, node);
+    handleExpr(pLiteral, pContext, node, StringType);
 }
 
 // TODO : search includes for "common.h" or add it
 void MatchHandler::handleInitListExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                      const clang::ast_type_traits::DynTypedNode node) {
+                                      const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
 
-    handleExpr(pLiteral, pContext, node);
+
+    handleExpr(pLiteral, pContext, node, StringType);
 }
 
+void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
+                                      const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
+
+    auto Identifier = node.get<clang::VarDecl>()->getIdentifier()->getName();
+    auto TypeLoc =  node.get<clang::VarDecl>()->getTypeSourceInfo()->getTypeLoc();
+    auto Type = TypeLoc.getType().getAsString();
+    auto Loc = TypeLoc.getSourceRange();
+    std::string LHSReplacement;
+    if(Type.find(" []") != std::string::npos)
+        LHSReplacement = Type.replace(Type.find(" []"),3,"* ");
+
+    LHSReplacement.append(Identifier);
+
+    llvm::outs() << "Type of " << Identifier << " is " << Type << "\n";
+    std::string NewType = Type+" ";
+    if (Type.find("BYTE*") != std::string::npos) {
+        NewType = "const char ";
+    } else if(Type.find("wchar") != std::string::npos){
+        NewType = "const wchar_t ";
+    } else if(Type.find("WCHAR") != std::string::npos){
+        NewType = "const wchar_t ";
+    } else if(Type.find("char*") != std::string::npos){
+        NewType = "const char ";
+    }
+
+    ASTRewriter->ReplaceText(Loc, LHSReplacement);
+    llvm::outs() << "Type of " << Identifier << " is " << StringType << "\n";
+    
+    handleExpr(pLiteral, pContext, node, NewType, Type+" ");
+}
+
+
 bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                             clang::SourceRange range, const std::string& Replacement) {
+                                             clang::SourceRange range, const std::string& Replacement, std::string StringType) {
 
     std::string StringLiteralContent = pLiteral->getBytes().str();
 
@@ -176,7 +263,8 @@ bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLitera
     // inject code to declare the string in an encrypted fashion
     SourceRange FreeSpace = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(), *pLiteral,
                                               IsInGlobalContext, 0);
-    std::string StringVariableDeclaration = generateVariableDeclaration(Replacement, StringLiteralContent);
+
+    std::string StringVariableDeclaration = Utils::generateVariableDeclaration(Replacement, StringLiteralContent, StringType);
 
     if (!IsInGlobalContext) {
         //StringVariableDeclaration += "\tdprintf(\"" + Replacement + "\");\n";
@@ -209,55 +297,20 @@ bool MatchHandler::replaceStringLiteral(const clang::StringLiteral *pLiteral, cl
         // weird bug with TEXT Macro / other macros...there must be a proper way to do this.
         if (OrigText.find("TEXT") != std::string::npos) {
 
-            ASTRewriter->RemoveText(LiteralRange);
-            LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc().getLocWithOffset(-1)));
+            //ASTRewriter->RemoveText(LiteralRange);
+            //LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc().getLocWithOffset(-1)));
+            LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc()));
         }
     }
 
     return ASTRewriter->ReplaceText(LiteralRange, Replacement);
 }
 
-void MatchHandler::cleanParameter(std::string &Argument) {
-
-    auto Index = Argument.find_first_of('\"');
-
-    Argument.erase(Argument.begin(), Argument.begin() + Index + 1);
-
-    if (Argument.back() == '\"') {
-        Argument.pop_back();
-    }
-}
-
-std::string MatchHandler::translateStringToIdentifier(const std::string &StrLiteral) {
-
-    std::string NewIdentifier = std::regex_replace(StrLiteral, std::regex("[^A-Za-z]"), "_");
-    return "hid_" + NewIdentifier.substr(0, 6) + '_' + randomString(12);
-}
-
-std::string MatchHandler::randomString(std::string::size_type Length) {
-
-    static auto &chrs = "0123456789"
-                        "abcdefghijklmnopqrstuvwxyz"
-                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    thread_local static std::mt19937 rg{std::random_device{}()};
-    thread_local static std::uniform_int_distribution<std::string::size_type> pick(0, sizeof(chrs) - 2);
-
-    std::string s;
-
-    s.reserve(Length);
-
-    while (Length--)
-        s += chrs[pick(rg)];
-
-    return s;
-}
-
 SourceRange
 MatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
                                 const clang::StringLiteral &Literal, bool IsGlobal, uint64_t Iterations) {
 
-    if (Iterations > CLIMB_PARENTS_MAX_ITER)
+    if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER)
         throw std::runtime_error("Reached max iterations when trying to find a function declaration");
 
     ASTContext::DynTypedNodeList parents = Context->getParents(Literal);;
@@ -285,45 +338,6 @@ MatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_typ
 
         return findInjectionSpot(Context, parent, Literal, IsGlobal, ++Iterations);
     }
-}
-
-std::string
-MatchHandler::generateVariableDeclaration(const std::string &StringIdentifier, std::string &StringValue) {
-
-    std::stringstream Result;
-
-    //Result << "\n#ifdef _UNICODE\n\twchar_t\n";
-    //Result << "#else\n\tchar\n#endif\n\t";
-    Result << "TCHAR " << StringIdentifier << "[] = {";
-
-    auto CleanString = std::string(StringValue);
-    cleanParameter(CleanString);
-    bool ToggleZero = std::count(CleanString.begin(), CleanString.end(), 0) >= CleanString.size() / 2;
-    for (std::string::iterator it = CleanString.begin(); it != CleanString.end(); it++) {
-
-        if (*it == '\'') {
-            Result << "'\\" << *it << "'";
-        } else if (*it == '\\') {
-            Result << "'\\\\'";
-        } else if (*it == '\n') {
-            Result << "'\\n'";
-        } else if (*it != 0) {
-            Result << "'" << *it << "'";
-        } else {
-            continue;
-        }
-
-        uint32_t offset = 1;
-        if (it + offset != CleanString.end()) {
-            Result << ",";
-        }
-    }
-
-    if(*Result.str().end() == ',')
-        Result << "0};\n";
-    else
-        Result << ",0};\n";
-    return std::regex_replace(Result.str(), std::regex(",,"), ",");
 }
 
 bool MatchHandler::isBlacklistedFunction(const CallExpr *FunctionCall) {
@@ -382,7 +396,7 @@ MatchHandler::shouldAbort(const clang::StringLiteral *pLiteral, clang::ASTContex
         }
 
         if(ShouldSkip)  {
-            llvm::outs() << "Ignoring " << pLiteral->getBytes() << " because it was already patched";
+            llvm::outs() << "Ignoring " << pLiteral->getBytes() << " because it was already patched\n";
             return true;
         }
     }

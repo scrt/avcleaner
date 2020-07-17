@@ -2,7 +2,7 @@
 // Created by vladimir on 28.09.19.
 //
 
-#include <windows.h>
+#include <Windows.h>
 #include <stdio.h>
 
 char *customCommands[] =

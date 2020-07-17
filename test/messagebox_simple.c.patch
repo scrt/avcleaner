@@ -1,0 +1,28 @@
+#include <Windows.h>
+
+int main(int argc, char** argv) {
+
+
+    
+	const char  hid_Someth_lynVPNLwrARo[] = {'\x53','\x6f','\x6d','\x65','\x74','\x68','\x69','\x6e','\x67',0};
+
+	const char  hid_Anothe_xoIlv4CacrnC[] = {'\x41','\x6e','\x6f','\x74','\x68','\x65','\x72','\x20','\x74','\x65','\x73','\x74',0};
+
+	const char  hid_Anothe_seauHFtF50iH[] = {'\x41','\x6e','\x6f','\x74','\x68','\x65','\x72','\x20','\x73','\x6f','\x6d','\x65','\x74','\x68','\x69','\x6e','\x67',0};
+	typedef int (*_MessageBoxA)(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType);
+	TCHAR hid_User___IY7MsuuC7qLX[] = {'\x55','\x73','\x65','\x72','\x33','\x32','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_TRMTilaShq8H = LoadLibrary(hid_User___IY7MsuuC7qLX);
+	TCHAR hid_Messag_iKGbMVaBGid4[] = {'\x4d','\x65','\x73','\x73','\x61','\x67','\x65','\x42','\x6f','\x78','\x41',0};
+
+	_MessageBoxA hid_Messag_oFEieEB5f957 = (_MessageBoxA) GetProcAddress(hid_hHandl_TRMTilaShq8H, hid_Messag_iKGbMVaBGid4);
+	TCHAR hid_User___o4usImK02V4Z[] = {'\x55','\x73','\x65','\x72','\x33','\x32','\x2e','\x64','\x6c','\x6c',0};
+
+	HANDLE hid_hHandl_mbuqC08o1kK7 = LoadLibrary(hid_User___o4usImK02V4Z);
+	TCHAR hid_Messag_K6lXCozbTxpv[] = {'\x4d','\x65','\x73','\x73','\x61','\x67','\x65','\x42','\x6f','\x78','\x41',0};
+
+	_MessageBoxA hid_Messag_8tJR7DjdUrkE = (_MessageBoxA) GetProcAddress(hid_hHandl_mbuqC08o1kK7, hid_Messag_K6lXCozbTxpv);
+hid_Messag_oFEieEB5f957(NULL, "Test", hid_Someth_lynVPNLwrARo, MB_OK);
+    hid_Messag_8tJR7DjdUrkE(NULL, hid_Anothe_xoIlv4CacrnC, hid_Anothe_seauHFtF50iH, MB_OK);
+    return 0;
+}

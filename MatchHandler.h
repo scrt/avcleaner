@@ -45,39 +45,12 @@ public:
 
     void run(const MatchResult &Result) override; // callback function that runs when a Match is found.
 
-    /**
-     * strip metacharacters decorating a string.
-     * For instance, L"ntdll" -> ntdll
-     * @param Argument the string to be cleaned.
-     */
-    static void cleanParameter(std::string &Argument);
-
-/**
- * used to replace a string literal by a variable's identifier
- * must not collide with existing identifiers.
- * Format: 12-first characters, letters only + random part
- * TODO: remember allocated identifiers for collision prevention
- * TODO: extract constants into readable identifiers.
- * @param StrLiteral the string literal
- */
-static std::string translateStringToIdentifier(const std::string &StrLiteral);
-
-/**
- * @brief declares and instantiate a variable holding a string that was moved out from a function's arguments.
- * @param StringIdentifier the new variable identifier.
- * @param StringValue the actual value of the string literal.
- * @return the generated code snippet.
- */
-static std::string
-generateVariableDeclaration(const std::string &StringIdentifier, std::string &StringValue);
-
 private:
     clang::Rewriter *ASTRewriter; // an instance to a Rewriter to manage changes to the AST.
 
     // climb the list of parents recursively until it finds a useful node (i.e. not Cast-like nodes).
     bool climbParentsIgnoreCast(const clang::StringLiteral &NodeString, clang::ast_type_traits::DynTypedNode node,
-                                clang::ASTContext *pContext, uint64_t iterations);
-
+                                clang::ASTContext *const pContext, uint64_t iterations, std::string StringType);
     /**
      * gets a list of all the parent nodes of a given StringLiteral node, ignoring Cast-like nodes.
      * @param NodeString a StringLiteral node
@@ -98,7 +71,7 @@ private:
      * @param node dummy node used to store the string literal successive parent.
      */
     void handleStringInContext(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
-                               clang::ast_type_traits::DynTypedNode node);
+                               clang::ast_type_traits::DynTypedNode node, std::string StringType);
 
     /**
      *
@@ -107,14 +80,8 @@ private:
      * @param node the AST node that makes use of the string pLiteral
      */
     void handleCallExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
-                        clang::ast_type_traits::DynTypedNode node);
+                        clang::ast_type_traits::DynTypedNode node, std::string StringType);
 
-    /**
-     * @brief generates a random string of size Length.
-     * @param Length desired length of the generated string.
-     * @return a random string of size Length.
-     */
-    static std::string randomString(unsigned long Length);
 
     /**
      * @brief Finds some free space to inject code that must run before the string literals usages.
@@ -128,8 +95,6 @@ private:
     findInjectionSpot(clang::ASTContext *Context, clang::ast_type_traits::DynTypedNode Parent,
                       const clang::StringLiteral &Literal, bool IsGlobal, uint64_t Iterations);
 
-    const static uint64_t CLIMB_PARENTS_MAX_ITER = 1000; // fail safe to prevent a recursion loop when climbing the list of parents.
-
     /**
      * offers a chance to bail out from the refactoring process if the string literal is found in an unpatchable location.
      * @param FunctionName
@@ -138,7 +103,7 @@ private:
     static bool isBlacklistedFunction(const clang::CallExpr *FunctionName);
 
     void handleInitListExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
-                            clang::ast_type_traits::DynTypedNode node);
+                            clang::ast_type_traits::DynTypedNode node, std::string StringType);
 
     bool shouldAbort(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext, clang::SourceRange string);
 
@@ -151,10 +116,15 @@ private:
                               const std::string& string);
 
     bool insertVariableDeclaration(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
-                                   clang::SourceRange range, const std::string& string);
+                                   clang::SourceRange range, const std::string& string, std::string StringType="");
 
     bool handleExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
-                    clang::ast_type_traits::DynTypedNode node);
+                    clang::ast_type_traits::DynTypedNode node, std::string StringType="", std::string NewType="");
+
+    void handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *pContext,
+                           clang::ast_type_traits::DynTypedNode node, std::string StringType);
+
+    std::string findStringType(const clang::StringLiteral &NodeString, clang::ASTContext *const pContext);
 };
 
 #endif //AVCLEANER_MATCHHANDLER_H
