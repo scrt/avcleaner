@@ -268,7 +268,7 @@ bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLitera
     std::string StringVariableDeclaration = Utils::generateVariableDeclaration(Replacement, StringLiteralContent, StringType);
 
     if (!IsInGlobalContext) {
-        //StringVariableDeclaration += "\tdprintf(\"" + Replacement + "\");\n";
+        StringVariableDeclaration += "\tOutputDebugString(\"" + Replacement + "\");\n";
         StringVariableDeclaration.insert(0, 1, '\t');
     }
 
