@@ -6,7 +6,7 @@ C/C++ source obfuscator for antivirus bypass
 ## Build
 
 ```
-docker build -t avcleaner
+docker build . -t avcleaner
 docker run -v ~/dev/scrt/avcleaner:/home/toto -it avcleaner bash #adapt ~/dev/scrt/avcleaner to the path where you cloned avcleaner
 sudo pacman -Syu
 mkdir CMakeBuild && cd CMakeBuild
