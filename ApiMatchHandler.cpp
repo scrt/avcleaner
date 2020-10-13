@@ -38,6 +38,13 @@ bool ApiMatchHandler::replaceIdentifier(const CallExpr *CallExpression, const st
 bool ApiMatchHandler::handleCallExpr(const CallExpr *CallExpression, clang::ASTContext *const pContext) {
 
     std::string Identifier = getFunctionIdentifier(CallExpression);
+
+    if(shouldReplaceWithSyscall(Identifier)) {
+
+        rewriteApiToSyscall(CallExpression, pContext, Identifier);
+        return true;
+    }
+
     std::string Replacement = Utils::translateStringToIdentifier(Identifier);
 
     if (!addGetProcAddress(CallExpression, pContext, Replacement, Identifier))
@@ -115,4 +122,120 @@ ApiMatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_
 
         return findInjectionSpot(Context, parent, Literal, ++Iterations);
     }
+}
+
+static std::vector<std::string> GetArgs(const CallExpr *CallExpression) {
+    std::vector<std::string> Args;
+    clang::LangOptions LangOpts;
+    LangOpts.CPlusPlus = true;
+    clang::PrintingPolicy Policy(LangOpts);
+
+    for (int i = 0; i < CallExpression->getNumArgs(); i++) {
+
+        std::string TypeS;
+        llvm::raw_string_ostream s(TypeS);
+        CallExpression->getArg(i)->printPretty(s, 0, Policy);
+        Args.push_back(s.str());
+    }
+
+    return Args;
+}
+bool ApiMatchHandler::shouldReplaceWithSyscall(std::string ApiName) {
+
+    return std::find(Syscalls.begin(), Syscalls.end(), ApiName) != Syscalls.end();
+}
+
+void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::ASTContext *const pContext,
+                                          std::string ApiName) {
+
+    if (ApiName == "WriteProcessMemory") {
+
+        llvm::outs() << "[*] Found WriteProcessMemory\n";
+
+        std::vector<std::string> FunctionArgs = GetArgs(pExpr);
+
+        std::ostringstream params(std::ostringstream::out);
+        //	reussite = ((fZwWriteVirtualMemory(handleProcess, (VOID*)adresseBase, adresseSource, longueur, &dwBytesWrite) != 0) && (dwBytesWrite == longueur));
+
+        params << "("
+               << FunctionArgs.at(0) << ", "
+               << FunctionArgs.at(1) << ", (PVOID)("
+               << FunctionArgs.at(2) << "), (ULONG)("
+               << FunctionArgs.at(3) << "), (PULONG)("
+               << FunctionArgs.at(4) << "))";
+        std::string Replacement = params.str();
+
+        SourceRange Range(pExpr->getBeginLoc(), pExpr->getEndLoc());
+        std::string Suffix = "";
+
+        if(isInsideIfCondition(pExpr, pContext)) {
+            llvm::outs() << "CompountStmt > IfStmt\n";
+
+            Suffix = "==ERROR_SUCCESS";
+        }
+
+        llvm::outs() << "Replacing with " << Replacement + Suffix << "\n";
+
+        ASTRewriter->ReplaceText(Range, "toto" + params.str() + Suffix);
+        return;
+    }
+}
+
+std::vector<std::string>
+ApiMatchHandler::getParents(const Expr& pExpr, clang::ast_type_traits::DynTypedNode Node,
+                             clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
+                             uint64_t Iterations) {
+
+    if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER) {
+        return CurrentParents;
+    }
+
+    ASTContext::DynTypedNodeList parents = Context->getParents(pExpr);
+
+    if (Iterations > 0) {
+        parents = Context->getParents(Node);
+    }
+
+    for (const auto &parent : parents) {
+
+        StringRef ParentNodeKind = parent.getNodeKind().asStringRef();
+
+        if (ParentNodeKind.find("Cast") != std::string::npos) {
+
+            return getParents(pExpr, parent, Context, CurrentParents, ++Iterations);
+        }
+
+        CurrentParents.push_back(ParentNodeKind);
+        return getParents(pExpr, parent, Context, CurrentParents, ++Iterations);
+    }
+
+    return CurrentParents;
+}
+
+bool ApiMatchHandler::isInsideIfCondition(const clang::CallExpr *pExpr, clang::ASTContext *const pContext) {
+
+    std::vector<std::string> Parents;
+    getParents(*pExpr, clang::ast_type_traits::DynTypedNode(), pContext, Parents, 0);
+
+    for(auto& parent : Parents){
+        llvm::outs() << "Parent is : " << parent << "\n";
+    }
+    auto it = std::find(Parents.begin(), Parents.end(), "IfStmt");
+    if(it != Parents.end()) {
+        // WriteProcessMemory call is located within an If statement. Now we should check if it's the
+        // in the If condition or the If Body.
+
+        auto CompoundStmtIt = std::find(Parents.begin(), Parents.end(), "CompoundStmt");
+
+        if( CompoundStmtIt == Parents.end()){
+            return true;
+        }
+
+        if(CompoundStmtIt > it)  {
+            // WriteProcessMememory is inside a CompoundStmt, inside an IfStmt
+            return true;
+        }
+    }
+
+    return false;
 }

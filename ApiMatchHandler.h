@@ -67,6 +67,16 @@ private:
                            const std::string &NewIdentifier);
 
     bool handleCallExpr(const clang::CallExpr *CallExpression, clang::ASTContext *const pContext);
+
+    bool shouldReplaceWithSyscall(std::string ApiName);
+
+    void rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::ASTContext *const pContext, std::string ApiName);
+
+    bool isInsideIfCondition(const clang::CallExpr *pExpr, clang::ASTContext *const pContext);
+
+    std::vector<std::string>
+    getParents(const clang::Expr &pExr, clang::ast_type_traits::DynTypedNode Node, clang::ASTContext *const Context,
+                   std::vector<std::string> &CurrentParents, uint64_t Iterations);
 };
 
 static std::map<std::string, std::string> ApiToHide_samlib = {
@@ -93,5 +103,10 @@ static std::map<std::string, std::string> ApiToHide_samlib = {
         {"SamRidToSid",                    "typedef NTSTATUS(__stdcall* _SamRidToSid)(SAMPR_HANDLE ObjectHandle, DWORD Rid, PSID * Sid);"},
         {"SamCloseHandle",                 "typedef NTSTATUS(__stdcall* _SamCloseHandle)(SAMPR_HANDLE SamHandle);"},
         {"SamFreeMemory",                  "typedef NTSTATUS(__stdcall* _SamFreeMemory)(PVOID Buffer);"}
+};
+
+static std::vector<std::string> Syscalls = {
+        "WriteProcessMemory",
+        "CreateRemoteThread"
 };
 #endif //AVCLEANER_APIMATCHHANDLER_H

