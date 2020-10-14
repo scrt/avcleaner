@@ -41,6 +41,7 @@ bool ApiMatchHandler::handleCallExpr(const CallExpr *CallExpression, clang::ASTC
 
     if(shouldReplaceWithSyscall(Identifier)) {
 
+
         rewriteApiToSyscall(CallExpression, pContext, Identifier);
         return true;
     }
@@ -145,6 +146,12 @@ bool ApiMatchHandler::shouldReplaceWithSyscall(std::string ApiName) {
     return std::find(Syscalls.begin(), Syscalls.end(), ApiName) != Syscalls.end();
 }
 
+/*
+ * 1. Rename API to random identifier
+ * 2. Adapt parameters
+ * 3. Handle If conditions since the return value is different
+ * 4.
+ */
 void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::ASTContext *const pContext,
                                           std::string ApiName) {
 
@@ -176,7 +183,48 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
 
         llvm::outs() << "Replacing with " << Replacement + Suffix << "\n";
 
-        ASTRewriter->ReplaceText(Range, "toto" + params.str() + Suffix);
+        SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
+                                                               *pExpr, 0);
+
+        // remember line number + function name
+        bool invalid;
+        auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),  EnclosingFunctionRange.getBegin().getRawEncoding(), &invalid);
+        auto index = std::pair<int, std::string>(toto, _ApiName);
+
+        bool AlreadyInitialized = Globs::TypeDefsInserted.count(index) != 0;
+
+        auto FunctionPointerIdentifier = std::string();
+
+        if(AlreadyInitialized) {
+            FunctionPointerIdentifier = Globs::TypeDefsInserted.at(index);
+        } else {
+            FunctionPointerIdentifier = Utils::translateStringToIdentifier(_ApiName);
+        }
+
+        ASTRewriter->ReplaceText(Range, FunctionPointerIdentifier + params.str() + Suffix);
+
+        if(Globs::TypeDefsInserted.count(index) != 0) {
+            return;
+        }
+
+        // remember that the fn pointer was already initialised
+        Globs::TypeDefsInserted.insert({index, FunctionPointerIdentifier});
+
+        /*
+         *
+            void *memWriteVirtualMemory = get_shellcode_buffer("ZwWriteVirtualMemory");
+            _ZwWriteVirtualMemory fZwWriteVirtualMemory =(_ZwWriteVirtualMemory)(memWriteVirtualMemory);
+         */
+        std::ostringstream InitStream(std::ostringstream::out);
+
+        auto MemoryBufferIdentifier = Utils::translateStringToIdentifier(_ApiName);
+
+        InitStream <<_TypeDef << "\n";
+        InitStream << "\tvoid *" << MemoryBufferIdentifier << " = get_shellcode_buffer(\"Zw" << _ApiName << "\");\n";
+        InitStream << "\t_" << _ApiName << " " << FunctionPointerIdentifier << " =(_" << _ApiName << ")("
+                       << MemoryBufferIdentifier << ");\n\n";
+
+        ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), InitStream.str(), false, true);
         return;
     }
 }

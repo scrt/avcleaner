@@ -298,9 +298,9 @@ bool MatchHandler::replaceStringLiteral(const clang::StringLiteral *pLiteral, cl
         // weird bug with TEXT Macro / other macros...there must be a proper way to do this.
         if (OrigText.find("TEXT") != std::string::npos) {
 
-            //ASTRewriter->RemoveText(LiteralRange);
-            //LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc().getLocWithOffset(-1)));
-            LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc()));
+            ASTRewriter->RemoveText(LiteralRange);
+            LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc().getLocWithOffset(-1)));
+            //LiteralRange.setEnd(ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getEndLoc()));
         }
     }
 

@@ -117,8 +117,14 @@ namespace AVObfuscator {
                                                                                    "User32.dll"));
                 consumers.push_back(*Cons);
 
-                auto Cons2 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("WriteProcessMemory", MessageBoxATypeDef,
-                                                                                                              "User32.dll"));
+                auto ZwWriteVirtualMemoryTypeDef = "typedef NTSTATUS(__stdcall *_ZwWriteVirtualMemory)(\n"
+                                                                   "      HANDLE	ProcessHandle,\n"
+                                                                   "      PVOID	BaseAddress,\n"
+                                                                   "      PVOID	Buffer,\n"
+                                                                   "      ULONG    NumberOfBytesToWrite,\n"
+                                                                   "      PULONG	NumberOfBytesWritten);\n\n";
+                auto Cons2 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("WriteProcessMemory", ZwWriteVirtualMemoryTypeDef,
+                                                                                                              ""));
                 consumers.push_back(*Cons2);
             }
 
