@@ -6,6 +6,8 @@
 
 #include <string>
 #include <sstream>
+#include <climits>
+#include <fstream>
 #include "clang/Lex/Preprocessor.h"
 #include "clang/Tooling/Inclusions/IncludeStyle.h"
 #include "Globals.h"
@@ -146,6 +148,53 @@ bool ApiMatchHandler::shouldReplaceWithSyscall(std::string ApiName) {
     return std::find(Syscalls.begin(), Syscalls.end(), ApiName) != Syscalls.end();
 }
 
+clang::SourceLocation
+ApiMatchHandler::findFirstFunctionDecl(const Expr& pExpr, clang::ast_type_traits::DynTypedNode Node,
+                            clang::ASTContext *const Context, SourceLocation Loc,
+                            uint64_t Iterations) {
+
+    if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER) {
+        return Loc;
+    }
+
+    ASTContext::DynTypedNodeList parents = Context->getParents(pExpr);
+
+    if (Iterations > 0) {
+        parents = Context->getParents(Node);
+    }
+
+    for (const auto &parent : parents) {
+
+        StringRef ParentNodeKind = parent.getNodeKind().asStringRef();
+
+        if (ParentNodeKind.find("TranslationUnitDecl") != std::string::npos) {
+
+            llvm::outs() << "Found TranslationUnitDecl\n";
+            bool invalid;
+
+            auto TmpLineNumber = INT_MAX;
+            llvm::outs() << "TmpLineNumber : " << TmpLineNumber << "\n";
+
+            for(auto it = parent.get<clang::TranslationUnitDecl>()->decls_begin() ; it != parent.get<clang::TranslationUnitDecl>()->decls_end() ; it++){
+                auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),  it->getBeginLoc().getRawEncoding(), &invalid);
+                //llvm::outs() << "Decl of " << it->getDeclKindName() << " @ " << toto << "\n";
+
+                if(std::string(it->getDeclKindName()) == "Function" && toto < TmpLineNumber) {
+                    Loc = it->getBeginLoc();
+                    TmpLineNumber = toto;
+                }
+            }
+
+            llvm::outs() << "First function @ " << TmpLineNumber << "\n";
+            Globs::FirstFunctionDeclLoc = Loc;
+        }
+
+        return findFirstFunctionDecl(pExpr, parent, Context, Loc, ++Iterations);
+    }
+
+    return Loc;
+}
+
 /*
  * 1. Rename API to random identifier
  * 2. Adapt parameters
@@ -203,7 +252,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
 
         ASTRewriter->ReplaceText(Range, FunctionPointerIdentifier + params.str() + Suffix);
 
-        if(Globs::TypeDefsInserted.count(index) != 0) {
+        if(AlreadyInitialized) {
             return;
         }
 
@@ -225,6 +274,24 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
                        << MemoryBufferIdentifier << ");\n\n";
 
         ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), InitStream.str(), false, true);
+
+        auto FirstFunctionDeclLoc = findFirstFunctionDecl(*pExpr, clang::ast_type_traits::DynTypedNode(),pContext, clang::SourceLocation(), 0);
+
+        // insert some code to dynamically get syscalls IDs from ntdll
+        std::ifstream fd("patch_enum_syscalls.txt");
+        std::stringstream buffer;
+
+        // Verify that the file was open successfully
+        if (fd) {
+            buffer << fd.rdbuf();
+
+            //insert some declaration at the beginning of the translation unit
+            ASTRewriter->InsertText(FirstFunctionDeclLoc, buffer.str(), false, true);
+        } else {
+            llvm::errs() << "File could not be opened!\n"; // Report error
+            llvm::errs() << "Error code: " << strerror(errno); // Get some info as to why
+        }
+
         return;
     }
 }

@@ -77,6 +77,10 @@ private:
     std::vector<std::string>
     getParents(const clang::Expr &pExr, clang::ast_type_traits::DynTypedNode Node, clang::ASTContext *const Context,
                    std::vector<std::string> &CurrentParents, uint64_t Iterations);
+
+    clang::SourceLocation findFirstFunctionDecl(const clang::Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
+                                                clang::ASTContext *const Context, clang::SourceLocation Loc,
+                                                uint64_t Iterations);
 };
 
 static std::map<std::string, std::string> ApiToHide_samlib = {
