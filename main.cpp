@@ -137,7 +137,7 @@ namespace AVObfuscator {
                                                                    "      ULONG    NumberOfBytesToWrite,\n"
                                                                    "      PULONG	NumberOfBytesWritten);\n\n";
                 auto Cons2 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("WriteProcessMemory", ZwWriteVirtualMemoryTypeDef,
-                                                                                                              ""));
+                                                                                                              "ZwWriteVirtualMemory", true));
                 consumers.push_back(*Cons2);
 
                 auto ZwCreateThreadExTypeDef = "typedef  NTSTATUS(__stdcall* _ZwCreateThreadEx)(HANDLE * pHandle,\n"
