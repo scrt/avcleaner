@@ -41,7 +41,7 @@ bool ApiMatchHandler::handleCallExpr(const CallExpr *CallExpression, clang::ASTC
 
     std::string Identifier = getFunctionIdentifier(CallExpression);
 
-    if(shouldReplaceWithSyscall(Identifier)) {
+    if (shouldReplaceWithSyscall(Identifier)) {
 
 
         rewriteApiToSyscall(CallExpression, pContext, Identifier);
@@ -76,13 +76,13 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
     // add function prototype if not already added
     //if(std::find(TypedefAdded.begin(), TypedefAdded.end(), pCallExpression->getDirectCallee()) == TypedefAdded.end()) {
 
-        Result << "\t" << _TypeDef << "\n";
+    Result << "\t" << _TypeDef << "\n";
     //}
 
     // add LoadLibrary with obfuscated strings
     std::string LoadLibraryVariable = Utils::translateStringToIdentifier(_Library);
     std::string LoadLibraryString = Utils::generateVariableDeclaration(LoadLibraryVariable, _Library);
-    std::string LoadLibraryHandleIdentifier = Utils::translateStringToIdentifier("hHandle_"+_Library);
+    std::string LoadLibraryHandleIdentifier = Utils::translateStringToIdentifier("hHandle_" + _Library);
     Result << "\t" << LoadLibraryString << std::endl;
     Result << "\tHANDLE " << LoadLibraryHandleIdentifier << " = LoadLibrary(" << LoadLibraryVariable << ");\n";
 
@@ -90,7 +90,7 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
     std::string ApiNameIdentifier = Utils::translateStringToIdentifier(ApiName);
     std::string ApiNameDecl = Utils::generateVariableDeclaration(ApiNameIdentifier, ApiName);
     Result << "\t" << ApiNameDecl << "\n";
-    Result << "\t_"<< ApiName << " " << NewIdentifier << " = (_" << ApiName << ") GetProcAddress("
+    Result << "\t_" << ApiName << " " << NewIdentifier << " = (_" << ApiName << ") GetProcAddress("
            << LoadLibraryHandleIdentifier << ", " << ApiNameIdentifier << ");\n";
 
     TypedefAdded.push_back(pCallExpression->getDirectCallee());
@@ -143,15 +143,16 @@ static std::vector<std::string> GetArgs(const CallExpr *CallExpression) {
 
     return Args;
 }
+
 bool ApiMatchHandler::shouldReplaceWithSyscall(std::string ApiName) {
 
     return std::find(Syscalls.begin(), Syscalls.end(), ApiName) != Syscalls.end();
 }
 
 clang::SourceLocation
-ApiMatchHandler::findFirstFunctionDecl(const Expr& pExpr, clang::ast_type_traits::DynTypedNode Node,
-                            clang::ASTContext *const Context, SourceLocation Loc,
-                            uint64_t Iterations) {
+ApiMatchHandler::findFirstFunctionDecl(const Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
+                                       clang::ASTContext *const Context, SourceLocation Loc,
+                                       uint64_t Iterations) {
 
     if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER) {
         return Loc;
@@ -175,11 +176,13 @@ ApiMatchHandler::findFirstFunctionDecl(const Expr& pExpr, clang::ast_type_traits
             auto TmpLineNumber = INT_MAX;
             llvm::outs() << "TmpLineNumber : " << TmpLineNumber << "\n";
 
-            for(auto it = parent.get<clang::TranslationUnitDecl>()->decls_begin() ; it != parent.get<clang::TranslationUnitDecl>()->decls_end() ; it++){
-                auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),  it->getBeginLoc().getRawEncoding(), &invalid);
+            for (auto it = parent.get<clang::TranslationUnitDecl>()->decls_begin();
+                 it != parent.get<clang::TranslationUnitDecl>()->decls_end(); it++) {
+                auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),
+                                                                      it->getBeginLoc().getRawEncoding(), &invalid);
                 //llvm::outs() << "Decl of " << it->getDeclKindName() << " @ " << toto << "\n";
 
-                if(std::string(it->getDeclKindName()) == "Function" && toto < TmpLineNumber) {
+                if (std::string(it->getDeclKindName()) == "Function" && toto < TmpLineNumber) {
                     Loc = it->getBeginLoc();
                     TmpLineNumber = toto;
                 }
@@ -203,6 +206,8 @@ ApiMatchHandler::findFirstFunctionDecl(const Expr& pExpr, clang::ast_type_traits
  */
 void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::ASTContext *const pContext,
                                           std::string ApiName) {
+    std::string Replacement = "";
+    std::ostringstream params(std::ostringstream::out);
 
     if (ApiName == "WriteProcessMemory") {
 
@@ -210,7 +215,6 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
 
         std::vector<std::string> FunctionArgs = GetArgs(pExpr);
 
-        std::ostringstream params(std::ostringstream::out);
         //	reussite = ((fZwWriteVirtualMemory(handleProcess, (VOID*)adresseBase, adresseSource, longueur, &dwBytesWrite) != 0) && (dwBytesWrite == longueur));
 
         params << "("
@@ -220,86 +224,111 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
                << FunctionArgs.at(3) << "), (PULONG)("
                << FunctionArgs.at(4) << "))";
         std::string Replacement = params.str();
-
-        SourceRange Range(pExpr->getBeginLoc(), pExpr->getEndLoc());
-        std::string Suffix = "";
-
-        if(isInsideIfCondition(pExpr, pContext)) {
-            llvm::outs() << "CompountStmt > IfStmt\n";
-
-            Suffix = "==ERROR_SUCCESS";
-        }
-
-        llvm::outs() << "Replacing with " << Replacement + Suffix << "\n";
-
-        SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
-                                                               *pExpr, 0);
-
-        // remember line number + function name
-        bool invalid;
-        auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),  EnclosingFunctionRange.getBegin().getRawEncoding(), &invalid);
-        auto index = std::pair<int, std::string>(toto, _ApiName);
-
-        bool AlreadyInitialized = Globs::TypeDefsInserted.count(index) != 0;
-
-        auto FunctionPointerIdentifier = std::string();
-
-        if(AlreadyInitialized) {
-            FunctionPointerIdentifier = Globs::TypeDefsInserted.at(index);
-        } else {
-            FunctionPointerIdentifier = Utils::translateStringToIdentifier(_ApiName);
-        }
-
-        ASTRewriter->ReplaceText(Range, FunctionPointerIdentifier + params.str() + Suffix);
-
-        if(AlreadyInitialized) {
-            return;
-        }
-
-        // remember that the fn pointer was already initialised
-        Globs::TypeDefsInserted.insert({index, FunctionPointerIdentifier});
-
+    } else if (ApiName == "CreateRemoteThread") {
         /*
-         *
-            void *memWriteVirtualMemory = get_shellcode_buffer("ZwWriteVirtualMemory");
-            _ZwWriteVirtualMemory fZwWriteVirtualMemory =(_ZwWriteVirtualMemory)(memWriteVirtualMemory);
-         */
-        std::ostringstream InitStream(std::ostringstream::out);
+            * Variable cible d'assignation hThread devient premier paramètre
+            * 1er paramètre devient 4ème.
+            * 4ème et 5ème paramètres deviennent 5 et 6ème.
+        */
 
-        auto MemoryBufferIdentifier = Utils::translateStringToIdentifier(_ApiName);
+        std::vector<std::string> FunctionArgs = GetArgs(pExpr);
+        std::ostringstream params(std::ostringstream::out);
+        std::string VarName = getCallExprAssignmentVarName(pExpr, pContext);
+        params << "(&" << VarName << ", THREAD_ALL_ACCESS, NULL, "
+               << FunctionArgs.at(0) << ", "
+               << FunctionArgs.at(3) << ", "
+               << FunctionArgs.at(4) << ", 0x00000001 | 0x00000004, 0, 0, 0, NULL)";
+        std::string Replacement = params.str();
 
-        InitStream <<_TypeDef << "\n";
-        InitStream << "\tvoid *" << MemoryBufferIdentifier << " = get_shellcode_buffer(\"Zw" << _ApiName << "\");\n";
-        InitStream << "\t_" << _ApiName << " " << FunctionPointerIdentifier << " =(_" << _ApiName << ")("
-                       << MemoryBufferIdentifier << ");\n\n";
 
-        ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), InitStream.str(), false, true);
+        //SourceLocation NewStart = !CallInfos._VarName.empty() ? CallInfos._StartOfLHS : CallExpression->getBeginLoc();
+    }
 
-        auto FirstFunctionDeclLoc = findFirstFunctionDecl(*pExpr, clang::ast_type_traits::DynTypedNode(),pContext, clang::SourceLocation(), 0);
+    SourceRange Range(pExpr->getBeginLoc(), pExpr->getEndLoc());
+    std::string Suffix = "";
 
-        // insert some code to dynamically get syscalls IDs from ntdll
-        std::ifstream fd("patch_enum_syscalls.txt");
-        std::stringstream buffer;
+    if (isInsideIfCondition(pExpr, pContext)) {
+        llvm::outs() << "CompountStmt > IfStmt\n";
 
-        // Verify that the file was open successfully
-        if (fd) {
-            buffer << fd.rdbuf();
+        Suffix = "==ERROR_SUCCESS";
+    }
 
-            //insert some declaration at the beginning of the translation unit
-            ASTRewriter->InsertText(FirstFunctionDeclLoc, buffer.str(), false, true);
-        } else {
-            llvm::errs() << "File could not be opened!\n"; // Report error
-            llvm::errs() << "Error code: " << strerror(errno); // Get some info as to why
-        }
+    llvm::outs() << "Replacing with " << Replacement + Suffix << "\n";
 
+    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
+                                                           *pExpr, 0);
+
+    // remember line number + function name
+    bool invalid;
+    auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),
+                                                          EnclosingFunctionRange.getBegin().getRawEncoding(), &invalid);
+    auto index = std::pair<int, std::string>(toto, _ApiName);
+
+    bool AlreadyInitialized = Globs::TypeDefsInserted.count(index) != 0;
+
+    auto FunctionPointerIdentifier = std::string();
+
+    if (AlreadyInitialized) {
+        FunctionPointerIdentifier = Globs::TypeDefsInserted.at(index);
+    } else {
+        FunctionPointerIdentifier = Utils::translateStringToIdentifier(_ApiName);
+    }
+
+    ASTRewriter->ReplaceText(Range, FunctionPointerIdentifier + params.str() + Suffix);
+
+    if (AlreadyInitialized) {
         return;
+    }
+
+    // remember that the fn pointer was already initialised
+    Globs::TypeDefsInserted.insert({index, FunctionPointerIdentifier});
+
+    /*
+     *
+        void *memWriteVirtualMemory = get_shellcode_buffer("ZwWriteVirtualMemory");
+        _ZwWriteVirtualMemory fZwWriteVirtualMemory =(_ZwWriteVirtualMemory)(memWriteVirtualMemory);
+     */
+    std::ostringstream InitStream(std::ostringstream::out);
+
+    auto MemoryBufferIdentifier = Utils::translateStringToIdentifier(_ApiName);
+
+    InitStream << _TypeDef << "\n";
+    InitStream << "\tvoid *" << MemoryBufferIdentifier << " = get_shellcode_buffer(\"Zw" << "WriteVirtualMemory"
+               << "\");\n";
+    InitStream << "\t_" << "ZwWriteVirtualMemory" << " " << FunctionPointerIdentifier << " =(_"
+               << "ZwWriteVirtualMemory" << ")("
+               << MemoryBufferIdentifier << ");\n\n";
+
+    ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), InitStream.str(), false, true);
+
+    if (Globs::SyscallInserted) {
+        return;
+    }
+
+    Globs::SyscallInserted = true;
+    auto FirstFunctionDeclLoc = findFirstFunctionDecl(*pExpr, clang::ast_type_traits::DynTypedNode(), pContext,
+                                                      clang::SourceLocation(), 0);
+
+    // insert some code to dynamically get syscalls IDs from ntdll
+    std::ifstream fd("patch_enum_syscalls.txt");
+    std::stringstream buffer;
+
+    // Verify that the file was open successfully
+    if (fd) {
+        buffer << fd.rdbuf();
+
+        //insert some declaration at the beginning of the translation unit
+        ASTRewriter->InsertText(FirstFunctionDeclLoc, buffer.str(), false, true);
+    } else {
+        llvm::errs() << "File could not be opened!\n"; // Report error
+        llvm::errs() << "Error code: " << strerror(errno); // Get some info as to why
     }
 }
 
 std::vector<std::string>
-ApiMatchHandler::getParents(const Expr& pExpr, clang::ast_type_traits::DynTypedNode Node,
-                             clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
-                             uint64_t Iterations) {
+ApiMatchHandler::getParents(const Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
+                            clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
+                            uint64_t Iterations) {
 
     if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER) {
         return CurrentParents;
@@ -332,25 +361,55 @@ bool ApiMatchHandler::isInsideIfCondition(const clang::CallExpr *pExpr, clang::A
     std::vector<std::string> Parents;
     getParents(*pExpr, clang::ast_type_traits::DynTypedNode(), pContext, Parents, 0);
 
-    for(auto& parent : Parents){
+    for (auto &parent : Parents) {
         llvm::outs() << "Parent is : " << parent << "\n";
     }
     auto it = std::find(Parents.begin(), Parents.end(), "IfStmt");
-    if(it != Parents.end()) {
+    if (it != Parents.end()) {
         // WriteProcessMemory call is located within an If statement. Now we should check if it's the
         // in the If condition or the If Body.
 
         auto CompoundStmtIt = std::find(Parents.begin(), Parents.end(), "CompoundStmt");
 
-        if( CompoundStmtIt == Parents.end()){
+        if (CompoundStmtIt == Parents.end()) {
             return true;
         }
 
-        if(CompoundStmtIt > it)  {
+        if (CompoundStmtIt > it) {
             // WriteProcessMememory is inside a CompoundStmt, inside an IfStmt
             return true;
         }
     }
 
     return false;
+}
+
+std::string
+ApiMatchHandler::getCallExprAssignmentVarName(const clang::CallExpr *pExpr, clang::ASTContext *const pContext) {
+
+    auto VarName = std::string();
+    auto ParentNodes = pContext->getParents(*pExpr);
+
+    for (auto &Parent : ParentNodes) {
+
+        llvm::outs() << "Parent (BinOp) : " << Parent.getNodeKind().asStringRef() << "\n";
+        if (Parent.getNodeKind().asStringRef() == "VarDecl") {
+            auto Node = Parent.get<clang::VarDecl>();
+            VarName = Node->getNameAsString();
+        }
+        if (Parent.getNodeKind().asStringRef() == "BinaryOperator") {
+            auto Node = Parent.get<clang::BinaryOperator>();
+            auto Child = Node->getLHS();
+            if (auto *DRE = dyn_cast<DeclRefExpr>(Child)) {
+                // It's a reference to a declaration...
+                if (auto *VD = dyn_cast<VarDecl>(DRE->getDecl())) {
+                    // It's a reference to a variable (a local, function parameter, global, or static data member).
+                    VarName = VD->getQualifiedNameAsString();
+                }
+            }
+            llvm::outs() << "Var name is " << VarName  << "\n";
+        }
+    }
+
+    return std::string();
 }

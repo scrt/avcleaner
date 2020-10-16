@@ -81,6 +81,8 @@ private:
     clang::SourceLocation findFirstFunctionDecl(const clang::Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
                                                 clang::ASTContext *const Context, clang::SourceLocation Loc,
                                                 uint64_t Iterations);
+
+    std::string getCallExprAssignmentVarName(const clang::CallExpr *pExpr, clang::ASTContext *const pContext);
 };
 
 static std::map<std::string, std::string> ApiToHide_samlib = {

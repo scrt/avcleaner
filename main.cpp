@@ -126,6 +126,21 @@ namespace AVObfuscator {
                 auto Cons2 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("WriteProcessMemory", ZwWriteVirtualMemoryTypeDef,
                                                                                                               ""));
                 consumers.push_back(*Cons2);
+
+                auto ZwCreateThreadExTypeDef = "typedef  NTSTATUS(__stdcall* _ZwCreateThreadEx)(HANDLE * pHandle,\n"
+                                               "    ACCESS_MASK DesiredAccess,\n"
+                                               "    void * pAttr, \n"
+                                               "    HANDLE hProc,\n"
+                                               "    void * pFunc,\n"
+                                               "    void * pArg,\n"
+                                               "    ULONG Flags,\n"
+                                               "    SIZE_T ZeroBits,\n"
+                                               "    SIZE_T StackSize,\n"
+                                               "    SIZE_T MaxStackSize,\n"
+                                               "    void * pAttrListOut);\n\n";
+                auto Cons3 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("CreateRemoteThread", ZwCreateThreadExTypeDef,
+                                                                                    ""));
+                consumers.push_back(*Cons3);
             }
 
             auto TheConsumer = std::make_unique<Consumer>();
