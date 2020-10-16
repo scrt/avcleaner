@@ -65,24 +65,37 @@ namespace AVObfuscator {
         ApiCallConsumer(std::string ApiName, std::string TypeDef, std::string Library)
                 : _ApiName(std::move(ApiName)), _TypeDef(std::move(TypeDef)), _Library(std::move(Library)) {}
 
+
+                ApiCallConsumer(std::string ApiName, std::string TypeDef, std::string NtName, bool ConvertToSyscall)
+                : _ApiName(std::move(ApiName)), _TypeDef(std::move(TypeDef)), _NtName(std::move(NtName)), _ConvertToSyscall(ConvertToSyscall) {}
+
         void HandleTranslationUnit(clang::ASTContext &Context) override {
             using namespace clang::ast_matchers;
             using namespace AVObfuscator;
 
             llvm::outs() << "[ApiCallObfuscation] Registering ASTMatcher for " << _ApiName << "\n";
             MatchFinder Finder;
-            ApiMatchHandler Handler(&ASTRewriter, _ApiName, _TypeDef, _Library);
 
             const auto Matcher = callExpr(callee(functionDecl(hasName(_ApiName)))).bind("callExpr");
 
+            ApiMatchHandler Handler;
+            if(_ConvertToSyscall) {
+                Handler = ApiMatchHandler(&ASTRewriter, _ApiName, _TypeDef, _NtName, true);
+
+            } else {
+                Handler = ApiMatchHandler(&ASTRewriter, _ApiName, _TypeDef, _Library);
+            }
             Finder.addMatcher(Matcher, &Handler);
+
             Finder.matchAST(Context);
         }
 
     private:
-        std::string _ApiName;
-        std::string _TypeDef;
-        std::string _Library;
+        std::string _ApiName ="";
+        std::string _TypeDef ="";
+        std::string _Library = "";
+        std::string _NtName ="";
+        bool _ConvertToSyscall;
     };
 
     StringEncryptionConsumer StringConsumer = StringEncryptionConsumer();
@@ -139,7 +152,7 @@ namespace AVObfuscator {
                                                "    SIZE_T MaxStackSize,\n"
                                                "    void * pAttrListOut);\n\n";
                 auto Cons3 = std::make_unique<ApiCallConsumer*>(new ApiCallConsumer("CreateRemoteThread", ZwCreateThreadExTypeDef,
-                                                                                    ""));
+                                                                                    "ZwCreateThreadEx", true));
                 consumers.push_back(*Cons3);
             }
 

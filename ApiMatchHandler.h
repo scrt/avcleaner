@@ -38,20 +38,30 @@
 
 class ApiMatchHandler : public clang::ast_matchers::MatchFinder::MatchCallback {
 
-public:
     using MatchResult = clang::ast_matchers::MatchFinder::MatchResult;
 
+public:ApiMatchHandler() = default;
     ApiMatchHandler(clang::Rewriter *rewriter, std::string ApiName, std::string TypeDef, std::string Library) : ASTRewriter(rewriter),
                                                                                            _ApiName(ApiName),
                                                                                            _TypeDef(TypeDef), _Library(Library) {}
+
+    ApiMatchHandler(clang::Rewriter *rewriter, std::string ApiName, std::string TypeDef, std::string NtName, bool ConvertToSyscall) : ASTRewriter(rewriter),
+                                                                                                                _ApiName(ApiName),
+                                                                                                                _TypeDef(TypeDef),
+                                                                                                                _NtName(NtName),
+                                                                                                                _ConvertToSyscall(ConvertToSyscall) {
+        llvm::outs() << "toto " <<  _TypeDef << "\n";
+    }
 
     void run(const MatchResult &Result) override; // callback function that runs when a Match is found.
 
 private:
     clang::Rewriter *ASTRewriter; // an instance to a Rewriter to manage changes to the AST.
-    std::string _ApiName;
-    std::string _TypeDef;
-    std::string _Library;
+    std::string _ApiName = "";
+    std::string _TypeDef ="";
+    std::string _Library = "";
+    std::string _NtName = "";
+    bool _ConvertToSyscall = false;
     std::vector<const clang::FunctionDecl*> TypedefAdded; // collection of locations where the TypeDef for the API was already added.
 
     static clang::SourceRange findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,

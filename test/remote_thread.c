@@ -1,6 +1,5 @@
 #include "common.h"
 #include "remote_thread.h"
-#include <windows.h>
 
 /*! @brief Container structure for a client identifer used when creating remote threads with RtlCreateUserThread. */
 typedef struct _MIMI_CLIENT_ID {

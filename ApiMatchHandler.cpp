@@ -59,6 +59,7 @@ bool ApiMatchHandler::handleCallExpr(const CallExpr *CallExpression, clang::ASTC
 void ApiMatchHandler::run(const MatchResult &Result) {
 
     llvm::outs() << "Found " << _ApiName << "\n";
+    llvm::outs() << "Found " << _TypeDef << "\n";
 
     const auto *CallExpression = Result.Nodes.getNodeAs<clang::CallExpr>("callExpr");
     handleCallExpr(CallExpression, Result.Context);
@@ -206,9 +207,11 @@ ApiMatchHandler::findFirstFunctionDecl(const Expr &pExpr, clang::ast_type_traits
  */
 void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::ASTContext *const pContext,
                                           std::string ApiName) {
-    std::string Replacement = "";
+    std::string Replacement, Prefix, Suffix = "";
     std::ostringstream params(std::ostringstream::out);
+    SourceRange Range;
 
+    llvm::outs() << _TypeDef << "\n";
     if (ApiName == "WriteProcessMemory") {
 
         llvm::outs() << "[*] Found WriteProcessMemory\n";
@@ -223,7 +226,9 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
                << FunctionArgs.at(2) << "), (ULONG)("
                << FunctionArgs.at(3) << "), (PULONG)("
                << FunctionArgs.at(4) << "))";
-        std::string Replacement = params.str();
+        Replacement = params.str();
+        Range = clang::SourceRange(pExpr->getBeginLoc(), pExpr->getEndLoc());
+
     } else if (ApiName == "CreateRemoteThread") {
         /*
             * Variable cible d'assignation hThread devient premier paramètre
@@ -238,14 +243,16 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
                << FunctionArgs.at(0) << ", "
                << FunctionArgs.at(3) << ", "
                << FunctionArgs.at(4) << ", 0x00000001 | 0x00000004, 0, 0, 0, NULL)";
-        std::string Replacement = params.str();
+        Replacement = params.str();
 
+        auto ParentNode = pContext->getParents(*pExpr).begin();
+        Range = clang::SourceRange(ParentNode->getSourceRange().getBegin(), pExpr->getEndLoc());
+        if(ParentNode->getNodeKind().asStringRef() == "VarDecl") {
+           Prefix = ParentNode->get<clang::VarDecl>()->getType().getAsString() + " " + VarName + ";\n\t";
+        }
 
         //SourceLocation NewStart = !CallInfos._VarName.empty() ? CallInfos._StartOfLHS : CallExpression->getBeginLoc();
     }
-
-    SourceRange Range(pExpr->getBeginLoc(), pExpr->getEndLoc());
-    std::string Suffix = "";
 
     if (isInsideIfCondition(pExpr, pContext)) {
         llvm::outs() << "CompountStmt > IfStmt\n";
@@ -253,8 +260,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
         Suffix = "==ERROR_SUCCESS";
     }
 
-    llvm::outs() << "Replacing with " << Replacement + Suffix << "\n";
-
+    llvm::outs() << "Replacing with " << Prefix + Replacement + Suffix << "\n";
     SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
                                                            *pExpr, 0);
 
@@ -263,9 +269,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
     auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),
                                                           EnclosingFunctionRange.getBegin().getRawEncoding(), &invalid);
     auto index = std::pair<int, std::string>(toto, _ApiName);
-
     bool AlreadyInitialized = Globs::TypeDefsInserted.count(index) != 0;
-
     auto FunctionPointerIdentifier = std::string();
 
     if (AlreadyInitialized) {
@@ -274,7 +278,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
         FunctionPointerIdentifier = Utils::translateStringToIdentifier(_ApiName);
     }
 
-    ASTRewriter->ReplaceText(Range, FunctionPointerIdentifier + params.str() + Suffix);
+    ASTRewriter->ReplaceText(Range, Prefix + FunctionPointerIdentifier + Replacement + Suffix);
 
     if (AlreadyInitialized) {
         return;
@@ -293,10 +297,10 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
     auto MemoryBufferIdentifier = Utils::translateStringToIdentifier(_ApiName);
 
     InitStream << _TypeDef << "\n";
-    InitStream << "\tvoid *" << MemoryBufferIdentifier << " = get_shellcode_buffer(\"Zw" << "WriteVirtualMemory"
+    InitStream << "\tvoid *" << MemoryBufferIdentifier << " = get_shellcode_buffer(\"" << _NtName
                << "\");\n";
-    InitStream << "\t_" << "ZwWriteVirtualMemory" << " " << FunctionPointerIdentifier << " =(_"
-               << "ZwWriteVirtualMemory" << ")("
+    InitStream << "\t_" << _NtName << " " << FunctionPointerIdentifier << " =(_"
+               << _NtName << ")("
                << MemoryBufferIdentifier << ");\n\n";
 
     ASTRewriter->InsertText(EnclosingFunctionRange.getBegin(), InitStream.str(), false, true);
@@ -366,22 +370,13 @@ bool ApiMatchHandler::isInsideIfCondition(const clang::CallExpr *pExpr, clang::A
     }
     auto it = std::find(Parents.begin(), Parents.end(), "IfStmt");
     if (it != Parents.end()) {
+
         // WriteProcessMemory call is located within an If statement. Now we should check if it's the
         // in the If condition or the If Body.
-
         auto CompoundStmtIt = std::find(Parents.begin(), Parents.end(), "CompoundStmt");
 
-        if (CompoundStmtIt == Parents.end()) {
-            return true;
-        }
-
-        if (CompoundStmtIt > it) {
-            // WriteProcessMememory is inside a CompoundStmt, inside an IfStmt
-            return true;
-        }
+        return (CompoundStmtIt == Parents.end() || CompoundStmtIt > it);
     }
-
-    return false;
 }
 
 std::string
@@ -392,12 +387,12 @@ ApiMatchHandler::getCallExprAssignmentVarName(const clang::CallExpr *pExpr, clan
 
     for (auto &Parent : ParentNodes) {
 
-        llvm::outs() << "Parent (BinOp) : " << Parent.getNodeKind().asStringRef() << "\n";
         if (Parent.getNodeKind().asStringRef() == "VarDecl") {
             auto Node = Parent.get<clang::VarDecl>();
             VarName = Node->getNameAsString();
-        }
-        if (Parent.getNodeKind().asStringRef() == "BinaryOperator") {
+        } else if (Parent.getNodeKind().asStringRef() == "BinaryOperator") {
+            llvm::outs() << "Parent (BinOp) : " << Parent.getNodeKind().asStringRef() << "\n";
+
             auto Node = Parent.get<clang::BinaryOperator>();
             auto Child = Node->getLHS();
             if (auto *DRE = dyn_cast<DeclRefExpr>(Child)) {
@@ -407,9 +402,10 @@ ApiMatchHandler::getCallExprAssignmentVarName(const clang::CallExpr *pExpr, clan
                     VarName = VD->getQualifiedNameAsString();
                 }
             }
+
             llvm::outs() << "Var name is " << VarName  << "\n";
         }
     }
 
-    return std::string();
+    return VarName;
 }
