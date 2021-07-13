@@ -1,4 +1,4 @@
-FROM archlinux/base
+FROM archlinux
 RUN echo "root:root" | chpasswd
 RUN useradd -m -G wheel -s /bin/bash toto \
 	&& echo "toto:toto" | chpasswd
