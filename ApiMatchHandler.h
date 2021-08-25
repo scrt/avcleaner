@@ -64,7 +64,7 @@ private:
     bool _ConvertToSyscall = false;
     std::vector<const clang::FunctionDecl*> TypedefAdded; // collection of locations where the TypeDef for the API was already added.
 
-    static clang::SourceRange findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
+    static clang::SourceRange findInjectionSpot(clang::ASTContext *const Context, clang::DynTypedNode Parent,
                                          const clang::CallExpr &Literal, uint64_t Iterations);
 
     bool
@@ -85,10 +85,10 @@ private:
     bool isInsideIfCondition(const clang::CallExpr *pExpr, clang::ASTContext *const pContext);
 
     std::vector<std::string>
-    getParents(const clang::Expr &pExr, clang::ast_type_traits::DynTypedNode Node, clang::ASTContext *const Context,
+    getParents(const clang::Expr &pExr, clang::DynTypedNode Node, clang::ASTContext *const Context,
                    std::vector<std::string> &CurrentParents, uint64_t Iterations);
 
-    clang::SourceLocation findFirstFunctionDecl(const clang::Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
+    clang::SourceLocation findFirstFunctionDecl(const clang::Expr &pExpr, clang::DynTypedNode Node,
                                                 clang::ASTContext *const Context, clang::SourceLocation Loc,
                                                 uint64_t Iterations);
 

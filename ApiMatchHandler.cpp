@@ -29,7 +29,7 @@ std::string ApiMatchHandler::getFunctionIdentifier(const CallExpr *CallExpressio
         return nullptr;
     }
 
-    return II->getName();
+    return II->getName().data();
 }
 
 bool ApiMatchHandler::replaceIdentifier(const CallExpr *CallExpression, const std::string &ApiName,
@@ -69,7 +69,7 @@ void ApiMatchHandler::run(const MatchResult &Result) {
 bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, clang::ASTContext *const pContext,
                                         const std::string &NewIdentifier, std::string &ApiName) {
 
-    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
+    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::DynTypedNode(),
                                                            *pCallExpression, 0);
 
     std::stringstream Result;
@@ -101,13 +101,13 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
 }
 
 SourceRange
-ApiMatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
+ApiMatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::DynTypedNode Parent,
                                    const clang::CallExpr &Literal, uint64_t Iterations) {
 
     if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER)
         throw std::runtime_error("Reached max iterations when trying to find a function declaration");
 
-    ASTContext::DynTypedNodeList parents = Context->getParents(Literal);;
+    clang::DynTypedNodeList parents = Context->getParents(Literal);;
 
     if (Iterations > 0) {
         parents = Context->getParents(Parent);
@@ -134,7 +134,7 @@ static std::vector<std::string> GetArgs(const CallExpr *CallExpression) {
     LangOpts.CPlusPlus = true;
     clang::PrintingPolicy Policy(LangOpts);
 
-    for (int i = 0; i < CallExpression->getNumArgs(); i++) {
+    for (unsigned int i = 0; i < CallExpression->getNumArgs(); i++) {
 
         std::string TypeS;
         llvm::raw_string_ostream s(TypeS);
@@ -151,7 +151,7 @@ bool ApiMatchHandler::shouldReplaceWithSyscall(std::string ApiName) {
 }
 
 clang::SourceLocation
-ApiMatchHandler::findFirstFunctionDecl(const Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
+ApiMatchHandler::findFirstFunctionDecl(const Expr &pExpr, clang::DynTypedNode Node,
                                        clang::ASTContext *const Context, SourceLocation Loc,
                                        uint64_t Iterations) {
 
@@ -159,7 +159,7 @@ ApiMatchHandler::findFirstFunctionDecl(const Expr &pExpr, clang::ast_type_traits
         return Loc;
     }
 
-    ASTContext::DynTypedNodeList parents = Context->getParents(pExpr);
+    clang::DynTypedNodeList parents = Context->getParents(pExpr);
 
     if (Iterations > 0) {
         parents = Context->getParents(Node);
@@ -179,7 +179,7 @@ ApiMatchHandler::findFirstFunctionDecl(const Expr &pExpr, clang::ast_type_traits
 
             for (auto it = parent.get<clang::TranslationUnitDecl>()->decls_begin();
                  it != parent.get<clang::TranslationUnitDecl>()->decls_end(); it++) {
-                auto toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),
+                int toto = ASTRewriter->getSourceMgr().getLineNumber(ASTRewriter->getSourceMgr().getMainFileID(),
                                                                       it->getBeginLoc().getRawEncoding(), &invalid);
                 //llvm::outs() << "Decl of " << it->getDeclKindName() << " @ " << toto << "\n";
 
@@ -261,7 +261,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
     }
 
     llvm::outs() << "Replacing with " << Prefix + Replacement + Suffix << "\n";
-    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
+    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::DynTypedNode(),
                                                            *pExpr, 0);
 
     // remember line number + function name
@@ -310,7 +310,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
     }
 
     Globs::SyscallInserted = true;
-    auto FirstFunctionDeclLoc = findFirstFunctionDecl(*pExpr, clang::ast_type_traits::DynTypedNode(), pContext,
+    auto FirstFunctionDeclLoc = findFirstFunctionDecl(*pExpr, clang::DynTypedNode(), pContext,
                                                       clang::SourceLocation(), 0);
 
     // insert some code to dynamically get syscalls IDs from ntdll
@@ -330,7 +330,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
 }
 
 std::vector<std::string>
-ApiMatchHandler::getParents(const Expr &pExpr, clang::ast_type_traits::DynTypedNode Node,
+ApiMatchHandler::getParents(const Expr &pExpr, clang::DynTypedNode Node,
                             clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
                             uint64_t Iterations) {
 
@@ -338,7 +338,7 @@ ApiMatchHandler::getParents(const Expr &pExpr, clang::ast_type_traits::DynTypedN
         return CurrentParents;
     }
 
-    ASTContext::DynTypedNodeList parents = Context->getParents(pExpr);
+    clang::DynTypedNodeList parents = Context->getParents(pExpr);
 
     if (Iterations > 0) {
         parents = Context->getParents(Node);
@@ -353,7 +353,7 @@ ApiMatchHandler::getParents(const Expr &pExpr, clang::ast_type_traits::DynTypedN
             return getParents(pExpr, parent, Context, CurrentParents, ++Iterations);
         }
 
-        CurrentParents.push_back(ParentNodeKind);
+        CurrentParents.push_back(ParentNodeKind.data());
         return getParents(pExpr, parent, Context, CurrentParents, ++Iterations);
     }
 
@@ -363,7 +363,7 @@ ApiMatchHandler::getParents(const Expr &pExpr, clang::ast_type_traits::DynTypedN
 bool ApiMatchHandler::isInsideIfCondition(const clang::CallExpr *pExpr, clang::ASTContext *const pContext) {
 
     std::vector<std::string> Parents;
-    getParents(*pExpr, clang::ast_type_traits::DynTypedNode(), pContext, Parents, 0);
+    getParents(*pExpr, clang::DynTypedNode(), pContext, Parents, 0);
 
     for (auto &parent : Parents) {
         llvm::outs() << "Parent is : " << parent << "\n";

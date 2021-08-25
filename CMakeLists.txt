@@ -34,7 +34,7 @@ target_link_libraries(avcleaner.bin LLVM clangTooling clangToolingInclusions cla
         LLVMX86Desc # MC, Support, X86AsmPrinter, X86Info
         #LLVMX86AsmPrinter # MC, Support, X86Utils
         LLVMX86Info # MC, Support, Target
-        LLVMX86Utils # Core, Support
+        #LLVMX86Utils # Core, Support
         LLVMipo
         LLVMScalarOpts
         LLVMInstCombine
