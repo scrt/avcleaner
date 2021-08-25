@@ -22,7 +22,7 @@ MatchHandler::MatchHandler(clang::Rewriter *rewriter) {
 }
 
 std::vector<std::string>
-MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_traits::DynTypedNode Node,
+MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::DynTypedNode Node,
                              clang::ASTContext *const Context, std::vector<std::string> &CurrentParents,
                              uint64_t Iterations) {
 
@@ -30,7 +30,7 @@ MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_tr
         return CurrentParents;
     }
 
-    ASTContext::DynTypedNodeList parents = Context->getParents(NodeString);
+    clang::DynTypedNodeList parents = Context->getParents(NodeString);
 
     if (Iterations > 0) {
         parents = Context->getParents(Node);
@@ -45,7 +45,7 @@ MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_tr
             return getNodeParents(NodeString, parent, Context, CurrentParents, ++Iterations);
         }
 
-        CurrentParents.push_back(ParentNodeKind);
+        CurrentParents.push_back(ParentNodeKind.data());
         return getNodeParents(NodeString, parent, Context, CurrentParents, ++Iterations);
     }
 
@@ -55,7 +55,7 @@ MatchHandler::getNodeParents(const StringLiteral &NodeString, clang::ast_type_tr
 std::string
 MatchHandler::findStringType(const StringLiteral &NodeString, clang::ASTContext *const pContext) {
 
-    ASTContext::DynTypedNodeList parents = pContext->getParents(NodeString);;
+    clang::DynTypedNodeList parents = pContext->getParents(NodeString);;
     std::string StringType;
     for (const auto &parent : parents) {
 
@@ -74,10 +74,10 @@ MatchHandler::findStringType(const StringLiteral &NodeString, clang::ASTContext 
 }
 
 bool
-MatchHandler::climbParentsIgnoreCast(const StringLiteral &NodeString, clang::ast_type_traits::DynTypedNode node,
+MatchHandler::climbParentsIgnoreCast(const StringLiteral &NodeString, clang::DynTypedNode node,
                                      clang::ASTContext *const pContext, uint64_t iterations, std::string StringType) {
 
-    ASTContext::DynTypedNodeList parents = pContext->getParents(NodeString);;
+    clang::DynTypedNodeList parents = pContext->getParents(NodeString);;
 
     if (iterations > 0) {
         parents = pContext->getParents(node);
@@ -106,18 +106,18 @@ void MatchHandler::run(const MatchResult &Result) {
     if (!SM.isInMainFile(Decl->getBeginLoc()))
         return;
 
-    if (!Decl->getBytes().str().size() > 4) {
+    if (!(Decl->getBytes().str().size() > 4)) {
         return;
     }
 
     auto StringType = findStringType(*Decl, Result.Context);
 
-    climbParentsIgnoreCast(*Decl, clang::ast_type_traits::DynTypedNode(), Result.Context, 0, StringType);
+    climbParentsIgnoreCast(*Decl, clang::DynTypedNode(), Result.Context, 0, StringType);
 
 }
 
 void MatchHandler::handleStringInContext(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                         const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
+                                         const clang::DynTypedNode node, std::string StringType) {
 
     StringRef ParentNodeKind = node.getNodeKind().asStringRef();
 
@@ -134,7 +134,7 @@ void MatchHandler::handleStringInContext(const clang::StringLiteral *pLiteral, c
 }
 
 bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                  const clang::ast_type_traits::DynTypedNode node, std::string StringType, std::string NewType) {
+                                  const clang::DynTypedNode node, std::string StringType, std::string NewType) {
 
     clang::SourceRange LiteralRange = clang::SourceRange(
             ASTRewriter->getSourceMgr().getFileLoc(pLiteral->getBeginLoc()),
@@ -158,7 +158,7 @@ bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTCo
 }
 
 void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                  const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
+                                  const clang::DynTypedNode node, std::string StringType) {
 
     // below is an attempt to guess the correct string type
     const auto *FunctionCall = node.get<clang::CallExpr>();
@@ -174,12 +174,12 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
         return;
     }
 
-    llvm::outs() << "Function is " << II->getName() << "\n";
+    llvm::outs() << "Function is " << II->getName().data() << "\n";
     clang::LangOptions LangOpts;
     LangOpts.CPlusPlus = true;
     auto MacroName = clang::Lexer::getImmediateMacroName(FunctionCall->getSourceRange().getBegin(), pContext->getSourceManager(), LangOpts);
 
-    if(!MacroName.empty() && MacroName.compare(II->getName())){
+    if(!MacroName.empty() && MacroName.compare(II->getName().data())){
         llvm::outs() << "Macro detected, cannot guess the string type. Using TCHAR and prayers.\n";
         StringType = "TCHAR ";
     }
@@ -216,16 +216,16 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
 
 // TODO : search includes for "common.h" or add it
 void MatchHandler::handleInitListExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                      const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
+                                      const clang::DynTypedNode node, std::string StringType) {
 
 
     handleExpr(pLiteral, pContext, node, StringType);
 }
 
 void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
-                                      const clang::ast_type_traits::DynTypedNode node, std::string StringType) {
+                                      const clang::DynTypedNode node, std::string StringType) {
 
-    auto Identifier = node.get<clang::VarDecl>()->getIdentifier()->getName();
+    auto Identifier = node.get<clang::VarDecl>()->getIdentifier()->getName().data();
     auto TypeLoc =  node.get<clang::VarDecl>()->getTypeSourceInfo()->getTypeLoc();
     auto Type = TypeLoc.getType().getAsString();
     auto Loc = TypeLoc.getSourceRange();
@@ -262,7 +262,7 @@ bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLitera
     bool IsInGlobalContext = isStringLiteralInGlobal(pContext, *pLiteral);
 
     // inject code to declare the string in an encrypted fashion
-    SourceRange FreeSpace = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(), *pLiteral,
+    SourceRange FreeSpace = findInjectionSpot(pContext, clang::DynTypedNode(), *pLiteral,
                                               IsInGlobalContext, 0);
 
     std::string StringVariableDeclaration = Utils::generateVariableDeclaration(Replacement, StringLiteralContent, StringType);
@@ -308,13 +308,13 @@ bool MatchHandler::replaceStringLiteral(const clang::StringLiteral *pLiteral, cl
 }
 
 SourceRange
-MatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
+MatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::DynTypedNode Parent,
                                 const clang::StringLiteral &Literal, bool IsGlobal, uint64_t Iterations) {
 
     if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER)
         throw std::runtime_error("Reached max iterations when trying to find a function declaration");
 
-    ASTContext::DynTypedNodeList parents = Context->getParents(Literal);;
+    clang::DynTypedNodeList parents = Context->getParents(Literal);;
 
     if (Iterations > 0) {
         parents = Context->getParents(Parent);
@@ -355,7 +355,7 @@ bool MatchHandler::isBlacklistedFunction(const CallExpr *FunctionCall) {
         return true;
     }
 
-    std::string ApiName = II->getName();
+    std::string ApiName = II->getName().data();
 
     return ApiName.find("dprintf") != std::string::npos;
 }
@@ -363,7 +363,7 @@ bool MatchHandler::isBlacklistedFunction(const CallExpr *FunctionCall) {
 bool MatchHandler::isStringLiteralInGlobal(clang::ASTContext *const Context, const clang::StringLiteral &Literal) {
 
     std::vector<std::string> Parents;
-    getNodeParents(Literal, clang::ast_type_traits::DynTypedNode(), Context, Parents, 0);
+    getNodeParents(Literal, clang::DynTypedNode(), Context, Parents, 0);
 
     for (auto &CurrentParent : Parents) {
 

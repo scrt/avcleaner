@@ -27,7 +27,7 @@ std::string ApiMatchHandler::getFunctionIdentifier(const CallExpr *CallExpressio
         return nullptr;
     }
 
-    return II->getName();
+    return II->getName().data();
 }
 
 bool ApiMatchHandler::replaceIdentifier(const CallExpr *CallExpression, const std::string &ApiName,
@@ -58,7 +58,7 @@ void ApiMatchHandler::run(const MatchResult &Result) {
 bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, clang::ASTContext *const pContext,
                                         const std::string &NewIdentifier, std::string &ApiName) {
 
-    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::ast_type_traits::DynTypedNode(),
+    SourceRange EnclosingFunctionRange = findInjectionSpot(pContext, clang::DynTypedNode(),
                                                            *pCallExpression, 0);
 
     std::stringstream Result;
@@ -90,13 +90,13 @@ bool ApiMatchHandler::addGetProcAddress(const clang::CallExpr *pCallExpression, 
 }
 
 SourceRange
-ApiMatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::ast_type_traits::DynTypedNode Parent,
+ApiMatchHandler::findInjectionSpot(clang::ASTContext *const Context, clang::DynTypedNode Parent,
                                    const clang::CallExpr &Literal, uint64_t Iterations) {
 
     if (Iterations > Globs::CLIMB_PARENTS_MAX_ITER)
         throw std::runtime_error("Reached max iterations when trying to find a function declaration");
 
-    ASTContext::DynTypedNodeList parents = Context->getParents(Literal);;
+    clang::DynTypedNodeList parents = Context->getParents(Literal);;
 
     if (Iterations > 0) {
         parents = Context->getParents(Parent);
