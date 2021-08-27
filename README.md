@@ -41,3 +41,8 @@ CommandLine Error: Option 'non-global-value-max-name-size' registered more than 
 ```
 
 In case you encounter this error, please use `CMakeLists_archlinux.txt` instead of `CMakeLists.txt` and it should go away. 
+
+
+## Contributors
+
+Thanks @gituser5555 for the bug fixes.
