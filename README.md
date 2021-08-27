@@ -5,7 +5,7 @@ C/C++ source obfuscator for antivirus bypass
 
 # Blog posts
 
-The implementation is rather complex and this domain in software development is rarely documented in layman's terms. This is way there are blog posts which detail every design choice and go over the quirks of working with the LLVM API.
+The implementation is rather complex and this domain in software development is rarely documented in layman's terms. This is why there are blog posts which detail every design choice and go over the quirks of working with the LLVM API.
 
 * https://blog.scrt.ch/2020/06/19/engineering-antivirus-evasion/
 * https://blog.scrt.ch/2020/07/15/engineering-antivirus-evasion-part-ii/
