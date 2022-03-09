@@ -12,6 +12,7 @@
 #include "clang/Tooling/Inclusions/IncludeStyle.h"
 #include "Globals.h"
 #include "Utils.h"
+#include <filesystem>
 
 using namespace clang;
 
@@ -314,7 +315,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
                                                       clang::SourceLocation(), 0);
 
     // insert some code to dynamically get syscalls IDs from ntdll
-    std::ifstream fd("patch_enum_syscalls.txt");
+    std::ifstream fd("/tmp/patch_enum_syscalls.txt");
     std::stringstream buffer;
 
     // Verify that the file was open successfully
@@ -324,7 +325,7 @@ void ApiMatchHandler::rewriteApiToSyscall(const clang::CallExpr *pExpr, clang::A
         //insert some declaration at the beginning of the translation unit
         ASTRewriter->InsertText(FirstFunctionDeclLoc, buffer.str(), false, true);
     } else {
-        llvm::errs() << "File could not be opened!\n"; // Report error
+        llvm::errs() << "File could not be opened in " << std::filesystem::current_path(); // Report error
         llvm::errs() << "Error code: " << strerror(errno); // Get some info as to why
     }
 }

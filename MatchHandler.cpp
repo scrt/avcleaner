@@ -154,6 +154,7 @@ bool MatchHandler::handleExpr(const clang::StringLiteral *pLiteral, clang::ASTCo
 
     Globs::PatchedSourceLocation.push_back(LiteralRange);
 
+    std::cout << "[*] Replacing string " << pLiteral->getBytes().str() << std::endl;
     return replaceStringLiteral(pLiteral, pContext, LiteralRange, Replacement);
 }
 
@@ -268,7 +269,7 @@ bool MatchHandler::insertVariableDeclaration(const clang::StringLiteral *pLitera
     std::string StringVariableDeclaration = Utils::generateVariableDeclaration(Replacement, StringLiteralContent, StringType);
 
     if (!IsInGlobalContext) {
-        StringVariableDeclaration += "\tOutputDebugString(\"" + Replacement + "\");\n";
+        StringVariableDeclaration += "\tOutputDebugStringA(\"" + Replacement + "\");\n";
         StringVariableDeclaration.insert(0, 1, '\t');
     }
 
@@ -375,12 +376,38 @@ bool MatchHandler::isStringLiteralInGlobal(clang::ASTContext *const Context, con
     return true;
 }
 
+static bool hasPrintableChars(const std::string& text) {
+    for (auto c: text) {
+        if (static_cast<unsigned char>(c) > 33 or static_cast<unsigned char>(c) < 127) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static int nbUniqChars(const std::string& text) {
+    std::unordered_map<char, int> map;
+
+    for (auto i = 0; i < text.length(); i++) {
+        map[text[i]]++;
+    }
+
+    return map.size();
+}
+
 bool
 MatchHandler::shouldAbort(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext, SourceRange string) {
 
     std::string StringLiteralContent = pLiteral->getBytes().str();
 
     if (StringLiteralContent.size() < 6) {
+        std::cout << "[!] Skipped string " << StringLiteralContent << " because its size is lower than 6\n";
+        return true;
+    } else if(!hasPrintableChars(StringLiteralContent)) {
+        std::cout << "[!] Skipped string " << StringLiteralContent << " because it appears to be a hex string and the dev is lazy\n";
+        return true;
+    }  else if(nbUniqChars(StringLiteralContent) < 3) {
+        std::cout << "[!] Skipped string " << StringLiteralContent << " because it has very low entropy\n";
         return true;
     }
 
