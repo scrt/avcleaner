@@ -185,7 +185,7 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
         StringType = "TCHAR ";
     }
 
-    for(auto i = 0 ; i < FunctionCall->getDirectCallee()->getNumParams() ; i++) {
+    for(unsigned int i = 0 ; i < FunctionCall->getDirectCallee()->getNumParams() ; i++) {
 
         auto ArgStart = pContext->getSourceManager().getSpellingColumnNumber(FunctionCall->getArg(i)->getBeginLoc());
         auto StringStart = pContext->getSourceManager().getSpellingColumnNumber(pLiteral->getBeginLoc());
@@ -234,7 +234,7 @@ void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang
     if(Type.find(" []") != std::string::npos)
         LHSReplacement = Type.replace(Type.find(" []"),3,"* ");
 
-    LHSReplacement.append(Identifier.data());
+    LHSReplacement.append(Identifier);
 
     llvm::outs() << "Type of " << Identifier << " is " << Type << "\n";
     std::string NewType = Type+" ";

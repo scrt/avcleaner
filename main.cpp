@@ -25,8 +25,9 @@
 #include <vector>
 #include <fstream>
 
+
 namespace ClSetup {
-    llvm::cl::OptionCategory ToolCategory("AVObfuscator");
+    static llvm::cl::OptionCategory ToolCategory("AVObfuscator");
 
     llvm::cl::opt<bool> IsEditEnabled("edit",
                                       llvm::cl::desc("Edit the file in place, or write a copy with .patch extension."),
@@ -210,9 +211,9 @@ auto main(int argc, const char *argv[]) -> int {
     using namespace clang::tooling;
     using namespace ClSetup;
 
-    CommonOptionsParser OptionsParser(argc, argv, ToolCategory);
-    ClangTool Tool(OptionsParser.getCompilations(),
-                   OptionsParser.getSourcePathList());
+    auto option_parser = CommonOptionsParser::create(argc, argv, ToolCategory);
+    ClangTool Tool(option_parser->getCompilations(),
+                   option_parser->getSourcePathList());
 
     auto Action = newFrontendActionFactory<AVObfuscator::Action>();
     return Tool.run(Action.get());
