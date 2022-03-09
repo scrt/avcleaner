@@ -108,7 +108,6 @@ def run_avcleaner(filepath, g_arguments):
 
     flags = ""
 
-    print("toto")
     if g_arguments.strings:
         flags += "-strings=true"
     if g_arguments.debug:
@@ -163,7 +162,6 @@ def run_avcleaner(filepath, g_arguments):
     "-fms-compatibility-version=19.15.26726" "-std=c++14" "-fdelayed-template-parsing" "-fobjc-runtime=gcc" "-fcxx-exceptions" "-fexceptions" "-fdiagnostics-show-option" "-fcolor-diagnostics" "-x" "c++"
     """
 
-    print("toto" + command)
 
     res = exec(command)
     logging.info(res)
