@@ -34,7 +34,7 @@ static _inline void real_dprintf2(char *format, ...)
 static const unsigned int SYSCALL_ID_OFFSET = 4; // nb of bytes after a function's address that represents the syscall's id
 
 // the strings below are written this way to prevent them from being stored in a different section of the executable.
-static char NtCreateFile_api[] = { 'Z','w','C','r','e','a','t','e','F','i','l','e',0 };
+/*static char NtCreateFile_api[] = { 'Z','w','C','r','e','a','t','e','F','i','l','e',0 };
 static char NtAllocateVirtualMemory_api[] = { 'Z','w','A','l','l','o','c','a','t','e','V','i','r','t','u','a','l','M','e','m','o','r','y',0 };
 static char NtAlpcConnectPort_api[] = { 'Z','w','A','l','p','c','C','o','n','n','e','c','t','P','o','r','t',0 };
 static char NtAlpcConnectPortEx_api[] = { 'Z','w','A','l','p','c','C','o','n','n','e','c','t','P','o','r','t','E','x',0 };
@@ -42,7 +42,6 @@ static char NtAlpcSendWaitReceivePort_api[] = { 'Z','w','A','l','p','c','S','e',
 static char NtConnectPort_api[] = { 'Z','w','C','o','n','n','e','c','t','P','o','r','t',0 };
 static char NtCreateSection_api[] = { 'Z','w','C','r','e','a','t','e','S','e','c','t','i','o','n',0 };
 static char NtCreateThread_api[] = { 'Z','w','C','r','e','a','t','e','T','h','r','e','a','d',0 };
-static char NtCreateThreadEx_api[] = { 'Z','w','C','r','e','a','t','e','T','h','r','e','a','d','E','x',0 };
 static char NtMapViewOfSection_api[] = { 'Z','w','M','a','p','V','i','e','w','O','f','S','e','c','t','i','o','n',0 };
 static char NtProtectVirtualMemory_api[] = { 'Z','w','P','r','o','t','e','c','t','V','i','r','t','u','a','l','M','e','m','o','r','y',0 };
 static char NtQueueApcThread_api[] = { 'Z','w','Q','u','e','u','e','A','p','c','T','h','r','e','a','d',0 };
@@ -54,7 +53,6 @@ static char NtSetContextThread_api[] = { 'Z','w','S','e','t','C','o','n','t','e'
 static char NtSetInformationThread_api[] = { 'Z','w','S','e','t','I','n','f','o','r','m','a','t','i','o','n','T','h','r','e','a','d',0 };
 static char NtSuspendProcess_api[] = { 'Z','w','S','u','s','p','e','n','d','P','r','o','c','e','s','s',0 };
 static char NtSuspendThread_api[] = { 'Z','w','S','u','s','p','e','n','d','T','h','r','e','a','d',0 };
-static char NtWriteVirtualMemory_api[] = { 'Z','w','W','r','i','t','e','V','i','r','t','u','a','l','M','e','m','o','r','y',0 };
 static char NtCreateProcess_api[] = { 'Z','w','C','r','e','a','t','e','P','r','o','c','e','s','s',0 };
 static char NtCreateProcessEx_api[] = { 'Z','w','C','r','e','a','t','e','P','r','o','c','e','s','s','E','x',0 };
 static char NtCreateUserProcess_api[] = { 'Z','w','C','r','e','a','t','e','U','s','e','r','P','r','o','c','e','s','s',0 };
@@ -63,19 +61,27 @@ static char NtQueueApcThreadEx_api[] = { 'Z','w','Q','u','e','u','e','A','p','c'
 static char NtReadVirtualMemory_api[] = { 'Z','w','R','e','a','d','V','i','r','t','u','a','l','M','e','m','o','r','y',0 };
 static char NtSetInformationProcess_api[] = { 'Z','w','S','e','t','I','n','f','o','r','m','a','t','i','o','n','P','r','o','c','e','s','s',0 };
 static char NtUnmapViewOfSection_api[] = { 'Z','w','U','n','m','a','p','V','i','e','w','O','f','S','e','c','t','i','o','n',0 };
+*/
+
+static char NtWriteVirtualMemory_api[] = { 'Z','w','W','r','i','t','e','V','i','r','t','u','a','l','M','e','m','o','r','y',0 };
+static char NtCreateThreadEx_api[] = { 'Z','w','C','r','e','a','t','e','T','h','r','e','a','d','E','x',0 };
+//static char NtWriteVirtualMemory_api[] = { 'a','r','a',0 };
+//static char NtCreateThreadEx_api[] = { 'a','x',0 };
+
 
 // store locations of strings on the stack
 static const char* __API_names[] = {
-	NtCreateFile_api,
+	/*NtCreateFile_api,
 	NtAllocateVirtualMemory_api,
 	NtAlpcConnectPort_api,
 	NtAlpcConnectPortEx_api,
 	NtAlpcSendWaitReceivePort_api,
 	NtConnectPort_api,
 	NtCreateSection_api,
-	NtCreateThread_api,
+	NtCreateThread_api,*/
 	NtCreateThreadEx_api,
-	NtMapViewOfSection_api,
+	NtWriteVirtualMemory_api
+	/*NtMapViewOfSection_api,
 	NtProtectVirtualMemory_api,
 	NtQueueApcThread_api,
 	NtRequestWaitReplyPort_api,
@@ -85,8 +91,8 @@ static const char* __API_names[] = {
 	NtSetContextThread_api,
 	NtSetInformationThread_api,
 	NtSuspendProcess_api,
-	NtSuspendThread_api,
-	NtWriteVirtualMemory_api,
+	NtSuspendThread_api,*/
+	/*NtWriteVirtualMemory_api,
 	NtCreateProcess_api,
 	NtCreateProcessEx_api,
 	NtCreateUserProcess_api,
@@ -94,7 +100,7 @@ static const char* __API_names[] = {
 	NtQueueApcThreadEx_api,
 	NtReadVirtualMemory_api,
 	NtSetInformationProcess_api,
-	NtUnmapViewOfSection_api
+	NtUnmapViewOfSection_api*/
 };
 
 

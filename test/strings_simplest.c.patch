@@ -6,31 +6,31 @@
 #include <stdio.h>
 
 
-const char  hid_core_l_1dPOPZkamUF3[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
+const char  hid_core_l_eJx5djghqRUh[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
 
-const char  hid_reques_NoQD5lCJZxuR[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
+const char  hid_reques_suVnMY4zFLUK[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6c','\x6f','\x61','\x64','\x6c','\x69','\x62',0};
 
-const char  hid_core_e_UyeDBgGU0Ugd[] = {'\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
+const char  hid_core_e_Vz3P9NyxVuYZ[] = {'\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
 
-const char  hid_reques_Wl1CQr4a2pYZ[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
+const char  hid_reques_RsYdQe1Sm79r[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x65','\x6e','\x75','\x6d','\x65','\x78','\x74','\x63','\x6d','\x64',0};
 
-const char  hid_core_m_6ZnpnVVQADzz[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
+const char  hid_core_m_J48Z0lXcIsWv[] = {'\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
 
-const char  hid_reques_aPcwVXnhNu4K[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
+const char  hid_reques_kWgewUXHF6Xt[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x6d','\x61','\x63','\x68','\x69','\x6e','\x65','\x5f','\x69','\x64',0};
 
-const char  hid_core_g_0KqPhECartCE[] = {'\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
+const char  hid_core_g_VmjT5bgu4L0Q[] = {'\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
 
-const char  hid_reques_pt1bMlMGG6PF[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
+const char  hid_reques_KinRM7BqTbwB[] = {'\x72','\x65','\x71','\x75','\x65','\x73','\x74','\x5f','\x63','\x6f','\x72','\x65','\x5f','\x67','\x65','\x74','\x5f','\x73','\x65','\x73','\x73','\x69','\x6f','\x6e','\x5f','\x67','\x75','\x69','\x64',0};
 char *customCommands[] =
 {
-	hid_core_l_1dPOPZkamUF3,
-    hid_reques_NoQD5lCJZxuR,
-	hid_core_e_UyeDBgGU0Ugd,
-    hid_reques_Wl1CQr4a2pYZ,
-	hid_core_m_6ZnpnVVQADzz,
-    hid_reques_aPcwVXnhNu4K,
-	hid_core_g_0KqPhECartCE,
-    hid_reques_pt1bMlMGG6PF
+	hid_core_l_eJx5djghqRUh,
+    hid_reques_suVnMY4zFLUK,
+	hid_core_e_Vz3P9NyxVuYZ,
+    hid_reques_RsYdQe1Sm79r,
+	hid_core_m_J48Z0lXcIsWv,
+    hid_reques_kWgewUXHF6Xt,
+	hid_core_g_VmjT5bgu4L0Q,
+    hid_reques_KinRM7BqTbwB
 };
 
 typedef NTSTATUS (NTAPI *f_NtMapViewOfSection)(HANDLE, HANDLE, PVOID *, ULONG, ULONG,
@@ -48,27 +48,32 @@ int main(void)
 {
 
     
-	TCHAR  hid_n_t_d__tJszbD6WOIyN[] = {'\x6e','\x74','\x64','\x6c','\x6c',0};
+	TCHAR  hid_n_t_d__zmYDp2fKvZGW[] = {'\x6e','\x74','\x64','\x6c','\x6c',0};
+	OutputDebugStringA("hid_n_t_d__zmYDp2fKvZGW");
 
-	const char  hid_NtMapV_tRQ46ULycPac[] = {'\x4e','\x74','\x4d','\x61','\x70','\x56','\x69','\x65','\x77','\x4f','\x66','\x53','\x65','\x63','\x74','\x69','\x6f','\x6e',0};
+	const char  hid_NtMapV_eROiRK1i5W94[] = {'\x4e','\x74','\x4d','\x61','\x70','\x56','\x69','\x65','\x77','\x4f','\x66','\x53','\x65','\x63','\x74','\x69','\x6f','\x6e',0};
+	OutputDebugStringA("hid_NtMapV_eROiRK1i5W94");
 
-	const char  hid_____At_4YLprF1RQtYY[] = {'\x5b','\x2a','\x5d','\x20','\x41','\x74','\x74','\x65','\x6d','\x70','\x74','\x69','\x6e','\x67','\x20','\x74','\x6f','\x20','\x61','\x64','\x64','\x20','\x75','\x73','\x65','\x72','\x20','\x25','\x73','\x20','\x74','\x6f','\x20','\x68','\x6f','\x73','\x74','\x20','\x25','\x73','\n',0};
+	const char  hid_____At_jkfVzSpmOWXA[] = {'\x5b','\x2a','\x5d','\x20','\x41','\x74','\x74','\x65','\x6d','\x70','\x74','\x69','\x6e','\x67','\x20','\x74','\x6f','\x20','\x61','\x64','\x64','\x20','\x75','\x73','\x65','\x72','\x20','\x25','\x73','\x20','\x74','\x6f','\x20','\x68','\x6f','\x73','\x74','\x20','\x25','\x73','\n',0};
+	OutputDebugStringA("hid_____At_jkfVzSpmOWXA");
 
-	const char  hid_userna_GOkzlltqxqPA[] = {'\x75','\x73','\x65','\x72','\x6e','\x61','\x6d','\x65',0};
+	const char  hid_userna_LK4HFBCixPOC[] = {'\x75','\x73','\x65','\x72','\x6e','\x61','\x6d','\x65',0};
+	OutputDebugStringA("hid_userna_LK4HFBCixPOC");
 
-	const char  hid_dc_net_Z6dg5gxf3MXD[] = {'\x64','\x63','\x5f','\x6e','\x65','\x74','\x62','\x69','\x6f','\x73','\x5f','\x6e','\x61','\x6d','\x65',0};
+	const char  hid_dc_net_8ZUyW6zWvCoJ[] = {'\x64','\x63','\x5f','\x6e','\x65','\x74','\x62','\x69','\x6f','\x73','\x5f','\x6e','\x61','\x6d','\x65',0};
+	OutputDebugStringA("hid_dc_net_8ZUyW6zWvCoJ");
 f_NtMapViewOfSection lNtMapViewOfSection;
     HMODULE ntdll;
 
-    if (!(ntdll = LoadLibrary(hid_n_t_d__tJszbD6WOIyN("ntdll"))))
+    if (!(ntdll = LoadLibrary(hid_n_t_d__zmYDp2fKvZGW)))
     {
         return -1;
     }
 
-    lNtMapViewOfSection = (f_NtMapViewOfSection)GetProcAddress(ntdll, hid_NtMapV_tRQ46ULycPac);
+    lNtMapViewOfSection = (f_NtMapViewOfSection)GetProcAddress(ntdll, hid_NtMapV_eROiRK1i5W94);
     lNtMapViewOfSection(0,0,0,0,0,0,0,0,0,0);
 
     char return_value[500];
-    sprintf(return_value, hid_____At_4YLprF1RQtYY, hid_userna_GOkzlltqxqPA, hid_dc_net_Z6dg5gxf3MXD);
+    sprintf(return_value, hid_____At_jkfVzSpmOWXA, hid_userna_LK4HFBCixPOC, hid_dc_net_8ZUyW6zWvCoJ);
     return 0;
 }
