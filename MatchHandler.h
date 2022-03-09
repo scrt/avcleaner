@@ -24,6 +24,7 @@
 #include "clang/AST/Decl.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/ASTConsumer.h"
+#include "clang/AST/ASTTypeTraits.h"
 
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"

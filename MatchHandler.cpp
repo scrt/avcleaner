@@ -106,7 +106,7 @@ void MatchHandler::run(const MatchResult &Result) {
     if (!SM.isInMainFile(Decl->getBeginLoc()))
         return;
 
-    if (!Decl->getBytes().str().size() > 4) {
+    if (!(Decl->getBytes().str().size() > 4)) {
         return;
     }
 
@@ -175,12 +175,12 @@ void MatchHandler::handleCallExpr(const clang::StringLiteral *pLiteral, clang::A
         return;
     }
 
-    llvm::outs() << "Function is " << II->getName() << "\n";
+    llvm::outs() << "Function is " << II->getName().data() << "\n";
     clang::LangOptions LangOpts;
     LangOpts.CPlusPlus = true;
     auto MacroName = clang::Lexer::getImmediateMacroName(FunctionCall->getSourceRange().getBegin(), pContext->getSourceManager(), LangOpts);
 
-    if(!MacroName.empty() && MacroName.compare(II->getName())){
+    if(!MacroName.empty() && MacroName.compare(II->getName().data())){
         llvm::outs() << "Macro detected, cannot guess the string type. Using TCHAR and prayers.\n";
         StringType = "TCHAR ";
     }
@@ -226,7 +226,7 @@ void MatchHandler::handleInitListExpr(const clang::StringLiteral *pLiteral, clan
 void MatchHandler::handleVarDeclExpr(const clang::StringLiteral *pLiteral, clang::ASTContext *const pContext,
                                       const clang::DynTypedNode node, std::string StringType) {
 
-    auto Identifier = node.get<clang::VarDecl>()->getIdentifier()->getName();
+    auto Identifier = node.get<clang::VarDecl>()->getIdentifier()->getName().data();
     auto TypeLoc =  node.get<clang::VarDecl>()->getTypeSourceInfo()->getTypeLoc();
     auto Type = TypeLoc.getType().getAsString();
     auto Loc = TypeLoc.getSourceRange();
